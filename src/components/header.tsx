@@ -13,14 +13,12 @@ const Header = () => {
     useEffect(() => {
         fetchPayload(baseURI, "studios", 10, "en").then((data)=>{
             const section = document.querySelector(".about");
-            if (section) {
-                const _unserializedText = data["docs"][3]["description"][0]
-                console.log(_unserializedText)
-                const _serializedText = serialize(_unserializedText)
-                console.log(_serializedText)
-                section.innerHTML = _serializedText;
-                setAbout(_serializedText);
-            }
+            const _unserializedText = data["docs"][3]["description"][0]
+            console.log(_unserializedText)
+            const _serializedText = serialize(_unserializedText)
+            console.log(section)
+            section.innerHTML = _serializedText;
+            setAbout(_serializedText);
         })
     }, []);
 
