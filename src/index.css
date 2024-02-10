@@ -1,0 +1,36 @@
+@font-face {
+    font-family: "Movement-DirectBlack";
+    src: url("assets/fonts/Movement-DirectBlack.woff2");
+}
+
+@font-face {
+    font-family: "Movement-DirectThin";
+    src: url("assets/fonts/Movement-DirectThin.woff2");
+}
+
+root, body {
+    background: black;
+    color: white;
+    font-family: Movement-DirectThin, Sans-Serif;
+}
+
+h1 {
+
+}
+
+.bold {
+    font-family: Movement-DirectBlack, Sans-Serif;
+}
+
+header {
+    padding: 0 20px;
+    display: flex;
+}
+
+nav {
+
+}
+
+strong{
+    font-family: Movement-DirectBlack, Sans-Serif;
+}
