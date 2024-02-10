@@ -3,7 +3,7 @@ import {fetchPayload} from "../utils/fetchPayload.ts";
 import {serialize} from "../utils/serialize.ts";
 const Header = () => {
 
-    const [about, setAbout] = useState("")
+    const [about, setAbout] = useState([])
     const [language, setLanguage] = useState("en")
     let _switch = "en";
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
@@ -12,21 +12,19 @@ const Header = () => {
     // fetch data
     useEffect(() => {
         fetchPayload(baseURI, "studios", 10, "en").then((data)=>{
-            const section = document.querySelector(".about");
             const _unserializedText = data["docs"][3]["description"][0]
-            console.log(_unserializedText)
             const _serializedText = serialize(_unserializedText)
-            console.log(section)
-            section.innerHTML = _serializedText;
             setAbout(_serializedText);
         })
     }, []);
 
     return(
         <header>
-            <h1 className={"about"}>{about}</h1>
+            <h1 className={"about"} dangerouslySetInnerHTML={{ __html: about }}></h1>
             <nav>
-                <a>{_switch}</a>
+                <h1>
+                    <a>{_switch}</a>
+                </h1>
             </nav>
         </header>
     )
