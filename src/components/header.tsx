@@ -24,7 +24,7 @@ const Header = () => {
 
     return(
         <header>
-            <h1 className={"about"}>{about}</h1>
+            <span className={"about"}>{about}</span>
             <nav>
                 <a>{_switch}</a>
             </nav>
