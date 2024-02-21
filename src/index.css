@@ -38,3 +38,40 @@ nav {
 strong{
     font-family: Movement-DirectBlack, Sans-Serif;
 }
+
+footer {
+    position: absolute;
+    bottom: 20px;
+    left: 30px;
+    width: 100%;
+}
+
+.languages {
+    position: absolute;
+    bottom: 0px;
+    right: 60px;
+    display: flex;
+    flex-flow: column;
+}
+
+.languages > p:hover {
+    color: pink;
+    text-decoration: underline;
+}
+
+.fonts {
+    display: flex;
+    flex-flow: row;
+    gap: 10px;
+    & p {
+        margin: 1px;
+    }
+}
+
+.fonts > div {
+    display: flex;
+    flex-flow: column;
+    & p {
+        margin: 1px;
+    }
+}
