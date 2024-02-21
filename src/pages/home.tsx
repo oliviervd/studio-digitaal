@@ -1,6 +1,7 @@
-import Header from "../components/header.tsx";
-import Footer from "../components/footer.tsx";
-import {useState} from "react"
+import Header from "../components/header";
+import Footer from "../components/footer";
+import {useState} from "preact/hooks"
+import "../index.css"
 
 const Home = () => {
 

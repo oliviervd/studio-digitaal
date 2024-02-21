@@ -1,12 +1,13 @@
-import {useState, useEffect} from "react";
-import {fetchPayload} from "../utils/fetchPayload.ts";
-import {serialize} from "../utils/serialize.ts";
+import {useState, useEffect} from "preact/hooks";
+import {fetchPayload} from "../utils/fetchPayload";
+import {serialize} from "../utils/serialize";
 const Header = (props) => {
 
     const [about, setAbout] = useState([])
     let _switch = "en";
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
+    //let id =
 
     // fetch data
     useEffect(() => {
