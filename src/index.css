@@ -26,6 +26,7 @@ h1 {
 header {
     padding: 0 20px;
     display: flex;
+    border-bottom: coral 2px dotted;
 }
 
 a {
@@ -89,6 +90,8 @@ footer {
     display: grid;
     max-width: 100%;
     grid-template-columns: 80% 20%;
+    border-bottom: coral 2px dotted;
+
 }
 
 .home__index {
@@ -103,7 +106,7 @@ footer {
     right:0;
     bottom:0;
     border-radius: 100%;
-    height: 80vh;
+    height: 70vh;
 }
 
 .masonry-grid{
@@ -111,7 +114,7 @@ footer {
 
     & img {
         break-inside: avoid;
-        border: 2px solid;
+        border: 5px solid;
     }
 }
 
