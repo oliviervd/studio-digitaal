@@ -15,6 +15,18 @@ const Home = () => {
 
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(max-width: 600px)');
+        const handleChange = () => setIsMobile(mediaQuery.matches);
+
+        mediaQuery.addListener(handleChange);
+        handleChange(); // Initial check
+
+        return () => mediaQuery.removeListener(handleChange);
+    }, []);
+
 
     useEffect(() => {
         const currentUrl = getCurrentUrl();
@@ -49,30 +61,39 @@ const Home = () => {
         <div>
             <Header language={language}/>
 
-            <div className={"home__projects-container"}>
+            {!isMobile &&
+                <div className={"home__projects-container"}>
 
-                <section>
-                    <div className={"home__image"}>
+                    <section>
+                        <div className={"home__image"}>
                             <img src={hero}/>
+                        </div>
+                    </section>
 
-                    </div>
-                </section>
+                    <section className={"home__index"}>
+                        <div className={"index_project"}>
+                            {projects.map((project) => {
+                                return (
+                                    <div>
+                                        <a onMouseEnter={() => switchProject(project)}>{project.projectTitle}</a>
+                                    </div>
+                                )
+                            })
+                            }
+                        </div>
+                    </section>
 
-                <section className={"home__index"}>
-                    <div className={"index_project"}>
-                        {projects.map((project) => {
+                </div>
+            }
+            {isMobile &&
+                <div className={"image-container"}>
+                     {projects.map((p) => {
                             return (
-                                <div>
-                                    <a onMouseEnter={()=>switchProject(project)}>{project.projectTitle}</a>
-                                </div>
+                               <img className={"image-mobile"} src={p.heroImage.url}/>
                             )
-                        })
-                        }
-                    </div>
-                </section>
-
-            </div>
-
+                        })}
+                </div>
+            }
 
             <Footer language={language} setLanguage={setLanguage}/>
         </div>
