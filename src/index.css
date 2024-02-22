@@ -12,6 +12,7 @@ root, body {
     background: black;
     color: white;
     font-family: Movement-DirectThin, Sans-Serif;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -78,12 +79,6 @@ footer {
 
 /* PAGES HOME */
 
-.home__image {
-}
-
-.home__image > img {
-    max-height: 60vh
-}
 
 .home__image > img:hover {
     opacity: 0.7;
@@ -111,9 +106,17 @@ footer {
     height: 80vh;
 }
 
+.masonry-grid{
+    column-count: 3;
+
+    & img {
+        break-inside: avoid;
+        border: 2px solid;
+    }
+}
+
 .index_project {
     padding: 0 20px;
-    padding-top: 20px;
     position: relative;
 
     > div {
@@ -142,8 +145,6 @@ footer {
 .image-mobile {
     width: 95%;
     margin: auto;
-    padding-bottom: 20px;
-
 }
 
 .image-container {

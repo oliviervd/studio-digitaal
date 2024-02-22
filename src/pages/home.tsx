@@ -17,6 +17,8 @@ const Home = () => {
 
     const [isMobile, setIsMobile] = useState(false);
 
+    const colors = ["rgb(243, 198, 198)","rgb(199, 243, 198)", "rgb(184, 94, 149)"]
+
     useEffect(() => {
         const mediaQuery = window.matchMedia('(max-width: 600px)');
         const handleChange = () => setIsMobile(mediaQuery.matches);
@@ -64,10 +66,12 @@ const Home = () => {
             {!isMobile &&
                 <div className={"home__projects-container"}>
 
-                    <section>
-                        <div className={"home__image"}>
-                            <img src={hero}/>
-                        </div>
+                    <section className={"masonry-grid"}>
+                        {projects.map((p, index) => {
+                            return (
+                                <img className={"image-mobile"} style={`border-color:${colors[index]}`} src={p.heroImage.url}/>
+                            )
+                        })}
                     </section>
 
                     <section className={"home__index"}>
@@ -80,7 +84,7 @@ const Home = () => {
                                 return (
                                     <div>
                                         <div className={"pretty-circle-index"}
-                                             style="background-color: rgb(199, 243, 198)"></div>
+                                             style={`background-color:${colors[index]}`}></div>
                                         <a onMouseEnter={() => switchProject(project)}>{project.projectTitle}</a>
                                     </div>
                                 )
