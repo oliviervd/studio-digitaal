@@ -72,9 +72,15 @@ const Home = () => {
 
                     <section className={"home__index"}>
                         <div className={"index_project"}>
-                            {projects.map((project) => {
+                            <h1>projects:</h1>
+
+                            <div className={"sphere-in-div"}></div>
+
+                            {projects.map((project, index) => {
                                 return (
                                     <div>
+                                        <div className={"pretty-circle-index"}
+                                             style="background-color: rgb(199, 243, 198)"></div>
                                         <a onMouseEnter={() => switchProject(project)}>{project.projectTitle}</a>
                                     </div>
                                 )
