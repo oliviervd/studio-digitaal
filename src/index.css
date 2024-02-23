@@ -1,3 +1,5 @@
+
+
 @font-face {
     font-family: "Movement-DirectBlack";
     src: url("assets/fonts/Movement-DirectBlack.woff2");
@@ -9,8 +11,8 @@
 }
 
 root, body {
-    background: black;
-    color: white;
+    background: #F6F8FF;
+    color: black;
     font-family: Movement-DirectThin, Sans-Serif;
     overflow-x: hidden;
 }
@@ -24,13 +26,24 @@ h1 {
 }
 
 header {
+    position: sticky;
+    top: 0;
     padding: 0 20px;
     display: flex;
-    border-bottom: coral 2px dotted;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+header > nav {
+    display: flex;
+    flex-flow: row;
+    & h1:hover {
+        color: #C6D8D3
+    }
 }
 
 a {
-    color: white;
+    color: #C6D8D3;
 }
 
 nav {
@@ -78,81 +91,15 @@ footer {
     }
 }
 
-/* PAGES HOME */
-
-
-.home__image > img:hover {
-    opacity: 0.7;
+/* HOME */
+.home-hero{
+    height: 100vh;
 }
 
-.home__projects-container {
+.home-about{
+    height:fit-content;
     padding: 30px;
-    display: grid;
-    max-width: 100%;
-    grid-template-columns: 80% 20%;
-    border-bottom: coral 2px dotted;
-
-}
-
-.home__index {
-    height: 60vh;
-}
-
-.sphere-in-div{
-    border: white dotted 2px;
-    position: absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    border-radius: 100%;
-    height: 70vh;
-}
-
-.masonry-grid{
-    column-count: 3;
-
-    & img {
-        break-inside: avoid;
-        border: 5px solid;
-    }
-}
-
-.index_project {
-    padding: 0 20px;
-    position: relative;
-
-    > div {
-        padding-bottom: 10px;
-        display: flex;
-        flex-flow: row;
-        gap: 20px;
-    }
-    & a {
-        font-size: 1.5em;
-        font-weight: 900;
-        color: white;
-    }
-    & a:hover{
-        color: white;
-    }
-}
-
-.pretty-circle-index{
-    width: 15px;
-    height: 15px;
-    border-radius: 100%;
-    transform: translateY(50%);
-}
-
-.image-mobile {
-    width: 95%;
-    margin: auto;
-}
-
-.image-container {
-    padding: 10px;
-    text-align: center;
+    font-size: 1.5em;
 }
 
 @media (max-width: 700px) {
@@ -164,21 +111,6 @@ footer {
     }
     & p {
         font-size: 0.5em;
-    }
-
-    .home__image {
-        padding: 0;
-        padding-top: 20px;
-        margin: auto;
-        text-align: center;
-    }
-
-    .home__image > img {
-        max-width: 90%;
-    }
-
-    .home__index {
-        display: none;
     }
 
     footer {

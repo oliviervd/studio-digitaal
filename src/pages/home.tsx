@@ -5,27 +5,21 @@ import { getCurrentUrl, route } from 'preact-router';
 
 import "../index.css"
 import {fetchPayload} from "../utils/fetchPayload";
+import {serialize} from "../utils/serialize";
 
 const Home = () => {
 
-    const [language, setLanguage] = useState("en")
-    const [projects, setProjects] = useState([]);
-    const [activeProject, setActiveProject] = useState("")
-    const [hero, setHero] = useState("https://d2yoaaok6mt608.cloudfront.net/Figure 20 - Prototype of Searcher")
-
-    const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
-
     const [isMobile, setIsMobile] = useState(false);
-
-    const colors = ["rgb(243, 198, 198)","rgb(199, 243, 198)", "rgb(184, 94, 149)"]
+    const [language, setLanguage] = useState("en")
+    const [about, setAbout] = useState([])
+    const [projects, setProjects] = useState([]);
+    const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
     useEffect(() => {
         const mediaQuery = window.matchMedia('(max-width: 600px)');
         const handleChange = () => setIsMobile(mediaQuery.matches);
-
         mediaQuery.addListener(handleChange);
         handleChange(); // Initial check
-
         return () => mediaQuery.removeListener(handleChange);
     }, []);
 
@@ -51,60 +45,30 @@ const Home = () => {
         )
     }, [])
 
-    useEffect(()=> {
-        setHero(activeProject.heroImage.url)
-    }, [activeProject])
 
-    function switchProject(p){
-        setActiveProject(p)
+    const scrollToAbout = () => {
+        const aboutSection = document.getElementById("about")
+        if (aboutSection) {
+            aboutSection.scrollIntoView({behavior:"smooth"})
+        }
     }
+
+    // fetch data
+    useEffect(() => {
+        fetchPayload(baseURI, "studios", 10, language).then((data)=>{
+            const _unserializedText = data["docs"][3]["description"][0]
+            const _serializedText = serialize(_unserializedText)
+            setAbout(_serializedText);
+        })
+    }, [language]);
 
     return(
         <div>
-            <Header language={language}/>
-
-            {!isMobile &&
-                <div className={"home__projects-container"}>
-
-                    <section className={"masonry-grid"}>
-                        {projects.map((p, index) => {
-                            return (
-                                <img className={"image-mobile"} style={`border-color:${colors[index]}`} src={p.heroImage.url}/>
-                            )
-                        })}
-                    </section>
-
-                    <section className={"home__index"}>
-                        <div className={"index_project"}>
-                            <h1>projects:</h1>
-
-                            <div className={"sphere-in-div"}></div>
-
-                            {projects.map((project, index) => {
-                                return (
-                                    <div>
-                                        <div className={"pretty-circle-index"}
-                                             style={`background-color:${colors[index]}`}></div>
-                                        <a onMouseEnter={() => switchProject(project)}>{project.projectTitle}</a>
-                                    </div>
-                                )
-                            })
-                            }
-                        </div>
-                    </section>
-
-                </div>
-            }
-            {isMobile &&
-                <div className={"image-container"}>
-                     {projects.map((p) => {
-                            return (
-                               <img className={"image-mobile"} src={p.heroImage.url}/>
-                            )
-                        })}
-                </div>
-            }
-
+            <Header language={language} scrollToAbout={scrollToAbout}/>
+            <section className={"home-hero"}></section>
+            <section id={"about"} className={"home-about"}>
+                <h1 className={"about"} dangerouslySetInnerHTML={{__html: about}}></h1>
+            </section>
             <Footer language={language} setLanguage={setLanguage}/>
         </div>
     )
