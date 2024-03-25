@@ -1,0 +1,9 @@
+.sidebar__container{
+    padding-left:20px;
+    display: flex;
+    flex-flow: column;
+}
+
+.sidebar__container > a {}
+
+
