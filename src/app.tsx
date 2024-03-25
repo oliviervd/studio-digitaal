@@ -2,8 +2,7 @@ import Home from "./pages/home";
 import {Router, route} from "preact-router";
 import { render } from 'preact';
 import { useEffect } from 'preact/hooks';
-import ApiDoc from "./components/apiDoc";
-
+import ApiDocs from "./pages/CollectionAPI";
 
 
 const App = () => {
@@ -18,7 +17,7 @@ const App = () => {
   return (
     <Router>
         <Home path={"/:lang"}/>
-        <ApiDoc path={"/:lang/api-docs"}/>
+        <ApiDocs path={"/:lang/collection-api"}/>
     </Router>
   )
 }

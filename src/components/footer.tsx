@@ -2,6 +2,8 @@ const Footer = (props) => {
 
     function changeLang(lang) {
         props.setLanguage(lang)
+        const newUrl = `${window.location.protocol}//${window.location.host}/${lang}`;
+        window.history.pushState({ path: newUrl }, '', newUrl);
         // set nav
     }
 
