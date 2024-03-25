@@ -1,6 +1,6 @@
 import escapeHTML from "escape-html";
 import {Text} from "slate";
-import {Fragment} from "react";
+import {Fragment} from "preact";
 
 const serialize = (children) =>
     children.map((node, i) => {
