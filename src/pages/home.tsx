@@ -7,8 +7,7 @@ import { getCurrentUrl, route } from 'preact-router';
 
 import "../index.css"
 import {fetchPayload} from "../utils/fetchPayload";
-import {serialize} from "../utils/serialize";
-
+import serialize from "../utils/serialize";
 const Home = () => {
 
     const [isMobile, setIsMobile] = useState(false);
@@ -47,7 +46,6 @@ const Home = () => {
         )
     }, [])
 
-
     const scrollToAbout = () => {
         const aboutSection = document.getElementById("about")
         if (aboutSection) {
@@ -63,7 +61,9 @@ const Home = () => {
     useEffect(() => {
         fetchPayload(baseURI, "studios", 10, language).then((data)=>{
             const _unserializedText = data["docs"][3]["description"][0]
-            const _serializedText = serialize(_unserializedText)
+            console.log(_unserializedText)
+            const _serializedText =  serialize(data["docs"][3]["description"][0])
+            console.log(_serializedText)
             setAbout(_serializedText);
         })
     }, [language]);
@@ -76,7 +76,7 @@ const Home = () => {
                 </div>
             </section>
             <section id={"about"} className={"home-about"}>
-            <h1 className={"about"} dangerouslySetInnerHTML={{__html: about}}></h1>
+            <h1 className={"about"}>{about}</h1>
             </section>
             <Footer language={language} setLanguage={setLanguage}/>
         </div>
