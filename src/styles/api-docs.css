@@ -1,0 +1,12 @@
+.api-doc__container {
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.api-doc__container a {
+    font-size: 2em;
+}
+
+.api-doc__container a:hover{
+    text-decoration: underline;
+}
