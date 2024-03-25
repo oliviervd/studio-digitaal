@@ -150,57 +150,6 @@ footer {
     background: darkorange;
 }
 
-.api-doc{
-    padding-left: 50px;
-}
-
-.apiText {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateX(100%) rotate(90deg) translateY(150%);
-    transform-origin: right top;
-    white-space: nowrap; /* Ensure the text doesn't wrap */
-    font-weight: 900;
-}
-.apiInterface--container{
-    position: relative;
-    display: grid;
-    grid-template-columns: 20% 80%;
-    padding: 30px;
-    top: 50px;
-
-    & h2 {
-        font-size: 1.8em;
-    }
-
-    & nav > a {
-        display: block;
-        color: darkorange;
-        font-weight: bolder;
-        font-size: 1.5em;
-    }
-
-    & nav > a:hover {
-        text-decoration: underline;
-    }
-
-    & .codeBox{
-
-    }
-}
-
-.api-response {
-    height: 70vh;
-    & pre {
-        background: #C6D8D3;
-        padding: 30px;
-        overflow-y: scroll;
-        overflow-x: auto;
-        width: 30vw;
-        height: 60vh;
-    }
-}
 
 
 

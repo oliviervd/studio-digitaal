@@ -19,7 +19,7 @@ const Block = (props) => {
     // if richtext
     if (props.data.blockType === "RichTextBlock") {
         console.log(props.data.richText)
-        let text = serialize(props.data.richText[0].children)
+        let text = serialize(props.data.richText)
         console.log(text)
         return(
             <div>{text}</div>

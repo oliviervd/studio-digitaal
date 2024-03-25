@@ -23,7 +23,7 @@ class ApiResponse extends Component<ApiResponseProps, ApiResponseState> {
     render({endpoint}: ApiResponseProps, {data, loading, error}: ApiResponseState) {
         return(
             <div className={"api-response"}>
-                <h3>Response from {endpoint}</h3>
+                <h3>example response from {endpoint}</h3>
                 {loading && <p>Loading...</p>}
                 {error && <p>Error: {error.message}</p>}
                 {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
