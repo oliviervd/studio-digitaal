@@ -1,9 +1,14 @@
 import { route } from 'preact-router';
 const Header = (props) => {
 
+    function toggleHome() {
+        window.scrollTo({top: 0, left: 0, behavior: "smooth"})
+        route(`${props.language}/`)
+    }
+
     return(
         <header>
-            <h1 onClick={props.scrollToTop}>Studio Digitaal</h1>
+            <h1 onClick={()=>toggleHome()}>Studio Digitaal</h1>
             <nav>
                 <h1 onClick={()=>route(`${props.language}/collection-api`)}>collection api</h1>
             </nav>
