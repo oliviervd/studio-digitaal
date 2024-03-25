@@ -1,5 +1,7 @@
 import Header from "../components/header";
 import Footer from "../components/footer";
+import SideNav from "../pages/CollectionAPI";
+
 import {useState, useEffect} from "preact/hooks"
 import { getCurrentUrl, route } from 'preact-router';
 
@@ -53,6 +55,10 @@ const Home = () => {
         }
     }
 
+    const scrollToTop = () => {
+        window.scrollTo({top: 0, left: 0, behavior: "smooth"})
+    }
+
     // fetch data
     useEffect(() => {
         fetchPayload(baseURI, "studios", 10, language).then((data)=>{
@@ -64,10 +70,13 @@ const Home = () => {
 
     return(
         <div>
-            <Header language={language} scrollToAbout={scrollToAbout}/>
-            <section className={"home-hero"}></section>
+            <Header language={language} scrollToAbout={scrollToAbout} scrollToTop={scrollToTop}/>
+            <section className={"home-hero"}>
+                <div className={"home-hero_project-grid"}>
+                </div>
+            </section>
             <section id={"about"} className={"home-about"}>
-                <h1 className={"about"} dangerouslySetInnerHTML={{__html: about}}></h1>
+            <h1 className={"about"} dangerouslySetInnerHTML={{__html: about}}></h1>
             </section>
             <Footer language={language} setLanguage={setLanguage}/>
         </div>

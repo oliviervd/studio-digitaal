@@ -10,15 +10,37 @@
     src: url("assets/fonts/Movement-DirectThin.woff2");
 }
 
-root, body {
-    background: #F6F8FF;
-    color: black;
-    font-family: Movement-DirectThin, Sans-Serif;
-    overflow-x: hidden;
+@font-face {
+    font-family: "Director-Regular";
+    src: url("assets/fonts/Director-Regular.woff2");
 }
 
-h1 {
+@font-face {
+    font-family: "Basalte-Fond";
+    src: url("assets/fonts/Basalte-Fond.woff");
+}
 
+root, body {
+    background: white;
+    color: black;
+    font-family: Basalte-Fond, Sans-Serif;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    margin: 0px;
+}
+
+pre {
+    white-space: pre-wrap;       /* CSS 3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+
+h1 {
+    font-family: Basalte-Fond;
+    text-transform: uppercase;
 }
 
 .bold {
@@ -27,6 +49,7 @@ h1 {
 
 header {
     position: sticky;
+    z-index: 10;
     top: 0;
     padding: 0 20px;
     display: flex;
@@ -94,6 +117,7 @@ footer {
 /* HOME */
 .home-hero{
     height: 100vh;
+    padding: 20px;
 }
 
 .home-about{
@@ -101,6 +125,84 @@ footer {
     padding: 30px;
     font-size: 1.5em;
 }
+
+.home-hero_project-grid{
+    display: grid;
+    grid-template-rows: repeat(5, 20%);
+}
+
+.sideNav{
+    position: absolute;
+    top:0;
+    width:100vw;
+    bottom:0;
+    background: #C6D8D3;
+    transform: translateX(0);
+    transition: transform 1s ease;
+}
+
+.sideNavClosed {
+    transform: translateX(-98vw);
+}
+
+
+.sideNavClosed:hover {
+    background: darkorange;
+}
+
+.api-doc{
+    padding-left: 50px;
+}
+
+.apiText {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateX(100%) rotate(90deg) translateY(150%);
+    transform-origin: right top;
+    white-space: nowrap; /* Ensure the text doesn't wrap */
+    font-weight: 900;
+}
+.apiInterface--container{
+    position: relative;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    padding: 30px;
+    top: 50px;
+
+    & h2 {
+        font-size: 1.8em;
+    }
+
+    & nav > a {
+        display: block;
+        color: darkorange;
+        font-weight: bolder;
+        font-size: 1.5em;
+    }
+
+    & nav > a:hover {
+        text-decoration: underline;
+    }
+
+    & .codeBox{
+
+    }
+}
+
+.api-response {
+    height: 70vh;
+    & pre {
+        background: #C6D8D3;
+        padding: 30px;
+        overflow-y: scroll;
+        overflow-x: auto;
+        width: 30vw;
+        height: 60vh;
+    }
+}
+
+
 
 @media (max-width: 700px) {
     body {
