@@ -1,9 +1,14 @@
 .sidebar__container{
+    padding-top: 10px;
     padding-left:20px;
     display: flex;
     flex-flow: column;
 }
 
-.sidebar__container > a {}
+.sidebar__container > a {
+    font-family: Basalte-Fond;
+    text-transform: uppercase;
+    font-size: 1.5em;
+}
 
 

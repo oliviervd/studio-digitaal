@@ -78,7 +78,7 @@ const Home = () => {
             <section id={"about"} className={"home-about"}>
             <h1 className={"about"}>{about}</h1>
             </section>
-            <Footer language={language} setLanguage={setLanguage}/>
+            <Footer showFont={true} language={language} setLanguage={setLanguage}/>
         </div>
     )
 }

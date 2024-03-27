@@ -26,7 +26,7 @@ const ApiDocs = (props) => {
                 <Sidebar apiPages={apiPages} setApiPage={setApiPage}/>
                 <ApiDoc apiPage={apiPage}/>
             </section>
-            <Footer/>
+            <Footer showFont={false}/>
         </div>
     )
 

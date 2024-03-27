@@ -16,11 +16,13 @@ const Footer = (props) => {
                         <p>Ruda by Mariela Monsalve and Angelina Sánchez</p>
                     </div>
                 </div>
-                <div className={"languages"}>
-                    <p onClick={()=>changeLang("nl")}>NL</p>
-                    <p onClick={()=>changeLang("en")}>EN</p>
-                    <p onClick={()=>changeLang("fr")}>FR</p>
-                </div>
+                {props.showFont &&
+                    <div className={"languages"}>
+                        <p onClick={() => changeLang("nl")}>NL</p>
+                        <p onClick={() => changeLang("en")}>EN</p>
+                        <p onClick={() => changeLang("fr")}>FR</p>
+                    </div>
+                }
             </footer>
     )
 }

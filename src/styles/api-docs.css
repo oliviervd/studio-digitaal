@@ -14,11 +14,32 @@
 .api-doc{
     padding-left: 50px;
     max-width: 1200px;
+    overflow-y: scroll;
+    padding-right: 20px;
+    width: 80%;
+
+    & h1 {
+        padding-top: 0px;
+        margin-top: 10px;
+    }
 }
 
 .api-doc a{
     font-size: 1em;
     color: darkorange;
+}
+
+.api-doc .tabs{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    text-align: left;
+
+    h1 {
+        text-align: left;
+        align-content: start;
+        align-items: start;
+    }
 }
 
 .apiText {
@@ -39,6 +60,7 @@
 
     & h2 {
         font-size: 1.8em;
+        font-family: Basalte-Fond;
     }
 
     & nav > a {
@@ -46,6 +68,8 @@
         color: darkorange;
         font-weight: bolder;
         font-size: 1.5em;
+        font-family: Basalte-Fond;
+        text-transform: uppercase;
     }
 
     & nav > a:hover {
@@ -58,13 +82,48 @@
 }
 
 .api-response {
-    height: 70vh;
+    /*height: 70vh;*/
     & pre {
         background: #C6D8D3;
-        padding: 30px;
         overflow-y: scroll;
         overflow-x: auto;
-        max-width: 1200px;
-        height: 60vh;
+        max-width: 1000px;
+    }
+}
+
+pre {
+    background: #C6D8D3;
+    overflow-y: scroll;
+    overflow-x: auto;
+    max-width: 1200px;
+    padding: 10px;
+}
+
+.hidden {
+    height: 0;
+    /* transition: height 1s ease; */
+}
+
+.visible {
+    height: 500px;
+    transition: height 1s ease;
+    padding: 20px
+}
+.collapse-title {
+    display: flex;
+    flex-flow: row;
+    gap: 20px;
+
+    & h3:first-child {
+        color: orange;
+    }
+}
+
+.snippet {
+    display: grid;
+    grid-template-columns: 15% 85%;
+
+    & p {
+        color: orange;
     }
 }

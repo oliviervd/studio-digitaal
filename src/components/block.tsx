@@ -18,13 +18,46 @@ const Block = (props) => {
 
     // if richtext
     if (props.data.blockType === "RichTextBlock") {
-        console.log(props.data.richText)
         let text = serialize(props.data.richText)
-        console.log(text)
         return(
             <div>{text}</div>
         )
     }
+    // if code snippet
+
+    if (props.data.blockType === "codeSnippet") {
+        return (
+            <div>
+                <div>
+                    {props.data.Curl.snippet &&
+                        <div className={"snippet"}>
+                            <p>curl</p>
+                            <pre className={"codeBox"}>{props.data.Curl.snippet}</pre>
+                        </div>
+                    }
+                </div>
+                <div>
+                    {props.data.Python.snippet &&
+                        <div className={"snippet"}>
+                            <p>python</p>
+                            <pre className={"codeBox"}>{props.data.Python.snippet}</pre>
+                        </div>
+                    }
+                </div>
+                <div>
+                    {props.data.Javascript.snippet &&
+                        <div className={"snippet"}>
+                            <p>javascript</p>
+                            <pre className={"codeBox"}>{props.data.Javascript.snippet}</pre>
+                        </div>
+                    }
+                </div>
+            </div>
+        )
+
+    }
+    // todo: code snippet
+    // todo: add possibility to copy to clipboard
 
 }
 export default Block
