@@ -10,7 +10,8 @@ const serialize = (children) =>
         );
 
             if (node.bold) {
-                text = <strong key={i}>{text}</strong>;
+                //text = <strong key={i}>{text}</strong>;
+                text = <span key={i} style={{color:"orange"}}>{text}</span>
             }
 
             if (node.code) {

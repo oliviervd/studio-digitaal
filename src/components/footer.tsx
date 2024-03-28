@@ -8,7 +8,8 @@ const Footer = (props) => {
     }
 
     return(
-            <footer>
+        <footer>
+            {props.showFont &&
                 <div className={"fonts"}>
                     <p>fonts: </p>
                     <div>
@@ -16,14 +17,14 @@ const Footer = (props) => {
                         <p>Ruda by Mariela Monsalve and Angelina Sánchez</p>
                     </div>
                 </div>
-                {props.showFont &&
-                    <div className={"languages"}>
-                        <p onClick={() => changeLang("nl")}>NL</p>
-                        <p onClick={() => changeLang("en")}>EN</p>
-                        <p onClick={() => changeLang("fr")}>FR</p>
-                    </div>
-                }
-            </footer>
+            }
+            <div className={"languages"}>
+                <p onClick={() => changeLang("nl")}>NL</p>
+                <p onClick={() => changeLang("en")}>EN</p>
+                <p onClick={() => changeLang("fr")}>FR</p>
+            </div>
+
+        </footer>
     )
 }
 
