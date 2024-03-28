@@ -1,6 +1,5 @@
 .api-doc__container {
-    display: grid;
-    grid-template-columns: 20% 80%;
+
 }
 
 .api-doc__container a {
@@ -12,11 +11,12 @@
 }
 
 .api-doc{
-    padding-left: 50px;
+    padding-left: 20vw;
+    width: 100%;
     max-width: 1200px;
     overflow-y: scroll;
     padding-right: 20px;
-    width: 80%;
+    width: 75%;
 
     & h1 {
         padding-top: 0px;
@@ -53,11 +53,9 @@
 }
 .apiInterface--container{
     position: relative;
-    display: grid;
-    grid-template-columns: 20% 80%;
     padding: 30px;
     top: 50px;
-
+    width: 100%;
     & h2 {
         font-size: 1.8em;
         font-family: Basalte-Fond;
@@ -109,6 +107,7 @@ pre {
     transition: height 1s ease;
     padding: 20px
 }
+
 .collapse-title {
     display: flex;
     flex-flow: row;
@@ -127,3 +126,15 @@ pre {
         color: orange;
     }
 }
+
+@media (max-width: 700px) {
+    .apiInterface--container {
+        display: block;
+    }
+
+    .api-doc {
+        padding-left: 20px;
+        width: 90vw;
+    }
+}
+

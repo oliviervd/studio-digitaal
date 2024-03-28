@@ -3,12 +3,74 @@
     padding-left:20px;
     display: flex;
     flex-flow: column;
+    position: fixed;
+    width: 10%;
+
 }
 
-.sidebar__container > a {
+.sidebar__container >   a {
     font-family: Basalte-Fond;
     text-transform: uppercase;
     font-size: 1.5em;
+}
+
+.sidebar__container > div {
+    position: fixed;
+    width: 10%;
+}
+
+.sideNav{
+    position: absolute;
+    top:0;
+    width:100vw;
+    bottom:0;
+    background: #C6D8D3;
+    transform: translateX(0);
+    transition: transform 1s ease;
+}
+
+.sideNavClosed {
+    transform: translateX(-98vw);
+}
+
+
+.sideNavClosed:hover {
+    background: darkorange;
+}
+
+.dropMenu{
+    width: 100%;
+    background: black;
+    padding: 0 20px;
+    max-height: 500px;
+    transition: max-height ease 500ms;
+}
+
+.closed {
+    max-height: 0;
+}
+
+.dropMenu > a {
+    color: white;
+    display: flex;
+    flex-flow: column;
+    font-size: 1.5rem;
+    font-family: Basalte-Fond;
+    padding: 5px 0px
+}
+
+.dropMenu > a:first-child {
+    padding-top: 20px;
+}
+
+.dropMenu > a:last-child {
+    padding-bottom: 20px;
+}
+
+@media (max-width: 700px) {
+    .sidebar__container {
+        display: none;
+    }
 }
 
 
