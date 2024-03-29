@@ -44,17 +44,19 @@ header {
     justify-content: space-between;
     border-bottom: black 5px solid;
 
+
     h1 {
-        margin-top: 2px;
-        margin-left: 2px;
+        margin: 1px;
         font-size: 1.5rem;
         font-family: "IBM Plex Mono-Light";
+        line-height: 1.2rem;
+
     }
 }
 
 header > div {
     display: flex;
-    flex-flow: row;
+    flex-flow: column;
 
     & .boxIcon {
         width: 3rem;
@@ -133,9 +135,22 @@ footer {
 }
 
 .home-about{
-    height:fit-content;
-    padding: 30px;
-    font-size: 1.5em;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+
+    p {
+        text-transform: uppercase;
+        font-size: 3.5rem;
+        font-family: "IBM Plex Mono-Light";
+        margin: 0;
+        line-height: 45px;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+    }
 }
 
 .home-hero_project-grid{

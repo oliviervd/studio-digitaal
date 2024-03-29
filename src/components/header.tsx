@@ -8,10 +8,11 @@ const Header = (props) => {
 
     return(
         <header>
-            <div>
+            <div >
                 <h1 onClick={() => toggleHome()}>Studio Digitaal</h1>
+                <h1>booting.</h1>
             </div>
-           {/* <nav>
+            {/* <nav>
                 <h1 onClick={() =>route(`${props.language}/collection-api`)}>collection api</h1>
             </nav>
             <nav>

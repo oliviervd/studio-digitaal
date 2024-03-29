@@ -64,16 +64,18 @@ const Home = () => {
         fetchPayload(baseURI, "studios", 10, language).then((data)=>{
             const _unserializedText = data["docs"][3]["description"][0]
             console.log(_unserializedText)
-            const _serializedText =  serialize(data["docs"][3]["description"][0])
+            const _serializedText =  serialize(data["docs"][3]["description"])
             console.log(_serializedText)
             setAbout(_serializedText);
         })
-    }, [language]);
+    }, []);
 
     return(
         <div>
             <Header language={language} scrollToAbout={scrollToAbout} scrollToTop={scrollToTop}/>
-            <h1 >{about}</h1>
+            <section className={"home-about"}>
+                <p>{about}</p>
+            </section>
         </div>
     )
 }
