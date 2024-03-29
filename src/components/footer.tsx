@@ -9,7 +9,7 @@ const Footer = (props) => {
 
     return(
         <footer>
-            {props.showFont &&
+            {/*{props.showFont &&
                 <div className={"fonts"}>
                     <p>fonts: </p>
                     <div>
@@ -22,7 +22,7 @@ const Footer = (props) => {
                 <p onClick={() => changeLang("nl")}>NL</p>
                 <p onClick={() => changeLang("en")}>EN</p>
                 <p onClick={() => changeLang("fr")}>FR</p>
-            </div>
+            </div>*/}
 
         </footer>
     )

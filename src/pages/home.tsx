@@ -16,6 +16,8 @@ const Home = () => {
     const [projects, setProjects] = useState([]);
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
+    console.log(about)
+
     useEffect(() => {
         const mediaQuery = window.matchMedia('(max-width: 600px)');
         const handleChange = () => setIsMobile(mediaQuery.matches);
@@ -71,14 +73,7 @@ const Home = () => {
     return(
         <div>
             <Header language={language} scrollToAbout={scrollToAbout} scrollToTop={scrollToTop}/>
-            <section className={"home-hero"}>
-                <div className={"home-hero_project-grid"}>
-                </div>
-            </section>
-            <section id={"about"} className={"home-about"}>
-            <h1 className={"about"}>{about}</h1>
-            </section>
-            <Footer showFont={true} language={language} setLanguage={setLanguage}/>
+            <h1 >{about}</h1>
         </div>
     )
 }

@@ -9,15 +9,14 @@ const Header = (props) => {
     return(
         <header>
             <div>
-                <div className={"boxIcon"} onClick={()=> {props.setOpen(!props.open)}}/>
                 <h1 onClick={() => toggleHome()}>Studio Digitaal</h1>
             </div>
-            <nav>
+           {/* <nav>
                 <h1 onClick={() =>route(`${props.language}/collection-api`)}>collection api</h1>
             </nav>
             <nav>
                 <h1 onClick={props.scrollToAbout}>about</h1>
-            </nav>
+            </nav>*/}
         </header>
     )
 }
