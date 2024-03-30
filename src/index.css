@@ -97,16 +97,17 @@ footer {
 }
 
 .languages {
-    position: fixed;
-    bottom: 10px;
-    left: 20px;
     display: flex;
-    flex-flow: column;
+    flex-flow: row;
     font-family: IBM Plex Mono-Medium;
     text-transform: uppercase;
+
+    & .selected {
+        text-decoration: underline;
+    }
 }
 
-.languages > p:hover {
+.languages > h1:hover {
     color: pink;
     text-decoration: underline;
 }
@@ -158,6 +159,19 @@ footer {
     grid-template-rows: repeat(5, 20%);
 }
 
+
+.pageSize{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    > p {
+        margin: 1px;
+        font-size: 1rem;
+        font-family: "IBM Plex Mono-Light";
+        line-height: 1.2rem;
+    }
+}
 
 
 @media (max-width: 700px) {

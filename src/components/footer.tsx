@@ -18,11 +18,7 @@ const Footer = (props) => {
                     </div>
                 </div>
             }
-            <div className={"languages"}>
-                <p onClick={() => changeLang("nl")}>NL</p>
-                <p onClick={() => changeLang("en")}>EN</p>
-                <p onClick={() => changeLang("fr")}>FR</p>
-            </div>*/}
+            */}
 
         </footer>
     )

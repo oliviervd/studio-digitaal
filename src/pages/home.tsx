@@ -1,6 +1,5 @@
 import Header from "../components/header";
-import Footer from "../components/footer";
-import SideNav from "../pages/CollectionAPI";
+import CalculateSize from "../components/fetchSize";
 
 import {useState, useEffect} from "preact/hooks"
 import { getCurrentUrl, route } from 'preact-router';
@@ -16,7 +15,6 @@ const Home = () => {
     const [projects, setProjects] = useState([]);
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
-    console.log(about)
 
     useEffect(() => {
         const mediaQuery = window.matchMedia('(max-width: 600px)');
@@ -68,14 +66,16 @@ const Home = () => {
             console.log(_serializedText)
             setAbout(_serializedText);
         })
-    }, []);
+    }, [language]);
 
     return(
         <div>
-            <Header language={language} scrollToAbout={scrollToAbout} scrollToTop={scrollToTop}/>
+            <Header language={language} scrollToAbout={scrollToAbout} scrollToTop={scrollToTop} setLanguage={setLanguage}/>
             <section className={"home-about"}>
                 <p>{about}</p>
             </section>
+            <CalculateSize />
+
         </div>
     )
 }
