@@ -33,12 +33,6 @@ const Header = (props) => {
                     <h1 id={'fr'} onClick={() => changeLang("fr")}>FR</h1> .
                 </div>
             </div>
-            {/* <nav>
-                <h1 onClick={() =>route(`${props.language}/collection-api`)}>collection api</h1>
-            </nav>
-            <nav>
-                <h1 onClick={props.scrollToAbout}>about</h1>
-            </nav>*/}
         </header>
     )
 }
