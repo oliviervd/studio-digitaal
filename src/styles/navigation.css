@@ -5,7 +5,6 @@
     flex-flow: column;
     position: relative;
     min-height: 60%;
-    border-right: orange 2px solid;
     padding-right: 50px;
 }
 
