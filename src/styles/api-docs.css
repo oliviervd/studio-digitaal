@@ -1,9 +1,8 @@
 .api-doc__container {
-
-}
-
-.api-doc__container a {
-    font-size: 2em;
+    font-size: var(--font-size-s);
+    width: 100%;
+    display: flex;
+    flex-flow: row;
 }
 
 .api-doc__container a:hover{
@@ -11,16 +10,18 @@
 }
 
 .api-doc{
-    padding-left: 20vw;
-    width: 100%;
-    max-width: 1200px;
+    position: relative;
+    padding-left: 10px;
+    padding-top: 20px;
+    padding-right: 10px;
+    top: 0;
     overflow-y: scroll;
-    padding-right: 20px;
-    width: 75%;
 
     & h1 {
-        padding-top: 0px;
-        margin-top: 10px;
+        margin: 1px;
+        font-size: 1.5rem;
+        font-family: "IBM Plex Mono-Light";
+        line-height: 1.2rem;
     }
 }
 
@@ -56,6 +57,7 @@
     padding: 30px;
     top: 50px;
     width: 100%;
+
     & h2 {
         font-size: 1.8em;
         font-family: Basalte-Fond;
@@ -91,6 +93,8 @@
 
 pre {
     background: #C6D8D3;
+    font-size: 1em;
+    color: black;
     overflow-y: scroll;
     overflow-x: auto;
     max-width: 1200px;

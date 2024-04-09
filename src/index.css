@@ -11,10 +11,34 @@
 root, body {
     background: black;
     color: white;
-    font-family: IBM Plex Mono-Medium;
+    font-family: "IBM Plex Mono-Light";
     overflow-x: hidden;
     margin: 0px;
 }
+
+:root {
+    --font-size-s: 1.2rem;
+    --font-size-m: 1.8rem;
+    --font-size-l: 3.5rem;
+}
+
+
+@media (max-width: 1600px) {
+    :root {
+        --font-size-s: 1rem;
+        --font-size-m: 1.2rem;
+        --font-size-l: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    :root {
+        --font-size-s: 1.2rem;
+        --font-size-m: 1.5rem;
+        --font-size-l: 1.5rem;
+    }
+}
+
 
 pre {
     white-space: pre-wrap;       /* CSS 3 */
@@ -23,7 +47,6 @@ pre {
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
-
 
 h1 {
     font-family: IBM Plex Mono-Medium;
@@ -36,14 +59,11 @@ h1 {
 
 header {
     position: sticky;
-    background: black;
     z-index: 10;
     top: 0;
     display: flex;
     flex-flow: row;
     justify-content: space-between;
-    border-bottom: black 5px solid;
-
 
     h1 {
         margin: 1px;
@@ -79,6 +99,7 @@ header > nav {
 
 a {
     color: #C6D8D3;
+    font-size: var(--font-size-l);
 }
 
 nav {
@@ -142,7 +163,7 @@ footer {
 
     p {
         text-transform: uppercase;
-        font-size: 3.5rem;
+        font-size: var(--font-size-l);
         font-family: "IBM Plex Mono-Light";
         margin: 0;
         line-height: 45px;

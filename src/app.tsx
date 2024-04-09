@@ -3,8 +3,6 @@ import {Router, route} from "preact-router";
 import { render } from 'preact';
 import { useEffect } from 'preact/hooks';
 import ApiDocs from "./pages/CollectionAPI";
-
-
 const App = () => {
 
     useEffect(() => {

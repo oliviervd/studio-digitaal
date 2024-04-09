@@ -6,12 +6,11 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import Sidebar from "../components/Sidebar";
 import ApiDoc from "../components/apiDoc";
-import DropMenu from "../components/dropMenu";
 
 const ApiDocs = (props) => {
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
     const [apiPages, setApiPages] = useState([])
-    const [apiPage, setApiPage] = useState(apiPages[0])
+    const [apiPage, setApiPage] = useState("")
     const [open, setOpen] = useState(false);
     // parse data from payload
 
@@ -21,12 +20,16 @@ const ApiDocs = (props) => {
         })
     }, []);
 
+    function changePage(page) {
+        setApiPage(page)
+        //console.log(page)
+    }
+
     return(
         <div>
             <Header setOpen={setOpen} open={open}/>
-            <DropMenu open={open} apiPages={apiPages} setApiPage={setApiPage}/>
             <section className={"api-doc__container"}>
-                <Sidebar apiPages={apiPages} setApiPage={setApiPage}/>
+                <Sidebar changePage={changePage}/>
                 <ApiDoc apiPage={apiPage}/>
             </section>
             <Footer showFont={false}/>
