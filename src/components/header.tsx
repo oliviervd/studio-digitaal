@@ -11,7 +11,6 @@ const Header = (props) => {
         <header>
             <div>
                 <h1 onClick={() => toggleHome()}>Studio Digitaal</h1>
-                <h1 onClick={() => route(`/${props.lang}/collection-api`)}>Collection API</h1>
                 <h1>booting.</h1>
                 <div id={"lang"} className={"languages"}>
                     <h1 id={'nl'} onClick={() => changeLang("nl")}>NL</h1> .

@@ -5,6 +5,7 @@ import {useState, useEffect} from "preact/hooks"
 import "../index.css"
 import {fetchPayload} from "../utils/fetchPayload";
 import serialize from "../utils/serialize";
+import {route} from "preact-router";
 
 const Home = () => {
     const [language, setLanguage] = useState("en")
@@ -31,7 +32,11 @@ const Home = () => {
     return(
         <div>
             <Header language={language} setLanguage={setLanguage}/>
-            <section></section>
+            <section>
+                <nav onClick={() => route(`/${language}/collection-api`)} className="home-link">
+                    <p>collection api</p>
+                </nav>
+            </section>
             <section className={"home-about"}>
                 <p>{about}</p>
             </section>
