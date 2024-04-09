@@ -163,7 +163,7 @@ footer {
 
     p {
         text-transform: uppercase;
-        font-size: var(--font-size-l);
+        font-size: 3.5rem;
         font-family: "IBM Plex Mono-Light";
         margin: 0;
         line-height: 45px;
@@ -172,6 +172,8 @@ footer {
     a {
         text-decoration: none;
         color: white;
+        font-size: 3.5rem;
+
     }
 }
 

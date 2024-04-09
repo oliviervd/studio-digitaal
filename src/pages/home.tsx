@@ -31,6 +31,7 @@ const Home = () => {
     return(
         <div>
             <Header language={language} setLanguage={setLanguage}/>
+            <section></section>
             <section className={"home-about"}>
                 <p>{about}</p>
             </section>

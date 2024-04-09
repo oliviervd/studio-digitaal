@@ -9,16 +9,30 @@ import ApiDoc from "../components/apiDoc";
 
 const ApiDocs = (props) => {
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
-    const [apiPages, setApiPages] = useState([])
-    const [apiPage, setApiPage] = useState("")
+    const [nav, setNav] = useState([])
+    const [apiPage, setApiPage] = useState([])
     const [open, setOpen] = useState(false);
-    // parse data from payload
 
-    useEffect(() => {
-        fetchPayload(baseURI, "apiDoc", 10, props.language).then((data)=>{
-            setApiPages(data.docs);
-        })
-    }, []);
+    // fetch and parse data from CMS
+    useEffect(()=>  {
+        // to do change language to props;
+        fetchPayload(baseURI, "navigationSD", 10, "en").then((data) => {
+                for (let i = 0; i < data["docs"].length; i ++) {
+                    if (data["docs"][i]["pageGroup"] === "collection-api") {
+                        setNav(data["docs"][i])
+                    }
+                }
+            }
+        )
+
+    },[])
+
+    if (apiPage.length == 0) {
+        if (nav.pages) {
+            setApiPage(nav.pages[0])
+
+        }
+    }
 
     function changePage(page) {
         setApiPage(page)
@@ -29,7 +43,7 @@ const ApiDocs = (props) => {
         <div>
             <Header setOpen={setOpen} open={open}/>
             <section className={"api-doc__container"}>
-                <Sidebar changePage={changePage}/>
+                <Sidebar changePage={changePage} nav={nav}/>
                 <ApiDoc apiPage={apiPage}/>
             </section>
             <Footer showFont={false}/>
