@@ -9,10 +9,20 @@
     padding-right: 50px;
 }
 
-.sidebar__container >   a {
+.sidebar__container > a {
     font-family: "IBM Plex Mono-Light";
+    display: inline-block;
+    margin-top: 5px;
+    padding: .3em .25em .225em;
+    color: white;
+    background-color: black;
+    border: 1px solid white;
     text-transform: uppercase;
     font-size: var(--font-size-s);
+}
+
+.sidebar__container > a:first-child {
+    margin-top: 0;
 }
 
 .sidebar__container > div {
