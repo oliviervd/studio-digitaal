@@ -36,7 +36,11 @@
 }
 
 .api-doc .tabs{
+    border-top: #C6D8D3 solid 2px;
+    border-bottom: #C6D8D3 solid 2px;
     padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
     display: flex;
     flex-flow: row;
     justify-content: space-evenly;

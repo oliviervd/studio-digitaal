@@ -14,14 +14,17 @@ const ApiDoc = (props) => {
                     )
                 })}
                 {props.apiPage.page.title !== "introduction" &&
+                    // todo: only show tab when there's something inside of it show.
                     <section>
                         <div className={"tabs"}>
                             <h1 id={"object"} style={{textDecoration: tab === "object" ? "underline" : "none"}}
-                                onClick={() => setTab("object")}>object</h1>
+                                onClick={() => setTab("object")}>object(s)</h1>
                             <h1 id={"agent"} style={{textDecoration: tab === "agent" ? "underline" : "none"}}
-                                onClick={() => setTab("agent")}>agent</h1>
+                                onClick={() => setTab("agent")}>agent(s)</h1>
                             <h1 id={"exhibition"} style={{textDecoration: tab === "exhibition" ? "underline" : "none"}}
-                                onClick={() => setTab("exhibition")}>exhibition</h1>
+                                onClick={() => setTab("exhibition")}>exhibition(s)</h1>
+                            <h1 id={"concept"} style={{textDecoration: tab === "concept" ? "underline" : "none"}}
+                                onClick={()=>setTab("concept")}>concept(s)</h1>
                         </div>
                         {tab && props.apiPage.page[tab] && props.apiPage.page[tab].layout.map((e) => {
                             return (
