@@ -27,11 +27,15 @@ const Home = () => {
         })
     }, [language]);
 
+    function changeLang(lang) {
+        setLanguage(lang);
+    }
+
 
 
     return(
         <div>
-            <Header language={language} setLanguage={setLanguage}/>
+            <Header language={language} changeLang={changeLang}/>
             <section>
                 <nav onClick={() => route(`/${language}/collection-api`)} className="home-link">
                     <p>collection api</p>
