@@ -1,5 +1,5 @@
 .sidebar__container{
-    padding-top: 20px;
+    padding-top: 50px;
     padding-left: 10px;
     display: flex;
     flex-flow: column;
@@ -18,7 +18,7 @@
     background-color: black;
     border: 1px solid white;
     text-transform: uppercase;
-    font-size: 1.3em;
+    font-size: var(--font-size-s);
 }
 
 .sidebar__container > a:first-child {
@@ -45,7 +45,8 @@
 }
 
 .sideNavClosed:hover {
-    background: darkorange;
+    background: white;
+    width: 100%;
 }
 
 .dropMenu{

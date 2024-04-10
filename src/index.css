@@ -120,6 +120,8 @@ footer {
 .languages {
     display: flex;
     flex-flow: row;
+    position: absolute;
+    top: 42px;
     font-family: IBM Plex Mono-Medium;
     text-transform: uppercase;
 
@@ -153,8 +155,6 @@ footer {
     height: 96.5vh;
     text-decoration: underline;
     transition: opacity .25s,border-color .25s,background-color .25s,color .25s;
-
-
 }
 
 
