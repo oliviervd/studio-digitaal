@@ -129,9 +129,35 @@ footer {
 }
 
 .languages > h1:hover {
-    color: pink;
     text-decoration: underline;
 }
+
+.languages > h1:first-child:hover {
+    height: 96.5vh;
+    background-color: orange;
+    text-decoration: underline;
+    transition: opacity .25s,border-color .25s,background-color .25s,color .25s;
+
+}
+
+.languages > h1:nth-child(2):hover {
+    height: 96.5vh;
+    background-color: darkorange;
+    text-decoration: underline;
+    transition: opacity .25s,border-color .25s,background-color .25s,color .25s;
+
+}
+
+.languages > h1:last-child:hover {
+    background-color: coral;
+    height: 96.5vh;
+    text-decoration: underline;
+    transition: opacity .25s,border-color .25s,background-color .25s,color .25s;
+
+
+}
+
+
 
 .fonts {
     display: flex;
