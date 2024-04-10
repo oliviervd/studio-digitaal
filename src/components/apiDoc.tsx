@@ -13,7 +13,7 @@ const ApiDoc = (props) => {
                         <Block data={e}/>
                     )
                 })}
-                {props.apiPage.page.title !== "introduction" &&
+                {props.apiPage.page.title !== "introduction" && props.apiPage.page.title !== "images" &&
                     // todo: only show tab when there's something inside of it show.
                     <section>
                         <div className={"tabs"}>

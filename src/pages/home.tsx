@@ -31,8 +31,6 @@ const Home = () => {
         setLanguage(lang);
     }
 
-
-
     return(
         <div>
             <Header language={language} changeLang={changeLang}/>
