@@ -263,7 +263,12 @@ footer {
         position: relative;
     }
 
-    footer > .languages {
-        display: none;
+
+    .languages {
+        top: 75px;
+        > h1 {
+            font-size: 2rem;
+
+        }
     }
 }
