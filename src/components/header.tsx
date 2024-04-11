@@ -3,7 +3,7 @@ const Header = (props) => {
 
     function toggleHome() {
         window.scrollTo({top: 0, left: 0, behavior: "smooth"})
-        route(`/${props.language}/`);    }
+        route(`/`);    }
 
 
     return(
