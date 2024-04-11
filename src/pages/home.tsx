@@ -6,9 +6,10 @@ import "../index.css"
 import {fetchPayload} from "../utils/fetchPayload";
 import serialize from "../utils/serialize";
 import {route} from "preact-router";
+import {useLanguage} from "../utils/languageProvider";
 
 const Home = () => {
-    const [language, setLanguage] = useState("en")
+    const {language, setLanguage} = useLanguage()
     const [projects, setProjects] = useState([])
     const [about, setAbout] = useState([])
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
@@ -35,7 +36,7 @@ const Home = () => {
         <div>
             <Header language={language} changeLang={changeLang}/>
             <section>
-                <nav onClick={() => route(`/${language}/collection-api`)} className="home-link">
+                <nav onClick={() => route(`/collection-api`)} className="home-link">
                     <p>collection api</p>
                 </nav>
             </section>
