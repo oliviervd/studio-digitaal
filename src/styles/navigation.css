@@ -10,7 +10,7 @@
 
 .sidebar__container > a {
     font-family: "IBM Plex Mono-Light";
-    font-weight: bolder;
+    font-weight: 100;
     display: inline-block;
     margin-top: 5px;
     padding: .3em .25em .225em;
