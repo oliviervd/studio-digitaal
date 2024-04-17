@@ -23,6 +23,8 @@
     overflow-y: scroll;
 
     & h1 {
+        border-top: 2px solid white;
+        padding-top: 20px;
         margin: 1px;
         font-size: 1.5rem;
         font-family: "IBM Plex Mono-Light";

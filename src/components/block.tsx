@@ -5,9 +5,18 @@ const Block = (props) => {
     // if title parse as title
     if (props.data.type === "title") {
         return(
-            <h1>{props.data.text}</h1>
+            <h1 id={props.data.text}>{props.data.text}</h1>
         )
     }
+
+
+    // if subtitle parse as subtitle
+    if (props.data.type === "subtitle") {
+        return(
+            <h2 id={props.data.text}>{props.data.text}</h2>
+        )
+    }
+
 
     // if endpoint use to generate api response
     if (props.data.type === "endpoint") {
