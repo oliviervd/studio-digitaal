@@ -213,7 +213,13 @@ footer {
 
 .home-hero_project-grid{
     display: grid;
-    grid-template-rows: repeat(5, 20%);
+    grid-template-columns: repeat(5, 20%);
+    padding: 20px;
+
+    & img {
+        max-width: 18vw;
+        margin: 20px;
+    }
 }
 
 

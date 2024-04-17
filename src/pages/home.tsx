@@ -43,6 +43,17 @@ const Home = () => {
                     <p >glossary</p>
                 </nav>
             </section>
+            <section>
+                <div className={"home-hero_project-grid"}>
+                    {projects[0] && projects.map((p)=>{
+                        console.log(p["heroImage"]["url"]);
+                        return (
+                            <img src={p["heroImage"]["url"]}/>
+                        )
+
+                    })}
+                </div>
+            </section>
             <section className={"home-about"}>
                 <p>{about}</p>
             </section>
