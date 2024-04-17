@@ -64,6 +64,33 @@
     white-space: nowrap; /* Ensure the text doesn't wrap */
     font-weight: 900;
 }
+
+.apiInterface--container{
+    position: relative;
+    padding: 30px;
+    top: 50px;
+    width: 100%;
+
+    & h2 {
+        font-size: 1.8em;
+    }
+
+    & nav > a {
+        display: block;
+        color: darkorange;
+        font-size: var(--font-size-s);
+        text-transform: uppercase;
+    }
+
+    & nav > a:hover {
+        text-decoration: underline;
+    }
+
+    & .codeBox{
+
+    }
+}
+
 .api-response {
     /*height: 70vh;*/
     & pre {
