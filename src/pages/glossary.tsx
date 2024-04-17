@@ -1,6 +1,11 @@
+import Header from "../components/header";
+
 const Glossary = (props) => {
     return(
-       <p>booting...</p>
+        <div>
+            <Header/>
+            <p style={{padding: "20px"}}>booting...</p>
+        </div>
     )
 }
 export default Glossary;
