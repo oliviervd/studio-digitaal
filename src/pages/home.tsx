@@ -35,9 +35,12 @@ const Home = () => {
     return(
         <div>
             <Header language={language} changeLang={changeLang}/>
-            <section>
+            <section className={"home-link--container"} >
                 <nav onClick={() => route(`/collection-api`)} className="home-link">
                     <p>collection api</p>
+                </nav>
+                <nav onClick={() => route(`/glossary`)} className="home-link">
+                    <p >glossary</p>
                 </nav>
             </section>
             <section className={"home-about"}>

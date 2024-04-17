@@ -3,6 +3,7 @@ import {Router, route} from "preact-router";
 import { render } from 'preact';
 import ApiDocs from "./pages/CollectionAPI";
 import {LanguageProvider} from "./utils/languageProvider";
+import Glossary from "./pages/glossary";
 const App = () => {
 
   return (
@@ -10,6 +11,7 @@ const App = () => {
           <Router>
               <Home path={"/"}/>
               <ApiDocs path={"/collection-api"}/>
+              <Glossary path={"/glossary"}/>
           </Router>
       </LanguageProvider>
   )
