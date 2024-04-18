@@ -3,7 +3,7 @@ import serialize from "../utils/serialize";
 
 const Block = (props) => {
     // if title parse as title
-    if (props.data.type === "title") {
+    if (props.data.type === "title" || props.data.type === "main title") {
         return(
             <h1 id={props.data.text}>{props.data.text}</h1>
         )

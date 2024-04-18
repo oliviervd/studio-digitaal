@@ -1,10 +1,15 @@
+
+.sidebar__container-main {
+    position: fixed;
+    padding-top: 45px;
+}
+
 .sidebar__container{
-    padding-top: 50px;
+    padding-top: 10px;
     padding-left: 10px;
     display: flex;
     flex-flow: column;
     position: relative;
-    min-height: 60%;
     padding-right: 50px;
 }
 
@@ -19,6 +24,17 @@
     border: 1px solid white;
     text-transform: uppercase;
     font-size: var(--font-size-s);
+}
+
+.sidebar__container > .subpage {
+    color: orange;
+    font-size: var(--font-size-xs)
+}
+
+.sidebar__container > .subpage-sub {
+    color: coral;
+    font-size: var(--font-size-xs);
+    padding-left: 10px;
 }
 
 .sidebar__container > a:first-child {

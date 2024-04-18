@@ -12,6 +12,7 @@ const ApiDocs = (props) => {
     const [nav, setNav] = useState([])
     const [apiPage, setApiPage] = useState([])
     const [open, setOpen] = useState(false);
+    const [scrollToID, setScrollToID] = useState(null)
 
     // fetch and parse data from CMS
     useEffect(()=>  {
@@ -30,21 +31,29 @@ const ApiDocs = (props) => {
     if (apiPage.length == 0) {
         if (nav.pages) {
             setApiPage(nav.pages[0])
-
         }
     }
 
-    function changePage(page) {
+    function changePage(page, id) {
         setApiPage(page)
-        //console.log(page)
+        if (id) {
+            setScrollToID(id)
+        }
+        else {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            })
+        }
     }
+
 
     return(
         <div>
             <Header setOpen={setOpen} open={open}/>
             <section className={"api-doc__container"}>
                 <Sidebar changePage={changePage} nav={nav}/>
-                <ApiDoc apiPage={apiPage}/>
+                <ApiDoc apiPage={apiPage} scrollToID={scrollToID}/>
             </section>
             <Footer showFont={false}/>
         </div>

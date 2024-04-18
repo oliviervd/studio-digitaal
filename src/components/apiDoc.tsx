@@ -1,9 +1,27 @@
 import Block from "./block";
-import {useState} from "preact/hooks";
+import {useState, useEffect} from "preact/hooks";
+
 
 const ApiDoc = (props) => {
     // set tab
     const [tab, setTab] = useState("object")
+
+    useEffect(()=>{
+        if (props.scrollToID){
+            scroller(props.scrollToID)
+        }
+    }, [props.scrollToID])
+
+    function scroller(id) {
+        // select element
+        const scrollToElem = document.getElementById(id);
+        const targetScrollPosition = scrollToElem.offsetTop -5;
+
+        window.scrollTo({
+            top: targetScrollPosition,
+            behavior: "smooth",
+        })
+    }
 
     if (props.apiPage.page) {
         return(

@@ -17,6 +17,7 @@ root, body {
 }
 
 :root {
+    --font-size-xs: 1rem;
     --font-size-s: 1.2rem;
     --font-size-m: 1.8rem;
     --font-size-l: 3.5rem;
@@ -164,8 +165,6 @@ footer {
     text-decoration: underline;
     transition: opacity .25s,border-color .25s,background-color .25s,color .25s;
 }
-
-
 
 .fonts {
     display: flex;

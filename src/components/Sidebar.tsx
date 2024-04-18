@@ -1,15 +1,36 @@
 import "../styles/navigation.css"
-import {useEffect, useState} from "preact/hooks";
-import {fetchPayload} from "../utils/fetchPayload";
 
 const Sidebar = (props) => {
 
     if (props.nav.pages) {
         return(
-            <div className={"sidebar__container"}>
+            <div className={"sidebar__container-main"}>
                 {props.nav["pages"].map((p, index) => {
                     return(
-                        <a onClick={()=>{ props.changePage(p)}}>{p.page.title}</a>
+                        <div className={"sidebar__container"}>
+                            <a onClick={() => {
+                                props.changePage(p)
+                            }}>
+                                {p.page.title}
+
+                            </a>
+                            {p.page.layout.map((sub)=> {
+                                if (sub.type==="title") {
+                                    return (
+                                        <a onClick={()=>props.changePage(p, sub.text)} className={"subpage"}>{sub.text}</a>
+                                    )
+
+                                }
+                                else if (sub.type==="subtitle") {
+                                    return (
+                                        <a onClick={()=>props.changePage(p, sub.text)} className={"subpage-sub"}>{sub.text}
+                                        </a>
+                                    )
+
+                                }
+                            })}
+                        </div>
+
                     )
                 })}
             </div>
