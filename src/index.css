@@ -212,13 +212,21 @@ footer {
 }
 
 .home-hero_project-grid{
+    position: absolute;
+    max-width: 70vw;
+    left: 25vw;
     display: grid;
     grid-template-columns: repeat(4, 25%);
     padding: 20px;
 
     & img {
-        max-width: 23vw;
+        max-width: 16vw;
         margin: 20px;
+        opacity: 50%;
+    }
+
+    & img:hover {
+        opacity: 100%;
     }
 }
 
