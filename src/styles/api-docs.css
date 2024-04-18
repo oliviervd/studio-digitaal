@@ -107,7 +107,7 @@ pre {
     color: black;
     overflow-y: scroll;
     overflow-x: auto;
-    max-width: 1200px;
+    max-width: 100%;
     padding: 10px;
 }
 
@@ -135,7 +135,7 @@ pre {
 .snippet {
     display: grid;
     grid-template-columns: 15% 85%;
-    width: 90%;
+    width: 100%;
 
     & p {
         color: orange;

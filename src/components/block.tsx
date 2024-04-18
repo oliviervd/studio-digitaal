@@ -38,6 +38,14 @@ const Block = (props) => {
         return (
             <div>
                 <div>
+                    {props.data.URL.snippet &&
+                        <div className={"snippet"}>
+                            <p>REST</p>
+                            <pre className={"codeBox"}>{props.data.URL.snippet}</pre>
+                        </div>
+                    }
+                </div>
+                <div>
                     {props.data.JSONLD.snippet &&
                         <div className={"snippet"}>
                             <p>JSON-LD</p>
