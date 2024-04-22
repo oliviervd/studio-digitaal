@@ -7,12 +7,17 @@ import {fetchPayload} from "../utils/fetchPayload";
 import serialize from "../utils/serialize";
 import {route} from "preact-router";
 import {useLanguage} from "../utils/languageProvider";
+import Project from "../components/project";
 
 const Home = () => {
     const {language, setLanguage} = useLanguage()
+    const [project, setProject] = useState([])
+    const [projectView, setProjectView] = useState(false)
     const [projects, setProjects] = useState([])
     const [about, setAbout] = useState([])
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
+
+    console.log(project)
 
     useEffect(()=> {
         fetchPayload(baseURI,"StudioDigitalProject", 10, language).then((data)=> {
@@ -28,13 +33,24 @@ const Home = () => {
         })
     }, [language]);
 
+    function openProject(project) {
+        setProject(project);
+        setProjectView(true);
+    }
+
     function changeLang(lang) {
         setLanguage(lang);
     }
 
+    function toggleHome() {
+        //window.scrollTo({top: 0, left: 0, behavior: "smooth"})
+        route(`/`);
+        setProjectView(false)
+    }
+
     return(
         <div>
-            <Header language={language} changeLang={changeLang}/>
+            <Header toggleHome={toggleHome} language={language} changeLang={changeLang}/>
             <section className={"home-link--container"} >
                 <nav onClick={() => route(`/collection-api`)} className="home-link">
                     <p>collection api</p>
@@ -44,19 +60,21 @@ const Home = () => {
                 </nav>
             </section>
             <section>
-                <div className={"home-hero_project-grid"}>
+                <div className={"home-hero_project-grid"} style={projectView ? {display: "none"}: {}}>
                     {projects[0] && projects.map((p)=>{
-                        console.log(p["heroImage"]["url"]);
                         return (
-                            <img src={p["heroImage"]["url"]}/>
+                            <img onClick={()=>openProject(p)} src={p["heroImage"]["url"]}/>
                         )
 
                     })}
                 </div>
             </section>
-            <section className={"home-about"}>
+            <section className={projectView ? "home-about w-50": "home-about w-100"} style={projectView ? {display: "none"}:{}}>
                 <p>{about}</p>
             </section>
+            {projectView &&
+                <Project project={project} />
+            }
             <CalculateSize />
 
         </div>

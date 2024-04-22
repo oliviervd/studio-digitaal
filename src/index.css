@@ -126,6 +126,14 @@ footer {
     width: 100%;
 }
 
+.w-100 {
+    width: 100%;
+}
+
+.w-50 {
+    width: 50%;
+}
+
 .languages {
     display: flex;
     flex-flow: row;
@@ -192,7 +200,6 @@ footer {
 .home-about{
     position: absolute;
     top: 50%;
-    width: 100%;
 
     p {
         text-transform: uppercase;
@@ -293,3 +300,4 @@ footer {
         }
     }
 }
+
