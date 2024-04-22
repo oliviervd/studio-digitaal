@@ -42,6 +42,7 @@ const Block = (props) => {
                         <div className={"snippet"}>
                             <p>REST</p>
                             <pre className={"codeBox"}>{props.data.URL.snippet}</pre>
+                            <a href={props.data.URL.snippet} target="_blank">try it out</a>
                         </div>
                     }
                 </div>

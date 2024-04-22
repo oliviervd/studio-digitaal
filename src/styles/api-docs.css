@@ -133,6 +133,7 @@ pre {
 }
 
 .snippet {
+    position: relative;
     display: grid;
     grid-template-columns: 15% 85%;
     width: 100%;
@@ -140,6 +141,15 @@ pre {
     & p {
         color: orange;
     }
+
+    & a {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 20px;
+    }
+
+
 }
 
 @media (max-width: 700px) {
