@@ -12,7 +12,7 @@ const Project = (props) =>  {
                 <p>{serialize(props.project.projectDescription)}</p>
             </div>
             <div className={"media"}>
-                <img src={props.project["heroImage"]["url"]}/>
+                <img style={{opacity: "0.6"}} src={props.project["heroImage"]["url"]}/>
             </div>
         </div>
     )

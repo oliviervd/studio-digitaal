@@ -1,3 +1,8 @@
+span {
+    color: var(--text-color);
+
+}
+
 .api-doc__container {
     position: absolute;
     font-size: var(--font-size-s);
@@ -29,6 +34,7 @@
         font-size: 1.5rem;
         font-family: "IBM Plex Mono-Light";
         line-height: 1.2rem;
+        color: var(--text-color);
     }
 }
 
@@ -52,6 +58,7 @@
         text-align: left;
         align-content: start;
         align-items: start;
+        color: var(--text-color);
     }
 }
 
@@ -73,6 +80,7 @@
 
     & h2 {
         font-size: 1.8em;
+        color: var(--text-color);
     }
 
     & nav > a {
@@ -147,6 +155,7 @@ pre {
         top: 50%;
         transform: translateY(-50%);
         right: 20px;
+        color: var(--text-color);
     }
 
 

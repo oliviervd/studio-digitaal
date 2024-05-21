@@ -1,4 +1,5 @@
 import { route } from 'preact-router';
+import ThemeToggle from "./ThemeToggle";
 const Header = (props) => {
 
     return(
@@ -12,6 +13,7 @@ const Header = (props) => {
                     <h1 id={'fr'} onClick={() => props.changeLang("fr")}>FR</h1> .
                 </div>
             </div>
+            <ThemeToggle/>
         </header>
     )
 }
