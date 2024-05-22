@@ -176,6 +176,7 @@ pre {
 
     .api-doc > h1 {
         border-top: none;
+        padding: 10px 0 10px 10px
     }
 
     .api-doc {

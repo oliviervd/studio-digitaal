@@ -160,7 +160,6 @@ footer {
 }
 
 .languages > h1:first-child:hover {
-    height: 96.5vh;
     background-color: orange;
     text-decoration: underline;
     transition: opacity .25s,border-color .25s,background-color .25s,color .25s;
@@ -168,7 +167,6 @@ footer {
 }
 
 .languages > h1:nth-child(2):hover {
-    height: 96.5vh;
     background-color: darkorange;
     text-decoration: underline;
     transition: opacity .25s,border-color .25s,background-color .25s,color .25s;
@@ -177,7 +175,6 @@ footer {
 
 .languages > h1:last-child:hover {
     background-color: coral;
-    height: 96.5vh;
     text-decoration: underline;
     transition: opacity .25s,border-color .25s,background-color .25s,color .25s;
 }
@@ -356,6 +353,10 @@ footer {
             margin-top: 0;
             padding: 0;
             line-height: 1.8rem;
+        }
+
+        > h1:hover {
+            color: var(--text-color)
         }
     }
 
