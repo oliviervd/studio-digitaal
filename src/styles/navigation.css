@@ -166,6 +166,7 @@ input:checked ~ .slider::before {
         border: 1px solid white;
         transition: opacity .25s,border-color .25s,background-color .25s,color .25s;
         text-transform: uppercase;
+        margin: 0;
     }
 
     & p:hover{
@@ -182,5 +183,21 @@ input:checked ~ .slider::before {
         display: none;
     }
 
+    .home-link--container{
+        top: 20rem;
+    }
+
+    .home-link {
+        p {
+            font-size: var(--font-size-m);
+            width: 93vw;
+            text-align: center;
+        }
+
+        p:hover{
+            width: 93vw;
+        }
+
+    }
 
 }
