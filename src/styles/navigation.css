@@ -93,20 +93,17 @@ input:checked ~ .slider::before {
     display: inline-block;
     margin-top: 0;
     padding: .3em .25em .225em;
-    color: blue;
     border: 1px solid var(--background-color);
     text-transform: uppercase;
     font-size: var(--font-size-s);
 }
 
 .sidebar__container > .subpage {
-    color: orange;
     font-family: "IBM Plex Mono-Medium";
     font-size: var(--font-size-xs)
 }
 
 .sidebar__container > .subpage-sub {
-    color: coral;
     font-size: var(--font-size-xs);
     padding-left: 10px;
     font-family: "IBM Plex Mono-Medium";
