@@ -46,7 +46,7 @@ const Home = () => {
     return(
         <div>
             <Header setProjectView={setProjectView} language={language} changeLang={changeLang}/>
-            <section className={"home-link--container"}>
+            {/*<section className={"home-link--container"}>
                 <nav onClick={() => route(`/collection-api`)} className="home-link">
                     <p>collection api</p>
                 </nav>
@@ -56,7 +56,7 @@ const Home = () => {
                 <nav onClick={() => route(`/glossary`)} className="home-link">
                     <p>glossary</p>
                 </nav>
-            </section>
+            </section>*/}
             <section>
                 <div className={"home-hero_project-grid"} style={projectView ? {display: "none"} : {}}>
                 {projects[0] && projects.map((p) => {
@@ -71,7 +71,7 @@ const Home = () => {
             </section>
 
             <div>
-                {showOverview && projects[0] && projects.map((p) => {
+                {projects[0] && projects.map((p) => {
                     if (p.projectTitle == "overview") {
                         return (
                             <div className={"project-overview"}>

@@ -206,8 +206,8 @@ footer {
 }
 
 .home-about{
-    position: absolute;
-    bottom: 30%;
+    position: relative;
+    top: 50%;
 
     p {
         text-transform: uppercase;
@@ -229,14 +229,16 @@ footer {
 
     position: relative;
     left: 30%;
-
+    right: 10%;
+    width: 60vw;
 
     p {
         font-size: var(--font-size-l);
         text-transform: uppercase;
         font-size: 3.5rem;
         line-height: 45px;
-        color:var(--text-color)
+        color:var(--text-color);
+        width: auto;
     }
 
     a {
@@ -248,7 +250,6 @@ footer {
     }
 
     a:hover {
-
         color: orange;
     }
 }
@@ -264,11 +265,11 @@ footer {
     & img {
         max-width: 16vw;
         margin: 20px;
-        opacity: 50%;
+        opacity: 20%;
     }
 
     & img:hover {
-        opacity: 100%;
+
     }
 }
 
@@ -291,6 +292,7 @@ footer {
 @media (max-width: 700px) {
     body {
         overflow-x: hidden;
+        width: 100vw;
     }
 
     header > div > h1 {
@@ -313,7 +315,7 @@ footer {
 
 
     header {
-
+        background-color: var(--background-color);
     }
 
     header > div > h1 {
@@ -325,8 +327,11 @@ footer {
         display: none;
     }
 
+    .home-hero_project-grid{
+        display: none;
+    }
+
     .project-overview, .home-about {
-        font-size: var(--font-size-m);
         width: 100%;
         left: 0;
     }
@@ -336,11 +341,17 @@ footer {
     }
 
     .languages {
+        background-color: var(--background-color);
         top: 75px;
+        width: 100vw;
         > h1 {
             font-size: 2rem;
 
         }
+    }
+
+    .pageSize{
+        position: relative;
     }
 }
 
