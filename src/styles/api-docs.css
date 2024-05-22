@@ -178,6 +178,8 @@ pre {
         padding-left: 20px;
         width: 90vw;
         left: 0px;
+        line-height: 1rem;
+        font-size: var(--font-size-m);
     }
 }
 
