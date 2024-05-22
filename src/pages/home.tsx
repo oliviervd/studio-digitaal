@@ -13,6 +13,7 @@ const Home = () => {
     const {language, setLanguage} = useLanguage()
     const [project, setProject] = useState([])
     const [projectView, setProjectView] = useState(false)
+    const [showOverview, setShowOverview] = useState(false);
     const [projects, setProjects] = useState([])
     const [about, setAbout] = useState([])
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
@@ -45,31 +46,50 @@ const Home = () => {
     return(
         <div>
             <Header setProjectView={setProjectView} language={language} changeLang={changeLang}/>
-            <section className={"home-link--container"} >
+            <section className={"home-link--container"}>
                 <nav onClick={() => route(`/collection-api`)} className="home-link">
                     <p>collection api</p>
                 </nav>
+                <nav className="home-link">
+                    <p onClick={() => setShowOverview(!showOverview)}>projects</p>
+                </nav>
                 <nav onClick={() => route(`/glossary`)} className="home-link">
-                    <p >glossary</p>
+                    <p>glossary</p>
                 </nav>
             </section>
             <section>
-                <div className={"home-hero_project-grid"} style={projectView ? {display: "none"}: {}}>
-                    {projects[0] && projects.map((p)=>{
-                        return (
-                            <img onClick={()=>openProject(p)} src={p["heroImage"]["url"]}/>
-                        )
-
+                <div className={"home-hero_project-grid"} style={projectView ? {display: "none"} : {}}>
+                {projects[0] && projects.map((p) => {
+                        if (p["heroImage"] && p["heroImage"]["url"]) {
+                            return (
+                                <img src={p["heroImage"]["url"]}/>
+                            )
+                        }
                     })}
                 </div>
+
             </section>
-            <section className={projectView ? "home-about w-50": "home-about w-100"} style={projectView ? {display: "none"}:{}}>
-                <p>{about}</p>
-            </section>
+
+            <div>
+                {showOverview && projects[0] && projects.map((p) => {
+                    if (p.projectTitle == "overview") {
+                        return (
+                            <div className={"project-overview"}>
+                                <p>{serialize(p.projectDescription)}</p>
+                                <p> * * * * </p>
+                            </div>
+                        )
+                    }
+                })}
+            </div>
+                <section className={projectView ? "home-about w-50" : "home-about w-100"}
+                         style={projectView ? {display: "none"} : {}}>
+                    <p>{about}</p>
+                </section>
             {projectView &&
-                <Project project={project} />
+                <Project project={project}/>
             }
-            <CalculateSize />
+            <CalculateSize/>
 
         </div>
     )

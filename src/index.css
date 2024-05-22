@@ -207,7 +207,7 @@ footer {
 
 .home-about{
     position: absolute;
-    top: 50%;
+    bottom: 30%;
 
     p {
         text-transform: uppercase;
@@ -222,6 +222,34 @@ footer {
         text-decoration: none;
         font-size: 3.5rem;
 
+    }
+}
+
+.project-overview{
+
+    position: relative;
+    left: 30%;
+
+
+    p {
+        font-size: var(--font-size-l);
+        text-transform: uppercase;
+        font-size: 3.5rem;
+        line-height: 45px;
+        color:var(--text-color)
+    }
+
+    a {
+        font-size: var(--font-size-l);
+        text-transform: uppercase;
+        font-size: 3.5rem;
+        line-height: 45px;
+        color: blue;
+    }
+
+    a:hover {
+
+        color: orange;
     }
 }
 
@@ -283,6 +311,7 @@ footer {
         margin-block-start: 0.5em;
     }
 
+
     header {
 
     }
@@ -296,10 +325,15 @@ footer {
         display: none;
     }
 
+    .project-overview, .home-about {
+        font-size: var(--font-size-m);
+        width: 100%;
+        left: 0;
+    }
+
     footer {
         position: relative;
     }
-
 
     .languages {
         top: 75px;

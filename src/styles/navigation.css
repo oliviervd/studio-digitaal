@@ -184,7 +184,7 @@ input:checked ~ .slider::before {
     }
 
     .home-link--container{
-        top: 20rem;
+        position: relative;
     }
 
     .home-link {
