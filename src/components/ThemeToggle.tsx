@@ -14,12 +14,17 @@ const ThemeToggle = (props) => {
     }
 
     return(
-        <div className={"theme-switch-container"}>
-            <p>switch theme</p>
-            <div className={"design-switch"}>
-                <div className={"design-switch-circle"} onClick={toggleTheme}></div>
+        <div className={"toggle-switch-container"}>
+            <p>contrast</p>
+            <div className={"toggle-switch"}>
+                <label>
+                    <input type="checkbox" checked={theme === "dark"} onChange={toggleTheme}/>
+                    <span className={"slider"}></span>
+                </label>
+                {/*<div className={"design-switch-circle"} onClick={toggleTheme}></div>*/}
             </div>
         </div>
+
 
     )
 }
