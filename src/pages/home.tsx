@@ -42,15 +42,9 @@ const Home = () => {
         setLanguage(lang);
     }
 
-    function toggleHome() {
-        //window.scrollTo({top: 0, left: 0, behavior: "smooth"})
-        route(`/`);
-        setProjectView(false)
-    }
-
     return(
         <div>
-            <Header toggleHome={toggleHome} language={language} changeLang={changeLang}/>
+            <Header setProjectView={setProjectView} language={language} changeLang={changeLang}/>
             <section className={"home-link--container"} >
                 <nav onClick={() => route(`/collection-api`)} className="home-link">
                     <p>collection api</p>
