@@ -319,6 +319,7 @@ footer {
 
     header {
         background-color: var(--background-color);
+        position: relative;
     }
 
     header > nav {
