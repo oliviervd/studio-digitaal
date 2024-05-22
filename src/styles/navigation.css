@@ -206,4 +206,8 @@ input:checked ~ .slider::before {
 
     }
 
+    .toggle-switch-container {
+        display: none;
+    }
+
 }
