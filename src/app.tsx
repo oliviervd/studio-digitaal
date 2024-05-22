@@ -4,6 +4,7 @@ import { render } from 'preact';
 import ApiDocs from "./pages/CollectionAPI";
 import {LanguageProvider} from "./utils/languageProvider";
 import Glossary from "./pages/glossary";
+import Permacomputing from "./pages/Permacomputing";
 const App = () => {
 
   return (
@@ -12,6 +13,7 @@ const App = () => {
               <Home path={"/"}/>
               <ApiDocs path={"/collection-api"}/>
               <Glossary path={"/glossary"}/>
+              <Permacomputing path={"/permacomputing"}/>
           </Router>
       </LanguageProvider>
   )

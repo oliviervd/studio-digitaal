@@ -12,7 +12,7 @@ const Header = (props) => {
         <header>
             <div>
                 <h1 onClick={() => toggleHome()}>Studio Digitaal</h1>
-                <h1>booting.</h1>
+                <h1>DESIGN MUSEUM GENT.</h1>
                 <div id={"lang"} className={"languages"}>
                     <h1 id={'nl'} onClick={() => props.changeLang("nl")}>NL</h1> .
                     <h1 id={'en'} onClick={() => props.changeLang("en")}>EN</h1> .

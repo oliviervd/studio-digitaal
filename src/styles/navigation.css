@@ -18,8 +18,11 @@
     flex-direction: row;
 
     p {
+        font-family: "IBM Plex Mono-Medium";
+        text-transform: uppercase;
         color: var(--text-color);
         margin: 0;
+        margin-top: 1px;
         padding-right: 10px;
     }
 }
@@ -81,15 +84,16 @@ input:checked ~ .slider::before {
     flex-flow: column;
     position: relative;
     padding-right: 50px;
+    text-decoration: underline;
 }
 
 .sidebar__container > a {
-    font-family: "IBM Plex Mono-Light";
-    font-weight: 100;
+    font-family: "IBM Plex Mono-Medium";
+    font-weight: 300;
     display: inline-block;
-    margin-top: 5px;
+    margin-top: 0;
     padding: .3em .25em .225em;
-    color: var(--text-color);
+    color: blue;
     border: 1px solid var(--background-color);
     text-transform: uppercase;
     font-size: var(--font-size-s);
@@ -97,6 +101,7 @@ input:checked ~ .slider::before {
 
 .sidebar__container > .subpage {
     color: orange;
+    font-family: "IBM Plex Mono-Medium";
     font-size: var(--font-size-xs)
 }
 
@@ -104,6 +109,7 @@ input:checked ~ .slider::before {
     color: coral;
     font-size: var(--font-size-xs);
     padding-left: 10px;
+    font-family: "IBM Plex Mono-Medium";
 }
 
 .sidebar__container > a:first-child {

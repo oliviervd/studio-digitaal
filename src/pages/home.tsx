@@ -75,6 +75,9 @@ const Home = () => {
                     if (p.projectTitle == "overview") {
                         return (
                             <div className={"project-overview"}>
+                                <div className={"section-label"}>
+                                    <p>*RESEARCH</p>
+                                </div>
                                 <p>{serialize(p.projectDescription)}</p>
                                 <p> * * * * </p>
                             </div>
@@ -82,8 +85,11 @@ const Home = () => {
                     }
                 })}
             </div>
-                <section className={projectView ? "home-about w-50" : "home-about w-100"}
+            <section className={projectView ? "home-about w-50" : "home-about w-100"}
                          style={projectView ? {display: "none"} : {}}>
+                    <div className={"section-label"}>
+                        <p>*ABOUT</p>
+                    </div>
                     <p>{about}</p>
                 </section>
             {projectView &&

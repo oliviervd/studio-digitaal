@@ -273,6 +273,13 @@ footer {
     }
 }
 
+.section-label {
+    background-color: var(--text-color);
+    width: 350px;
+    p {
+        color: var(--background-color)
+    }
+}
 
 .pageSize{
     position: absolute;
@@ -296,9 +303,9 @@ footer {
     }
 
     header > div > h1 {
-        font-size: 1.3em;
-        line-height: 2rem;
-        margin-top: 1px;
+        font-size: 2rem;
+        line-height: 1.5rem;
+        width: 100%;
     }
 
     & p, li {
@@ -316,11 +323,6 @@ footer {
 
     header {
         background-color: var(--background-color);
-    }
-
-    header > div > h1 {
-        width: 100%;
-        font-size: 2rem;
     }
 
     header > nav {
@@ -342,11 +344,14 @@ footer {
 
     .languages {
         background-color: var(--background-color);
-        top: 75px;
+        position: relative;
+        top: 0;
         width: 100vw;
         > h1 {
             font-size: 2rem;
-
+            margin-top: 0;
+            padding: 0;
+            line-height: 1.8rem;
         }
     }
 

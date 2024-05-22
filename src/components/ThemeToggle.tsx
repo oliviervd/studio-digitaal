@@ -15,7 +15,7 @@ const ThemeToggle = (props) => {
 
     return(
         <div className={"toggle-switch-container"}>
-            <p>contrast</p>
+            <p>CONTRAST</p>
             <div className={"toggle-switch"}>
                 <label>
                     <input type="checkbox" checked={theme === "dark"} onChange={toggleTheme}/>
