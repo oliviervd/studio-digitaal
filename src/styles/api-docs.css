@@ -174,11 +174,15 @@ pre {
         display: block;
     }
 
+    .api-doc > h1 {
+        border-top: none;
+    }
+
     .api-doc {
         padding-left: 20px;
         width: 90vw;
         left: 0px;
-        line-height: 1rem;
+        line-height: 1.2rem;
         font-size: var(--font-size-m);
     }
 }
