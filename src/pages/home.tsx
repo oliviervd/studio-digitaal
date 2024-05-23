@@ -52,7 +52,7 @@ const Home = () => {
         <div>
             <Header handleToggleChange={handleToggleChange} setProjectView={setProjectView} language={language} changeLang={changeLang}/>
 
-            <section>
+            <section className={"logo-desc"}>
                 {projects[0] && projects.map((p)=> {
                     if(p.projectTitle=="logo-design") {
                         return(
@@ -103,6 +103,8 @@ const Home = () => {
                     }
                 })}
             </div>
+
+
             <section className={projectView ? "home-about w-50" : "home-about w-100"}
                          style={projectView ? {display: "none"} : {}}>
                     <div className={"section-label"}>
