@@ -163,14 +163,12 @@ footer {
     background-color: orange;
     text-decoration: underline;
     transition: opacity .25s,border-color .25s,background-color .25s,color .25s;
-
 }
 
 .languages > h1:nth-child(2):hover {
     background-color: darkorange;
     text-decoration: underline;
     transition: opacity .25s,border-color .25s,background-color .25s,color .25s;
-
 }
 
 .languages > h1:last-child:hover {
@@ -290,6 +288,17 @@ footer {
         line-height: 1.2rem;
         color: var(--text-color)
     }
+}
+
+.landing-gif {
+    position: fixed;
+    top: 5vh;
+    left: 0;
+    width: auto;
+    height: 120%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.3;
 }
 
 

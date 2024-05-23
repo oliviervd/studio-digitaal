@@ -5,15 +5,15 @@ import {useState, useEffect} from "preact/hooks"
 import "../index.css"
 import {fetchPayload} from "../utils/fetchPayload";
 import serialize from "../utils/serialize";
-import {route} from "preact-router";
 import {useLanguage} from "../utils/languageProvider";
 import Project from "../components/project";
+import GifControl from "../components/GifControl";
+import Logo from "../assets/Pixel-Logo-41-frames-transparent.gif"
 
 const Home = () => {
     const {language, setLanguage} = useLanguage()
     const [project, setProject] = useState([])
     const [projectView, setProjectView] = useState(false)
-    const [showOverview, setShowOverview] = useState(false);
     const [projects, setProjects] = useState([])
     const [about, setAbout] = useState([])
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
@@ -57,6 +57,10 @@ const Home = () => {
                     <p>glossary</p>
                 </nav>
             </section>*/}
+
+            <section>
+                <GifControl src={Logo} width={500} height={400}></GifControl>
+            </section>
             <section>
                 <div className={"home-hero_project-grid"} style={projectView ? {display: "none"} : {}}>
                 {projects[0] && projects.map((p) => {
