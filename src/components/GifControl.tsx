@@ -10,6 +10,7 @@ interface GifControlProps {
     idleOpacity?: number; // Opacity when idle
     activeOpacity?: number; // Opacity when active
     idleTimeout?: number; // Time in milliseconds before becoming idle
+    raiseOpacityTimeout?: number; // Time in milliseconds before raising opacity after being idle
 }
 
 interface GifControlState {
@@ -26,15 +27,17 @@ class GifControl extends Component<GifControlProps, GifControlState> {
     private animationFrameId: number | null = null;
     private timeoutId: number | null = null;
     private idleTimeoutId: number | null = null;
+    private raiseOpacityTimeoutId: number | null = null;
 
     static defaultProps = {
         playAutomatically: false,
         frameDelay: 100, // Default to 100 milliseconds per frame
-        transitionDelay: 100, // Default to 1 second delay before transition
+        transitionDelay: 300, // Default to 1 second delay before transition
         transitionDuration: 500, // Default to 0.5 second transition duration
         idleOpacity: 0.2, // Opacity when idle
         activeOpacity: 1, // Opacity when active
-        idleTimeout: 500, // Time in milliseconds before becoming idle
+        idleTimeout: 1000, // Time in milliseconds before becoming idle
+        raiseOpacityTimeout: 10000, // Default to 60 seconds before raising opacity after being idle
     };
 
     constructor(props: GifControlProps) {
@@ -50,7 +53,8 @@ class GifControl extends Component<GifControlProps, GifControlState> {
     componentDidMount() {
         this.ctx = this.canvasRef.current?.getContext('2d') || null;
         this.loadGif(this.props.src);
-        window.addEventListener('mousemove', this.handleMouseMove);
+        window.addEventListener('mousemove', this.handleUserInteraction);
+        window.addEventListener('scroll', this.handleUserInteraction);
         window.addEventListener('resize', this.handleResize);
         this.setCanvasSize();
 
@@ -60,7 +64,8 @@ class GifControl extends Component<GifControlProps, GifControlState> {
     }
 
     componentWillUnmount() {
-        window.removeEventListener('mousemove', this.handleMouseMove);
+        window.removeEventListener('mousemove', this.handleUserInteraction);
+        window.removeEventListener('scroll', this.handleUserInteraction);
         window.removeEventListener('resize', this.handleResize);
         if (this.animationFrameId !== null) {
             cancelAnimationFrame(this.animationFrameId);
@@ -70,6 +75,9 @@ class GifControl extends Component<GifControlProps, GifControlState> {
         }
         if (this.idleTimeoutId !== null) {
             clearTimeout(this.idleTimeoutId);
+        }
+        if (this.raiseOpacityTimeoutId !== null) {
+            clearTimeout(this.raiseOpacityTimeoutId);
         }
     }
 
@@ -116,43 +124,59 @@ class GifControl extends Component<GifControlProps, GifControlState> {
         }
     };
 
-    handleMouseMove = (evt: MouseEvent) => {
+    handleUserInteraction = (evt: Event) => {
         if (!this.props.playAutomatically) {
-            const mouseX = evt.clientX;
-            const mouseY = evt.clientY;
-            const rect = this.canvasRef.current?.getBoundingClientRect();
-            if (rect) {
-                const relativeX = mouseX - rect.left;
-                const relativeY = mouseY - rect.top;
-                const frameIndexX = Math.floor((relativeX / window.innerWidth) * this.frameCount);
-                const frameIndexY = Math.floor((relativeY / window.innerHeight) * this.frameCount);
-                const targetFrameIndex = (frameIndexX + frameIndexY) % this.frameCount; // Combine both modifiers and use modulus to ensure it's within bounds
+            // Handle mouse move
+            if (evt.type === 'mousemove') {
+                const mouseX = (evt as MouseEvent).clientX;
+                const mouseY = (evt as MouseEvent).clientY;
+                const rect = this.canvasRef.current?.getBoundingClientRect();
+                if (rect) {
+                    const relativeX = mouseX - rect.left;
+                    const relativeY = mouseY - rect.top;
+                    const frameIndexX = Math.floor((relativeX / window.innerWidth) * this.frameCount);
+                    const frameIndexY = Math.floor((relativeY / window.innerHeight) * this.frameCount);
+                    const targetFrameIndex = (frameIndexX + frameIndexY) % this.frameCount; // Combine both modifiers and use modulus to ensure it's within bounds
 
-                if (this.state.targetFrameIndex !== targetFrameIndex) {
-                    this.setState({ targetFrameIndex });
-                    if (this.timeoutId) {
-                        clearTimeout(this.timeoutId);
+                    if (this.state.targetFrameIndex !== targetFrameIndex) {
+                        this.setState({ targetFrameIndex });
+                        if (this.timeoutId) {
+                            clearTimeout(this.timeoutId);
+                        }
+                        this.timeoutId = window.setTimeout(() => {
+                            this.animateToFrame(targetFrameIndex);
+                        }, this.props.transitionDelay);
                     }
-                    this.timeoutId = window.setTimeout(() => {
-                        this.animateToFrame(targetFrameIndex);
-                    }, this.props.transitionDelay);
-                }
-
-                // Reset opacity to active on mouse move
-                if (this.state.opacity !== this.props.activeOpacity) {
-                    this.setState({ opacity: this.props.activeOpacity! });
-                }
-
-                // Clear previous idle timeout
-                if (this.idleTimeoutId) {
-                    clearTimeout(this.idleTimeoutId);
                 }
             }
+
+            // Reset opacity to active on user interaction
+            if (this.state.opacity !== this.props.activeOpacity) {
+                this.setState({ opacity: this.props.activeOpacity! });
+            }
+
+            // Clear previous idle timeout
+            if (this.idleTimeoutId) {
+                clearTimeout(this.idleTimeoutId);
+            }
+
+            // Clear the raise opacity timeout if it's active
+            if (this.raiseOpacityTimeoutId) {
+                clearTimeout(this.raiseOpacityTimeoutId);
+            }
+
+            // Set the idle timeout again
+            this.idleTimeoutId = window.setTimeout(this.setIdle, this.props.idleTimeout);
         }
     };
 
     setIdle = () => {
         this.setState({ opacity: this.props.idleOpacity! });
+        this.raiseOpacityTimeoutId = window.setTimeout(this.raiseOpacity, this.props.raiseOpacityTimeout);
+    };
+
+    raiseOpacity = () => {
+        this.setState({ opacity: this.props.activeOpacity! });
     };
 
     animateToFrame = (targetFrameIndex: number) => {

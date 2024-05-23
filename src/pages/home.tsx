@@ -51,6 +51,21 @@ const Home = () => {
     return(
         <div>
             <Header handleToggleChange={handleToggleChange} setProjectView={setProjectView} language={language} changeLang={changeLang}/>
+
+            <section>
+                {projects[0] && projects.map((p)=> {
+                    if(p.projectTitle=="logo-design") {
+                        return(
+                            <div className={"container-logo-pop-up"}>
+                                <p>{serialize(p.projectDescription)}</p>
+                            </div>
+                        )
+                    }
+                })
+
+                }
+            </section>
+
             <section>
                 <GifControl playAutomatically={animateGif}
                             src={Logo}

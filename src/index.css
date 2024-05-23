@@ -203,6 +203,8 @@ footer {
 .home-about{
     position: relative;
     top: 50%;
+    left: 5%;
+    width: 90vh;
 
     p {
         text-transform: uppercase;
@@ -277,7 +279,7 @@ footer {
 }
 
 .pageSize{
-    position: absolute;
+    position: fixed;
     left: 0;
     bottom: 0;
 
@@ -299,6 +301,19 @@ footer {
     z-index: -1;
     pointer-events: none;
     opacity: 0.5;
+}
+
+.container-logo-pop-up {
+    position: absolute;
+    top: 10vh;
+    left: 5vw;
+    width: 20vw;
+
+    p {
+        color: var(--text-color);
+        font-size: var(--font-size-s);
+        line-height: 1.2rem;
+    }
 }
 
 
