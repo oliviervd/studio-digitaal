@@ -1,5 +1,6 @@
 import { route } from 'preact-router';
 import ThemeToggle from "./ThemeToggle";
+import Toggle from "./toggle";
 const Header = (props) => {
 
     function toggleHome() {

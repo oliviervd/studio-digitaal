@@ -5,11 +5,18 @@ interface GifControlProps {
     src: string;
     playAutomatically?: boolean;
     frameDelay?: number; // Delay in milliseconds
+    transitionDelay?: number; // Delay before starting the transition in milliseconds
+    transitionDuration?: number; // Duration of the transition in milliseconds
+    idleOpacity?: number; // Opacity when idle
+    activeOpacity?: number; // Opacity when active
+    idleTimeout?: number; // Time in milliseconds before becoming idle
 }
 
 interface GifControlState {
     frames: ImageData[];
     currentFrameIndex: number;
+    targetFrameIndex: number | null;
+    opacity: number;
 }
 
 class GifControl extends Component<GifControlProps, GifControlState> {
@@ -18,10 +25,16 @@ class GifControl extends Component<GifControlProps, GifControlState> {
     private frameCount = 0;
     private animationFrameId: number | null = null;
     private timeoutId: number | null = null;
+    private idleTimeoutId: number | null = null;
 
     static defaultProps = {
         playAutomatically: false,
-        frameDelay: 50, // Default to 100 milliseconds per frame
+        frameDelay: 100, // Default to 100 milliseconds per frame
+        transitionDelay: 100, // Default to 1 second delay before transition
+        transitionDuration: 500, // Default to 0.5 second transition duration
+        idleOpacity: 0.2, // Opacity when idle
+        activeOpacity: 1, // Opacity when active
+        idleTimeout: 500, // Time in milliseconds before becoming idle
     };
 
     constructor(props: GifControlProps) {
@@ -29,6 +42,8 @@ class GifControl extends Component<GifControlProps, GifControlState> {
         this.state = {
             frames: [],
             currentFrameIndex: 0,
+            targetFrameIndex: null,
+            opacity: this.props.idleOpacity!,
         };
     }
 
@@ -52,6 +67,9 @@ class GifControl extends Component<GifControlProps, GifControlState> {
         }
         if (this.timeoutId !== null) {
             clearTimeout(this.timeoutId);
+        }
+        if (this.idleTimeoutId !== null) {
+            clearTimeout(this.idleTimeoutId);
         }
     }
 
@@ -89,11 +107,11 @@ class GifControl extends Component<GifControlProps, GifControlState> {
 
     drawFrame = (index: number) => {
         if (this.state.frames.length > 0 && this.ctx) {
-            const frame = this.state.frames[Math.floor(index)];
+            const frame = this.state.frames[Math.floor(index) % this.frameCount];
             this.ctx.clearRect(0, 0, this.canvasRef.current!.width, this.canvasRef.current!.height);
             // Center the frame on the canvas
-            const x = 0 ;
-            const y = 0 ;
+            const x = (this.canvasRef.current!.width - frame.width) / 2;
+            const y = (this.canvasRef.current!.height - frame.height) / 2;
             this.ctx.putImageData(frame, x, y);
         }
     };
@@ -108,12 +126,58 @@ class GifControl extends Component<GifControlProps, GifControlState> {
                 const relativeY = mouseY - rect.top;
                 const frameIndexX = Math.floor((relativeX / window.innerWidth) * this.frameCount);
                 const frameIndexY = Math.floor((relativeY / window.innerHeight) * this.frameCount);
-                const frameIndex = (frameIndexX + frameIndexY) % this.frameCount; // Combine both modifiers
-                this.setState({ currentFrameIndex: frameIndex }, () => {
-                    this.drawFrame(frameIndex);
-                });
+                const targetFrameIndex = (frameIndexX + frameIndexY) % this.frameCount; // Combine both modifiers and use modulus to ensure it's within bounds
+
+                if (this.state.targetFrameIndex !== targetFrameIndex) {
+                    this.setState({ targetFrameIndex });
+                    if (this.timeoutId) {
+                        clearTimeout(this.timeoutId);
+                    }
+                    this.timeoutId = window.setTimeout(() => {
+                        this.animateToFrame(targetFrameIndex);
+                    }, this.props.transitionDelay);
+                }
+
+                // Reset opacity to active on mouse move
+                if (this.state.opacity !== this.props.activeOpacity) {
+                    this.setState({ opacity: this.props.activeOpacity! });
+                }
+
+                // Clear previous idle timeout
+                if (this.idleTimeoutId) {
+                    clearTimeout(this.idleTimeoutId);
+                }
             }
         }
+    };
+
+    setIdle = () => {
+        this.setState({ opacity: this.props.idleOpacity! });
+    };
+
+    animateToFrame = (targetFrameIndex: number) => {
+        const { transitionDuration } = this.props;
+        const startFrameIndex = this.state.currentFrameIndex;
+        const startTime = performance.now();
+
+        const animate = (time: number) => {
+            const elapsedTime = time - startTime;
+            const progress = Math.min(elapsedTime / transitionDuration!, 1);
+            const currentFrameIndex = startFrameIndex + (targetFrameIndex - startFrameIndex) * progress;
+
+            this.drawFrame(currentFrameIndex);
+
+            if (progress < 1) {
+                this.animationFrameId = requestAnimationFrame(animate);
+            } else {
+                this.setState({ currentFrameIndex: targetFrameIndex });
+
+                // Start idle timeout after transition completes
+                this.idleTimeoutId = window.setTimeout(this.setIdle, this.props.idleTimeout);
+            }
+        };
+
+        this.animationFrameId = requestAnimationFrame(animate);
     };
 
     startAnimation = () => {
@@ -136,7 +200,17 @@ class GifControl extends Component<GifControlProps, GifControlState> {
         return (
             <canvas
                 ref={this.canvasRef}
-                className={"landing-gif"}
+                style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    zIndex: -1,
+                    pointerEvents: 'none',
+                    opacity: this.state.opacity,
+                    transition: 'opacity 0.5s ease',
+                }}
             ></canvas>
         );
     }

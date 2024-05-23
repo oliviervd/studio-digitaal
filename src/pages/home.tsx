@@ -16,6 +16,7 @@ const Home = () => {
     const [projectView, setProjectView] = useState(false)
     const [projects, setProjects] = useState([])
     const [about, setAbout] = useState([])
+    const [animateGif, setAnimateGif] = useState(false)
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
     console.log(project)
@@ -43,23 +44,23 @@ const Home = () => {
         setLanguage(lang);
     }
 
+    const handleToggleChange = (newState) => {
+        setAnimateGif(newState);
+    }
+
     return(
         <div>
-            <Header setProjectView={setProjectView} language={language} changeLang={changeLang}/>
-            {/*<section className={"home-link--container"}>
-                <nav onClick={() => route(`/collection-api`)} className="home-link">
-                    <p>collection api</p>
-                </nav>
-                <nav className="home-link">
-                    <p onClick={() => setShowOverview(!showOverview)}>projects</p>
-                </nav>
-                <nav onClick={() => route(`/glossary`)} className="home-link">
-                    <p>glossary</p>
-                </nav>
-            </section>*/}
-
+            <Header handleToggleChange={handleToggleChange} setProjectView={setProjectView} language={language} changeLang={changeLang}/>
             <section>
-                <GifControl src={Logo} width={500} height={400}></GifControl>
+                <GifControl playAutomatically={animateGif}
+                            src={Logo}
+                            width={500}
+                            height={400}>
+                            frameDelay={100}
+                            transitionDelay={10}
+                            transitionDuration={500}
+                            idleTimeout={100}
+                </GifControl>
             </section>
             <section>
                 <div className={"home-hero_project-grid"} style={projectView ? {display: "none"} : {}}>
