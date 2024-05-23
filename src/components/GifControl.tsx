@@ -106,9 +106,9 @@ class GifControl extends Component<GifControlProps, GifControlState> {
             if (rect) {
                 const relativeX = mouseX - rect.left;
                 const relativeY = mouseY - rect.top;
-                const frameIndexX = (relativeX / window.innerWidth) * this.frameCount;
-                const frameIndexY = (relativeY / window.innerHeight) * this.frameCount;
-                const frameIndex = (frameIndexX + frameIndexY) / 2; // Combine both modifiers
+                const frameIndexX = Math.floor((relativeX / window.innerWidth) * this.frameCount);
+                const frameIndexY = Math.floor((relativeY / window.innerHeight) * this.frameCount);
+                const frameIndex = (frameIndexX + frameIndexY) % this.frameCount; // Combine both modifiers
                 this.setState({ currentFrameIndex: frameIndex }, () => {
                     this.drawFrame(frameIndex);
                 });
