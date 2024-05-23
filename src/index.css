@@ -204,7 +204,7 @@ footer {
     position: relative;
     top: 50%;
     left: 5%;
-    width: 90vh;
+    width: 90vw;
 
     p {
         text-transform: uppercase;
