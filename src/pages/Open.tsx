@@ -11,6 +11,9 @@ const Open = (props) => {
     const baseURI = "https://p01--admin-cms--qbt6mytl828m.code.run"
     //todo: move to env
 
+    function changeLang(lang) {
+        setLanguage(lang);
+    }
 
     // fetch content
     useEffect(() => {
@@ -20,16 +23,37 @@ const Open = (props) => {
                 setTrajectory(data.docs[i])
             }
         })
-    }, []);
-
-    console.log(trajectory)
+    }, [language]);
 
     return(
         <div>
-            <Header/>
-            <h1>{trajectory.trajectoryTitle}</h1>
+            <Header language={language} changeLang={changeLang}/>
             <section>
-                <p>{serialize(trajectory.trajectoryDescription)}</p>
+                <div className={"project-overview"}>
+                    <div className={"section-label"}>
+                        <p>{trajectory.trajectoryTitle}</p>
+                    </div>
+                    {trajectory.trajectoryDescription &&
+                        <p>{serialize(trajectory.trajectoryDescription)}</p>
+                    }
+                </div>
+
+            </section>
+
+            <section className={"home-about w-100"}>
+                <div className={"section-label"}>
+                    <p>*PROJECTS</p>
+                    <div className={"projects-grid"}>
+                        {trajectory.articles && trajectory.articles.map((article)=>{
+                            console.log(article)
+                            return(
+                                <div className={"project"}>
+                                    <p className={"project-title"}>{article.article.projectTitle}</p>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
             </section>
         </div>
     )

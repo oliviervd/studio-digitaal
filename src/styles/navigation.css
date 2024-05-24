@@ -179,6 +179,22 @@ input:checked ~ .slider::before {
     }
 }
 
+.header-container-desktop{
+    img {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 3vw;
+    }
+}
+
+.header-container-right{
+    display: flex;
+    width: 30vw;
+    flex-direction: row;
+    justify-content: end;
+}
+
 .header-container-mobile{
     display: none;
     padding: 10px;

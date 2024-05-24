@@ -19,7 +19,7 @@ const Home = () => {
     const [animateGif, setAnimateGif] = useState(false)
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
-    console.log(project)
+    //todo: add logo (white) for dark mode
 
     useEffect(()=> {
         fetchPayload(baseURI,"StudioDigitalProject", 10, language).then((data)=> {
@@ -34,11 +34,6 @@ const Home = () => {
             setAbout(serialize(data["docs"][3]["description"]));
         })
     }, [language]);
-
-    function openProject(project) {
-        setProject(project);
-        setProjectView(true);
-    }
 
     function changeLang(lang) {
         setLanguage(lang);
@@ -111,7 +106,7 @@ const Home = () => {
                         <p>*ABOUT</p>
                     </div>
                     <p>{about}</p>
-                </section>
+            </section>
             {projectView &&
                 <Project project={project}/>
             }
