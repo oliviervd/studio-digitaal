@@ -11,11 +11,13 @@
 :root {
     --background-color: white;
     --text-color: black;
+    --link-color: blue;
 }
 
 [data-theme="dark"] {
     --background-color: black;
     --text-color: white;
+    --link-color: blue;
 }
 
 body {
@@ -115,7 +117,7 @@ header > nav {
 }
 
 a {
-    color: #C6D8D3;
+    color: var(--link-color);
     font-size: var(--font-size-l);
 }
 
@@ -212,13 +214,12 @@ footer {
         font-family: "IBM Plex Mono-Light";
         margin: 0;
         line-height: 45px;
-        color: var(--text-color);
     }
 
     a {
         text-decoration: none;
         font-size: 3.5rem;
-
+        color: var(--link-color);
     }
 }
 
@@ -234,12 +235,12 @@ footer {
         text-transform: uppercase;
         font-size: 3.5rem;
         line-height: 45px;
-        color:var(--text-color);
         width: auto;
     }
 
     a {
         font-size: var(--font-size-l);
+        color: var(--link-color);
         text-transform: uppercase;
         text-decoration: none;
         font-size: 3.5rem;
@@ -247,7 +248,7 @@ footer {
     }
 
     a:hover {
-        color: orange;
+        color: var(--link-color);
     }
 }
 
@@ -274,7 +275,8 @@ footer {
     background-color: var(--text-color);
     width: 350px;
     p {
-        color: var(--background-color)
+        color: var(--background-color);
+        margin: 0;
     }
 }
 
@@ -390,6 +392,10 @@ footer {
         > h1:hover {
             color: var(--text-color)
         }
+    }
+
+    .gif-animation{
+        display: none;
     }
 
     .pageSize{

@@ -179,8 +179,24 @@ input:checked ~ .slider::before {
     }
 }
 
+.header-container-mobile{
+    display: none;
+    padding: 10px;
+
+    img{
+        width: 20vw;
+    }
+}
 
 @media (max-width: 700px) {
+
+    .header-container-mobile{
+        display: block;
+    }
+
+    .header-container-desktop {
+        display: none;
+    }
     .sidebar__container {
         display: none;
     }

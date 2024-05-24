@@ -223,6 +223,7 @@ class GifControl extends Component<GifControlProps, GifControlState> {
     render() {
         return (
             <canvas
+                className={"gif-animation"}
                 ref={this.canvasRef}
                 style={{
                     position: 'fixed',
