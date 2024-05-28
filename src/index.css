@@ -146,9 +146,10 @@ body {
         position: relative;
     }
 
-
     .gif-animation{
         display: none;
+        position: absolute;
+        z-index: 1000;
     }
 
     .pageSize{

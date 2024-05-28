@@ -46,3 +46,7 @@ pre {
 h1 {
     font-size: var(--font-size-m);
 }
+
+h2 {
+    font-size: var(--font-size-s);
+}

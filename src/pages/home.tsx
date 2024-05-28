@@ -52,16 +52,13 @@ const Home = () => {
         setLanguage(lang);
     }
 
-    const handleToggleChange = (newState) => {
-        setAnimateGif(newState);
-    }
+
 
     console.log(logoDesc)
 
     return(
         <div>
             <Header
-                handleToggleChange={handleToggleChange}
                 language={language} changeLang={changeLang}
                 logoDesc={logoDesc} openLogoDesc={openLogoDesc}
             />
@@ -80,7 +77,7 @@ const Home = () => {
                             }
                         })
                         }
-                        <section>
+                        {/*<section>
                             <GifControl playAutomatically={false}
                                         src={Logo}
                                         width={500}
@@ -90,7 +87,7 @@ const Home = () => {
                                 transitionDuration={500}
                                 idleTimeout={100}
                             </GifControl>
-                        </section>
+                        </section>*/}
                     </section>
                 }
 
@@ -110,11 +107,13 @@ const Home = () => {
                                     <span className={"arrow-open"}> ▼ </span>
                                     <h1 className={"L1-slug"}>{serialize(traject.trajectorySlug)}</h1>
                                 </div>
+
                                 {traject.trajectoryDescription &&
                                     <p className={"L1-description"}>
                                         {serialize(traject.trajectoryDescription)}
                                     </p>
                                 }
+
                                 {traject.articles &&
                                     <L2Container projects={traject.articles}></L2Container>
                                 }

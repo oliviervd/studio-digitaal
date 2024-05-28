@@ -13,13 +13,23 @@ const L2Container = ({projects}) => {
 
     return(
         <section className={"L2-container"}>
-            {projects && projects.map((project) => {
-                console.log(project)
+            {projects && projects.map((project, index) => {
                     return(
-                        < div >
-                            {project.article.projectTitle}
+                        <div>
+                            <div className={"index-container"}>
+                                <div className={"index-number"}>{index}</div>
+                                <span className={"arrow-open"}> ▼ </span>
+                                <h2 className={"L2-slug"}><p>{project.article.projectTitle}</p></h2>
+                            </div>
+                            <div>
+                                {project.article.projectDescription &&
+                                        <p className={"L2-description"}>
+                                            {serialize(project.article.projectDescription)}
+                                        </p>
+                                }
+                            </div>
                         </div>
-                        )
+                    )
             })}
 
         </section>

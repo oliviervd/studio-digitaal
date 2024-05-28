@@ -28,14 +28,12 @@
     position: relative;
 }
 
-
 .L1-slug {
     font-size: var(--font-size-s);
     margin:0;
 
     & p {
         background-color: greenyellow;
-
     }
 }
 
@@ -45,7 +43,19 @@
 
 .L2-container {
     position: relative;
-    padding-left: 5%;
+    padding-left: 3%;
+}
+
+.L2-slug {
+    margin: 0;
+    width: fit-content;
+    & p {
+        background-color: orange;
+    }
+}
+
+.L2-description {
+    padding-left: 60px;
 }
 
 
