@@ -22,6 +22,8 @@ const Home = () => {
     const [logoDesc, openLogoDesc] = useState(false)
     const [about, setAbout] = useState([])
     const [animateGif, setAnimateGif] = useState(false)
+    const [expandedContainers, setExpandedContainers] = useState([])
+
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
     //todo: add logo (white) for dark mode
@@ -52,6 +54,17 @@ const Home = () => {
         setLanguage(lang);
     }
 
+    function toggleContainer(index) {
+        setExpandedContainers(prevState => {
+            const newState = [...prevState]
+            if (newState.includes(index)) {
+                newState.splice(newState.indexOf(index), 1)
+            } else {
+                newState.push(index)
+            }
+            return newState
+        })
+    }
 
 
     console.log(logoDesc)
@@ -91,7 +104,6 @@ const Home = () => {
                     </section>
                 }
 
-
                 <p>{about}</p>
 
                 <div>
@@ -100,23 +112,26 @@ const Home = () => {
 
                 <section className={"L1-container"}>
                     {trajectories.map((traject, index) => {
+                        const isExpanded = expandedContainers.includes(index);
                         return (
-                            <div>
+                            <div key={traject._id}>
                                 <div className={"index-container"}>
                                     <div className={"index-number"}>{index}</div>
-                                    <span className={"arrow-open"}> ▼ </span>
-                                    <h1 className={"L1-slug"}>{serialize(traject.trajectorySlug)}</h1>
+                                    <span className={isExpanded? "arrow-open": "arrow-open _90deg"} onClick={()=>toggleContainer(index)}>
+                                     ▼
+                                    </span>
+                                    <h1 className={"L1-slug"} onClick={()=>toggleContainer(index)}>{serialize(traject.trajectorySlug)}</h1>
                                 </div>
 
                                 {traject.trajectoryDescription &&
-                                    <p className={"L1-description"}>
+                                    <p className={`L1-description ${isExpanded?"expanded":"collapsed"}`}>
                                         {serialize(traject.trajectoryDescription)}
+                                        {traject.articles &&
+                                            <L2Container projects={traject.articles}></L2Container>
+                                        }
                                     </p>
                                 }
 
-                                {traject.articles &&
-                                    <L2Container projects={traject.articles}></L2Container>
-                                }
 
                             </div>
 

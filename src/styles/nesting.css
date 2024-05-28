@@ -9,6 +9,10 @@
     padding-top: 20px;
 }
 
+._90deg{
+   transform: rotate(-90deg);
+}
+
 .index-container{
     display: flex;
     flex-direction: row;
@@ -39,6 +43,19 @@
 
 .L1-description {
     padding-left: 30px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .25s ease-out, opacity 0.3s ease-out;
+}
+
+.L1-description.expanded {
+    max-height: 100Vh;
+    opacity: 1;
+}
+
+.L1-description.collapsed {
+    max-height: 0;
+    opacity: 0;
 }
 
 .L2-container {
