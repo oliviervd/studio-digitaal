@@ -4,8 +4,8 @@ import { render } from 'preact';
 import ApiDocs from "./pages/CollectionAPI";
 import {LanguageProvider} from "./utils/languageProvider";
 import Glossary from "./pages/glossary";
-import Permacomputing from "./pages/Permacomputing";
-import Open from "./pages/Open";
+import Open from "./pages/L2Container";
+
 const App = () => {
 
   return (
@@ -15,7 +15,6 @@ const App = () => {
               <ApiDocs path={"/collection-api"}/>
               <Glossary path={"/glossary"}/>
               <Open path={"/open-collection"}></Open>
-              <Permacomputing path={"/permacomputing"}/>
           </Router>
       </LanguageProvider>
   )

@@ -2,7 +2,12 @@ import Header from "../components/header";
 import CalculateSize from "../components/fetchSize";
 import {useState, useEffect} from "preact/hooks"
 
-import "../index.css"
+import "../index.css";
+import "../styles/nesting.css";
+import "../styles/typography.css"
+
+import L2Container from "./L2Container";
+
 import {fetchPayload} from "../utils/fetchPayload";
 import serialize from "../utils/serialize";
 import {useLanguage} from "../utils/languageProvider";
@@ -12,14 +17,22 @@ import Logo from "../assets/Pixel-Logo-41-frames-transparent.gif"
 
 const Home = () => {
     const {language, setLanguage} = useLanguage()
-    const [project, setProject] = useState([])
-    const [projectView, setProjectView] = useState(false)
+    const [trajectories, setTrajectories] = useState([])
     const [projects, setProjects] = useState([])
+    const [logoDesc, openLogoDesc] = useState(false)
     const [about, setAbout] = useState([])
     const [animateGif, setAnimateGif] = useState(false)
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
     //todo: add logo (white) for dark mode
+
+    // fetch content from CMS
+    useEffect(()=> {
+        fetchPayload(baseURI,"trajectory", 10, language).then((data)=> {
+                setTrajectories(data["docs"])
+            }
+        )
+    }, [])
 
     useEffect(()=> {
         fetchPayload(baseURI,"StudioDigitalProject", 10, language).then((data)=> {
@@ -43,74 +56,80 @@ const Home = () => {
         setAnimateGif(newState);
     }
 
+    console.log(logoDesc)
+
     return(
         <div>
-            <Header handleToggleChange={handleToggleChange} setProjectView={setProjectView} language={language} changeLang={changeLang}/>
+            <Header
+                handleToggleChange={handleToggleChange}
+                language={language} changeLang={changeLang}
+                logoDesc={logoDesc} openLogoDesc={openLogoDesc}
+            />
 
-            <section className={"logo-desc"}>
-                {projects[0] && projects.map((p)=> {
-                    if(p.projectTitle=="logo-design") {
-                        return(
-                            <div className={"container-logo-pop-up"}>
-                                <p>{serialize(p.projectDescription)}</p>
-                            </div>
-                        )
-                    }
-                })}
-            </section>
+            <section className={"nest-master"}>
 
-            <section>
-                <GifControl playAutomatically={animateGif}
-                            src={Logo}
-                            width={500}
-                            height={400}>
-                            frameDelay={100}
-                            transitionDelay={10}
-                            transitionDuration={500}
-                            idleTimeout={100}
-                </GifControl>
-            </section>
-            <section>
-                <div className={"home-hero_project-grid"} style={projectView ? {display: "none"} : {}}>
-                {projects[0] && projects.map((p) => {
-                        if (p["heroImage"] && p["heroImage"]["url"]) {
-                            return (
-                                <img src={p["heroImage"]["url"]}/>
-                            )
+                {logoDesc &&
+                    <section>
+                        {projects && projects.map((p) => {
+                            if (p.projectTitle == "logo-design") {
+                                return (
+                                    <i>
+                                        {serialize(p.projectDescription)}
+                                    </i>
+                                )
+                            }
+                        })
                         }
-                    })}
+                        <section>
+                            <GifControl playAutomatically={false}
+                                        src={Logo}
+                                        width={500}
+                                        height={400}>
+                                frameDelay={100}
+                                transitionDelay={10}
+                                transitionDuration={500}
+                                idleTimeout={100}
+                            </GifControl>
+                        </section>
+                    </section>
+                }
+
+
+                <p>{about}</p>
+
+                <div>
+                    <h1>RESEARCH</h1>
                 </div>
 
-            </section>
-
-            <div>
-                {projects[0] && projects.map((p) => {
-                    if (p.projectTitle == "overview") {
+                <section className={"L1-container"}>
+                    {trajectories.map((traject, index) => {
                         return (
-                            <div className={"project-overview"}>
-                                <div className={"section-label"}>
-                                    <p>*RESEARCH</p>
+                            <div>
+                                <div className={"index-container"}>
+                                    <div className={"index-number"}>{index}</div>
+                                    <span className={"arrow-open"}> ▼ </span>
+                                    <h1 className={"L1-slug"}>{serialize(traject.trajectorySlug)}</h1>
                                 </div>
-                                <p>{serialize(p.projectDescription)}</p>
-                                <p> * * * * </p>
+                                {traject.trajectoryDescription &&
+                                    <p className={"L1-description"}>
+                                        {serialize(traject.trajectoryDescription)}
+                                    </p>
+                                }
+                                {traject.articles &&
+                                    <L2Container projects={traject.articles}></L2Container>
+                                }
+
                             </div>
+
                         )
-                    }
-                })}
-            </div>
-
-
-            <section className={projectView ? "home-about w-50" : "home-about w-100"}
-                         style={projectView ? {display: "none"} : {}}>
-                    <div className={"section-label"}>
-                        <p>*ABOUT</p>
-                    </div>
-                    <p>{about}</p>
+                    })}
+                    <section>
+                        <L2Container></L2Container>
+                    </section>
+                </section>
             </section>
-            {projectView &&
-                <Project project={project}/>
-            }
-            <CalculateSize/>
+
+            {/*<CalculateSize/>*/}
 
         </div>
     )

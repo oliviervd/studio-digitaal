@@ -3,6 +3,45 @@
     --dark: black;
 }
 
+
+header {
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+
+    h1 {
+        margin: 1px;
+        font-size: 1.5rem;
+        color:var(--text-color);
+    }
+}
+
+header > div {
+    display: flex;
+    flex-flow: column;
+
+    & .boxIcon {
+        width: 3rem;
+        height:3rem;
+        justify-content: center;
+        margin: auto;
+        margin-right: 10px;
+    }
+}
+
+
+header > nav {
+    display: flex;
+    flex-flow: row;
+    & h1:hover {
+        color: #C6D8D3
+    }
+}
+
+
 .sidebar__container-main {
     position: fixed;
     padding-top: 45px;
@@ -197,8 +236,7 @@ input:checked ~ .slider::before {
 
 .header-container-mobile{
     display: none;
-    padding: 10px;
-
+    padding: 10px 0 0 20px;
     img{
         width: 20vw;
     }

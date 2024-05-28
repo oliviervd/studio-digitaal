@@ -1,4 +1,3 @@
-import "../styles/project.css"
 import serialize from "../utils/serialize";
 
 const Project = (props) =>  {

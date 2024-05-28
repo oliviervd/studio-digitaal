@@ -1,0 +1,48 @@
+:root {
+    --font-size-xs: 1rem;
+    --font-size-s: 1.2rem;
+    --font-size-m: 1.8rem;
+    --font-size-l: 3.5rem;
+}
+
+
+@media (max-width: 1600px) {
+    :root {
+        --font-size-s: 1rem;
+        --font-size-m: 1.2rem;
+        --font-size-l: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    :root {
+        --font-size-s: 1.2rem;
+        --font-size-m: 1.5rem;
+        --font-size-l: 1.5rem;
+    }
+}
+
+body {
+    line-height: 120%;
+    font-family: "courier";
+}
+
+p {
+
+}
+
+a {
+    color: var(--link-color);
+}
+
+pre {
+    white-space: pre-wrap;       /* CSS 3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+h1 {
+    font-size: var(--font-size-m);
+}
