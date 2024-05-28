@@ -68,8 +68,9 @@ const Home = () => {
         })
     }
 
-
-    console.log(logoDesc)
+    function collapseAllContainers() {
+        setExpandedContainers([])
+    }
 
     return(
         <div>
@@ -110,7 +111,7 @@ const Home = () => {
 
                 <div className={"section-head"}>
                     <h1>RESEARCH</h1>
-                    <a style={{paddingTop:"20px"}}>[collapse all]</a>
+                    <a style={{paddingTop:"20px"}} onClick={()=>collapseAllContainers()}>[collapse all]</a>
                 </div>
 
                 <section className={"L1-container"}>
