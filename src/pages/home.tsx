@@ -24,6 +24,7 @@ const Home = () => {
     const [about, setAbout] = useState([])
     const [animateGif, setAnimateGif] = useState(false)
     const [expandedContainers, setExpandedContainers] = useState([])
+    const [expandedContainersGlossary, setExpandedContainersGlossary] = useState([])
 
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
@@ -69,6 +70,10 @@ const Home = () => {
 
     function collapseAllContainers() {
         setExpandedContainers([])
+    }
+
+    function collapseAllContainersGlossary() {
+        setExpandedContainersGlossary([])
     }
 
     return(
@@ -149,10 +154,11 @@ const Home = () => {
 
                 <div class={"section-head"}>
                     <h1>GLOSSARY</h1>
+                    <a onClick={() => collapseAllContainersGlossary()}>[collapse all]</a>
                 </div>
 
                 <section>
-                    <Glossary/>
+                    <Glossary expandedContainersGlossary={expandedContainersGlossary} setExpandedContainersGlossary={setExpandedContainersGlossary} />
                 </section>
             </section>
 

@@ -1,10 +1,6 @@
-import Header from "../components/header";
-import {fetchPayload} from "../utils/fetchPayload";
 import {useEffect, useState} from "preact/hooks";
 import {useLanguage} from "../utils/languageProvider";
 import serialize from "../utils/serialize";
-
-// todo: add media
 
 const L2Container = ({projects}) => {
     const {language, setLanguage} = useLanguage()

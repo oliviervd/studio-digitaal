@@ -96,7 +96,7 @@
 }
 
 .expanded {
-    max-height: 100Vh;
+    max-height: 100%;
     opacity: 1;
 }
 

@@ -1,25 +1,25 @@
 import {useEffect, useState} from "preact/hooks";
 import {fetchPayload} from "../utils/fetchPayload";
 import serialize from "../utils/serialize";
+import {useLanguage} from "../utils/languageProvider";
 
-const Glossary = ({language}) => {
-
-    //todo: sort in alphabetical order
+const Glossary = ({expandedContainersGlossary, setExpandedContainersGlossary}) => {
 
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
     const [glossary, setGlossary] = useState<string>([]);
-    const [expandedContainers, setExpandedContainers] = useState([])
-
+    const {language, setLanguage} = useLanguage()
 
     // fetch data Glossary
     useEffect(()=>{
         fetchPayload(baseURI, "Glossary", 100, language).then((data)=>{
-            setGlossary(data["docs"])
+            // sort concepts alphabetically
+            const sortedData = data["docs"].sort((a, b) => a.concept.localeCompare(b.concept));
+            setGlossary(sortedData)
         })
     }, [language])
 
     function toggleContainer(index) {
-        setExpandedContainers(prevState => {
+        setExpandedContainersGlossary(prevState => {
             const newState = [...prevState]
             if (newState.includes(index)) {
                 newState.splice(newState.indexOf(index), 1)
@@ -34,16 +34,13 @@ const Glossary = ({language}) => {
         <div>
             {glossary && glossary.map((concept, index)=>{
                 console.log(concept)
-                const isExpanded = expandedContainers.includes(index);
+                const isExpanded = expandedContainersGlossary.includes(index);
                 return(
                     <div>
                         <div className={"index-container"}>
                             <div className={"index-number"}>{index}</div>
-                            <span className={isExpanded ? "arrow-open" : "arrow-open _90deg"}
-                                  onClick={() => toggleContainer(index)}>
-                                     ▼
-                            </span>
-                            <h1 className={"glossary-concept"} id={concept.concept}>{concept.concept}</h1>
+                            <span className={isExpanded ? "arrow-open" : "arrow-open _90deg"}>▼</span>
+                            <h1 className={"glossary-concept"} id={concept.concept} onClick={() => toggleContainer(index)}>{concept.concept}</h1>
                         </div>
                         {concept.description &&
                             <div className={`L1-description ${isExpanded? "expanded" : "collapsed"}`}>
