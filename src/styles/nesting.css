@@ -47,6 +47,7 @@
     max-height: 0;
     overflow: hidden;
     transition: max-height .25s ease-out, opacity 0.3s ease-out;
+    border-left: greenyellow 2px solid;
 }
 
 .expanded {
@@ -75,6 +76,8 @@
 
 .L2-description {
     padding-left: 60px;
+    border-left: orange 2px solid;
+
 }
 
 
@@ -84,6 +87,6 @@
     }
 
     .L1-description, .L2-description, .L2-container {
-        padding-left: 0;
+        padding-left: 5px;
     }
 }
