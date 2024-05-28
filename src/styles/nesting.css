@@ -50,16 +50,6 @@
     border-left: greenyellow 2px solid;
 }
 
-.expanded {
-    max-height: 100Vh;
-    opacity: 1;
-}
-
-.collapsed {
-    max-height: 0;
-    opacity: 0;
-}
-
 
 .L2-container {
     position: relative;
@@ -76,8 +66,21 @@
 
 .L2-description {
     padding-left: 60px;
-    border-left: orange 2px solid;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .25s ease-out, opacity 0.3s ease-out;
+    border-left: orange 2px solid
+}
 
+.expanded {
+    max-height: 100Vh;
+    opacity: 1;
+}
+
+.collapsed {
+    margin:0;
+    height: 0;
+    opacity: 0;
 }
 
 

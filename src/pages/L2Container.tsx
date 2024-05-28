@@ -32,17 +32,15 @@ const L2Container = ({projects}) => {
                                 <span className={isExpanded? "arrow-open" : "arrow-open _90deg"} onClick={()=>toggleContainer(index)}> ▼ </span>
                                 <h2 className={"L2-slug"} onClick={()=>toggleContainer(index)}><p>{project.article.projectTitle}</p></h2>
                             </div>
-                            <div>
+
                                 {project.article.projectDescription &&
                                         <p className={`L2-description ${isExpanded ? "expanded" : "collapsed"}`}>
                                             {serialize(project.article.projectDescription)}
                                         </p>
                                 }
-                            </div>
                         </div>
                     )
             })}
-
         </section>
     )
 }

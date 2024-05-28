@@ -27,6 +27,7 @@ const Home = () => {
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
     //todo: add logo (white) for dark mode
+    //todo: add button to collapse all.
 
     // fetch content from CMS
     useEffect(()=> {
@@ -113,7 +114,6 @@ const Home = () => {
                 <section className={"L1-container"}>
                     {trajectories.map((traject, index) => {
                         const isExpanded = expandedContainers.includes(index);
-                        console.log(traject)
                         return (
                             <div key={traject._id}>
                                 <div className={"index-container"}>
