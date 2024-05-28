@@ -42,21 +42,23 @@
 }
 
 .L1-description {
+    margin: 0;
     padding-left: 30px;
     max-height: 0;
     overflow: hidden;
     transition: max-height .25s ease-out, opacity 0.3s ease-out;
 }
 
-.L1-description.expanded {
+.expanded {
     max-height: 100Vh;
     opacity: 1;
 }
 
-.L1-description.collapsed {
+.collapsed {
     max-height: 0;
     opacity: 0;
 }
+
 
 .L2-container {
     position: relative;
@@ -79,5 +81,9 @@
 @media (max-width: 700px) {
     .nest-master {
         top: 0;
+    }
+
+    .L1-description, .L2-description, .L2-container {
+        padding-left: 0;
     }
 }

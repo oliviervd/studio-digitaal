@@ -34,14 +34,14 @@ const Home = () => {
                 setTrajectories(data["docs"])
             }
         )
-    }, [])
+    }, [language])
 
     useEffect(()=> {
         fetchPayload(baseURI,"StudioDigitalProject", 10, language).then((data)=> {
                 setProjects(data["docs"])
             }
         )
-    }, [])
+    }, [language])
 
     // fetch data
     useEffect(() => {
@@ -113,18 +113,21 @@ const Home = () => {
                 <section className={"L1-container"}>
                     {trajectories.map((traject, index) => {
                         const isExpanded = expandedContainers.includes(index);
+                        console.log(traject)
                         return (
                             <div key={traject._id}>
                                 <div className={"index-container"}>
                                     <div className={"index-number"}>{index}</div>
-                                    <span className={isExpanded? "arrow-open": "arrow-open _90deg"} onClick={()=>toggleContainer(index)}>
+                                    <span className={isExpanded ? "arrow-open" : "arrow-open _90deg"}
+                                          onClick={() => toggleContainer(index)}>
                                      ▼
                                     </span>
-                                    <h1 className={"L1-slug"} onClick={()=>toggleContainer(index)}>{serialize(traject.trajectorySlug)}</h1>
+                                    <h1 className={"L1-slug"}
+                                        onClick={() => toggleContainer(index)}>{serialize(traject.trajectorySlug)}</h1>
                                 </div>
 
                                 {traject.trajectoryDescription &&
-                                    <p className={`L1-description ${isExpanded?"expanded":"collapsed"}`}>
+                                    <p className={`L1-description ${isExpanded ? "expanded" : "collapsed"}`}>
                                         {serialize(traject.trajectoryDescription)}
                                         {traject.articles &&
                                             <L2Container projects={traject.articles}></L2Container>
@@ -141,6 +144,10 @@ const Home = () => {
                         <L2Container></L2Container>
                     </section>
                 </section>
+
+                <div>
+                    <h1>GLOSSARY</h1>
+                </div>
             </section>
 
             {/*<CalculateSize/>*/}
