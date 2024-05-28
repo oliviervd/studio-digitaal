@@ -4,6 +4,7 @@ import {useEffect, useState} from "preact/hooks";
 import {useLanguage} from "../utils/languageProvider";
 import serialize from "../utils/serialize";
 
+// todo: add media
 
 const L2Container = ({projects}) => {
     const {language, setLanguage} = useLanguage()
@@ -25,6 +26,7 @@ const L2Container = ({projects}) => {
         <section className={"L2-container"}>
             {projects && projects.map((project, index) => {
                 const isExpanded = expandedContainers.includes(index)
+                    console.log(project.article)
                     return(
                         <div key={project._id}>
                             <div className={"index-container"}>
@@ -34,9 +36,12 @@ const L2Container = ({projects}) => {
                             </div>
 
                                 {project.article.projectDescription &&
-                                        <p className={`L2-description ${isExpanded ? "expanded" : "collapsed"}`}>
-                                            {serialize(project.article.projectDescription)}
-                                        </p>
+                                        <div className={`L2-description ${isExpanded ? "expanded" : "collapsed"}`}>
+                                            {project.article.heroImage &&
+                                                <img src={project.article.heroImage.url}/>
+                                            }
+                                            <p>{serialize(project.article.projectDescription)}</p>
+                                        </div>
                                 }
                         </div>
                     )

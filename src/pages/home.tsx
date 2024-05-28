@@ -28,7 +28,6 @@ const Home = () => {
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
     //todo: add logo (white) for dark mode
-    //todo: add button to collapse all.
 
     // fetch content from CMS
     useEffect(()=> {

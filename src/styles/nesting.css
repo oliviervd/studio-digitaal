@@ -5,6 +5,11 @@
     padding-right: 5%;
 }
 
+.nest-master img{
+    width: 250px;
+    padding-right: 20px;
+}
+
 .section-head{
     display: flex;
     flex-direction: row;
@@ -71,11 +76,17 @@
 }
 
 .L2-description {
+    display: flex;
+    flex-direction: row;
     padding-left: 60px;
     max-height: 0;
     overflow: hidden;
     transition: max-height .25s ease-out, opacity 0.3s ease-out;
-    border-left: orange 2px solid
+    border-left: orange 2px solid;
+
+    & p {
+        margin-top:0;
+    }
 }
 
 .glossary-concept{
