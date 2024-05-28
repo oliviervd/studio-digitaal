@@ -147,7 +147,7 @@ const Home = () => {
                     </section>
                 </section>
 
-                <div>
+                <div class={"section-head"}>
                     <h1>GLOSSARY</h1>
                 </div>
 
