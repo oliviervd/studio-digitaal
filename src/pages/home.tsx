@@ -110,7 +110,7 @@ const Home = () => {
 
                 <div className={"section-head"}>
                     <h1>RESEARCH</h1>
-                    <a>[collapse all]</a>
+                    <a style={{paddingTop:"20px"}}>[collapse all]</a>
                 </div>
 
                 <section className={"L1-container"}>

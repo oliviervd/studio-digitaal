@@ -22,6 +22,10 @@ const serialize = (children) =>
                 text = <em key={i}>{text}</em>;
             }
 
+            if (node.underline) {
+                text = <span style={{textDecoration:"underline"}} key={i}>{text}</span>
+            }
+
             // Handle other leaf types here...
 
             return <Fragment key={i}>{text}</Fragment>;

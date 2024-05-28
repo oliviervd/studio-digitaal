@@ -13,8 +13,6 @@ const App = () => {
           <Router>
               <Home path={"/"}/>
               <ApiDocs path={"/collection-api"}/>
-              <Glossary path={"/glossary"}/>
-              <Open path={"/open-collection"}></Open>
           </Router>
       </LanguageProvider>
   )
