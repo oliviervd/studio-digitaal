@@ -11,6 +11,7 @@ header {
     display: flex;
     flex-flow: row;
     justify-content: space-between;
+    font-family: monospace;
 
     h1 {
         margin: 1px;
@@ -246,6 +247,9 @@ input:checked ~ .slider::before {
 
     .header-container-mobile{
         display: block;
+        img {
+            display: block;
+        }
     }
 
     .header-container-desktop {
