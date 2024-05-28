@@ -14,6 +14,7 @@ import {useLanguage} from "../utils/languageProvider";
 import Project from "../components/project";
 import GifControl from "../components/GifControl";
 import Logo from "../assets/Pixel-Logo-41-frames-transparent.gif"
+import Glossary from "./glossary";
 
 const Home = () => {
     const {language, setLanguage} = useLanguage()
@@ -107,8 +108,9 @@ const Home = () => {
 
                 <p>{about}</p>
 
-                <div>
+                <div className={"section-head"}>
                     <h1>RESEARCH</h1>
+                    <a>[collapse all]</a>
                 </div>
 
                 <section className={"L1-container"}>
@@ -148,6 +150,10 @@ const Home = () => {
                 <div>
                     <h1>GLOSSARY</h1>
                 </div>
+
+                <section>
+                    <Glossary/>
+                </section>
             </section>
 
             {/*<CalculateSize/>*/}

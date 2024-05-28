@@ -5,6 +5,12 @@
     padding-right: 5%;
 }
 
+.section-head{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .arrow-open{
     padding-top: 20px;
 }
@@ -72,6 +78,10 @@
     border-left: orange 2px solid
 }
 
+.glossary-concept{
+    font-size: var(--font-size-s);
+}
+
 .expanded {
     max-height: 100Vh;
     opacity: 1;
@@ -81,6 +91,10 @@
     margin:0;
     height: 0;
     opacity: 0;
+}
+
+.source{
+    padding-top: 20px;
 }
 
 
