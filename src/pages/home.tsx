@@ -111,7 +111,20 @@ const Home = () => {
                     </section>
                 }
 
-                <p>{about}</p>
+                <b>{about}</b>
+
+
+                {projects && projects.map((p) => {
+
+                    if (p.projectTitle === "format"){
+                        console.log(p)
+                            return (
+                                    <p>{serialize(p.projectDescription)}</p>
+                            )
+
+                    }
+                })}
+
 
                 <div className={"section-head"}>
                     <h1>RESEARCH</h1>

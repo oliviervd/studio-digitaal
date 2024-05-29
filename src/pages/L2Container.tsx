@@ -22,7 +22,7 @@ const L2Container = ({projects}) => {
         <section className={"L2-container"}>
             {projects && projects.map((project, index) => {
                 const isExpanded = expandedContainers.includes(index)
-                    console.log(project.article)
+                    //console.log(project.article)
                     return(
                         <div key={project._id}>
                             <div className={"index-container"}>

@@ -33,7 +33,7 @@ const Glossary = ({expandedContainersGlossary, setExpandedContainersGlossary}) =
     return(
         <div>
             {glossary && glossary.map((concept, index)=>{
-                console.log(concept)
+                //console.log(concept)
                 const isExpanded = expandedContainersGlossary.includes(index);
                 return(
                     <div>
@@ -46,7 +46,7 @@ const Glossary = ({expandedContainersGlossary, setExpandedContainersGlossary}) =
                             <div className={`L1-description ${isExpanded? "expanded" : "collapsed"}`}>
                                 <p>{serialize(concept.description)}</p>
                                 {concept.references && concept.references.map((ref, index)=>{
-                                    console.log(ref)
+                                    //console.log(ref)
                                     return(
                                         <div>
                                             <p style={{textDecoration: "underline"}}>sources</p>
