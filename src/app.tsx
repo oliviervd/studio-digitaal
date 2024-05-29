@@ -12,6 +12,8 @@ const App = () => {
       <LanguageProvider>
           <Router>
               <Home path={"/"}/>
+              <Home path={"/research"}/>
+              <Home path={"/glossary"}/>
               <ApiDocs path={"/collection-api"}/>
           </Router>
       </LanguageProvider>

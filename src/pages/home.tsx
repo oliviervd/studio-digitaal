@@ -1,6 +1,6 @@
 import Header from "../components/header";
 import CalculateSize from "../components/fetchSize";
-import {useState, useEffect} from "preact/hooks"
+import {useState, useEffect, useRef} from "preact/hooks"
 
 import "../index.css";
 import "../styles/nesting.css";
@@ -16,7 +16,7 @@ import GifControl from "../components/GifControl";
 import Logo from "../assets/Pixel-Logo-41-frames-transparent.gif"
 import Glossary from "./glossary";
 
-const Home = () => {
+const Home = ({url}) => {
     const {language, setLanguage} = useLanguage()
     const [trajectories, setTrajectories] = useState([])
     const [projects, setProjects] = useState([])
@@ -25,6 +25,9 @@ const Home = () => {
     const [animateGif, setAnimateGif] = useState(false)
     const [expandedContainers, setExpandedContainers] = useState([])
     const [expandedContainersGlossary, setExpandedContainersGlossary] = useState([])
+
+    const researchRef = useRef(null)
+    const glossaryRef = useRef(null)
 
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
@@ -51,6 +54,15 @@ const Home = () => {
             setAbout(serialize(data["docs"][3]["description"]));
         })
     }, [language]);
+
+
+    useEffect(() => {
+        if (url === "/glossary" && glossaryRef.current) {
+            glossaryRef.current.scrollIntoView({behavior:"smooth"})
+        } else if (url == "/research" && researchRef.current) {
+            glossaryRef.current.scrollIntoView({behavior:"smooth"})
+        }
+    }, [url]);
 
     function changeLang(lang) {
         setLanguage(lang);
@@ -121,12 +133,11 @@ const Home = () => {
                             return (
                                     <p>{serialize(p.projectDescription)}</p>
                             )
-
                     }
                 })}
 
 
-                <div className={"section-head"}>
+                <div className={"section-head"} id={"research"} ref={researchRef}>
                     <h1>RESEARCH</h1>
                     <a style={{paddingTop:"20px"}} onClick={()=>collapseAllContainers()}>[collapse all]</a>
                 </div>
@@ -165,13 +176,13 @@ const Home = () => {
                     </section>
                 </section>
 
-                <div class={"section-head"}>
+                <div class={"section-head"} id={"glossary"} ref={glossaryRef}>
                     <h1>GLOSSARY</h1>
                     <a onClick={() => collapseAllContainersGlossary()}>[collapse all]</a>
                 </div>
 
                 <section>
-                    <Glossary expandedContainersGlossary={expandedContainersGlossary} setExpandedContainersGlossary={setExpandedContainersGlossary} />
+                    <Glossary  expandedContainersGlossary={expandedContainersGlossary} setExpandedContainersGlossary={setExpandedContainersGlossary} />
                 </section>
             </section>
 

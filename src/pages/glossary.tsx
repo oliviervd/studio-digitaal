@@ -1,5 +1,6 @@
-import {useEffect, useState} from "preact/hooks";
+import {useEffect, useState, useRef} from "preact/hooks";
 import {fetchPayload} from "../utils/fetchPayload";
+import {route} from "preact-router";
 import serialize from "../utils/serialize";
 import {useLanguage} from "../utils/languageProvider";
 
@@ -8,6 +9,7 @@ const Glossary = ({expandedContainersGlossary, setExpandedContainersGlossary}) =
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
     const [glossary, setGlossary] = useState<string>([]);
     const {language, setLanguage} = useLanguage()
+    const refs = useRef({})
 
     // fetch data Glossary
     useEffect(()=>{
@@ -18,56 +20,77 @@ const Glossary = ({expandedContainersGlossary, setExpandedContainersGlossary}) =
         })
     }, [language])
 
-    function toggleContainer(index) {
+    // Handle hash navigation
+    useEffect(() => {
+        const hash = window.location.hash.substring(1);
+        console.log(hash)
+        if (hash) {
+            setTimeout(() => {
+                if (refs.current[hash]) {
+                    console.log(refs.current[hash])
+                    refs.current[hash].scrollIntoView({ behavior: "smooth" });
+                    setExpandedContainersGlossary(prevState => {
+                        if (!prevState.includes(hash)) {
+                            return [...prevState, hash];
+                        }
+                        return prevState;
+                    });
+                }
+            }, 100); // Slight delay to ensure elements are rendered
+        }
+    }, [glossary, language, refs]);
+
+    function toggleContainer(index, concept) {
         setExpandedContainersGlossary(prevState => {
-            const newState = [...prevState]
+            const newState = [...prevState];
             if (newState.includes(index)) {
-                newState.splice(newState.indexOf(index), 1)
+                newState.splice(newState.indexOf(index), 1);
             } else {
-                newState.push(index)
+                newState.push(index);
+                route(`/glossary#${concept}`);  // Update the URL with the concept name
+                if (refs.current[concept]) {
+                    refs.current[concept].scrollIntoView({ behavior: "smooth" });
+                }
             }
-            return newState
-        })
+            return newState;
+        });
     }
+
 
     return(
         <div>
             {glossary && glossary.map((concept, index)=>{
                 //console.log(concept)
                 const isExpanded = expandedContainersGlossary.includes(index);
-                return(
-                    <div>
+                return (
+                    <div key={concept.concept} ref={el => refs.current[concept.concept] = el}>
                         <div className={"index-container"}>
                             <div className={"index-number"}>{index}</div>
                             <span className={isExpanded ? "arrow-open" : "arrow-open _90deg"}>▼</span>
-                            <h1 className={"glossary-concept"} id={concept.concept} onClick={() => toggleContainer(index)}>{concept.concept}</h1>
+                            <h1 className={"glossary-concept"} id={concept.concept} onClick={() => toggleContainer(index, concept.concept)}>{concept.concept}</h1>
                         </div>
                         {concept.description &&
-                            <div className={`L1-description ${isExpanded? "expanded" : "collapsed"}`}>
+                            <div className={`L1-description ${isExpanded ? "expanded" : "collapsed"}`}>
                                 <p>{serialize(concept.description)}</p>
-                                {concept.references && concept.references.map((ref, index)=>{
-                                    //console.log(ref)
-                                    return(
-                                        <div>
-                                            <p style={{textDecoration: "underline"}}>sources</p>
+                                {concept.references && concept.references.map((ref, idx) => {
+                                    return (
+                                        <div key={idx}>
+                                            <p style={{ textDecoration: "underline" }}>sources</p>
                                             <ol className={"index-container"}>
                                                 <li>
                                                     <a className={"source"} href={ref.url}>{ref.source}</a>
                                                 </li>
                                             </ol>
                                         </div>
-                                    )
-                                })
-                                }
-
+                                    );
+                                })}
                             </div>
                         }
-
                     </div>
-                )
+                );
+
             })}
         </div>
     )
-
 }
 export default Glossary;
