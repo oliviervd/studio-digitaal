@@ -1,8 +1,6 @@
 .nest-master{
     position: relative;
-    top: 3vw;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding: 0 20px;
 }
 
 .nest-master img{

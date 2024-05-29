@@ -11,26 +11,20 @@ const Header = ({changeLang, openLogoDesc, logoDesc}) => {
 
     return(
         <header>
-            <div className={"header-container-desktop"}>
+            <div className={"header__logo-container"}>
                 <img
                     src={logo} alt={"logo of studio digitaal"}
                     onClick={() => openLogoDesc(!logoDesc)}
                 />
             </div>
-            <div className={"header-container-mobile"}>
-                <img
-                    src={logo} alt={"logo of studio digitaal"}
-                    onClick={() => openLogoDesc(!logoDesc)}
-                />
-            </div>
-            <div className={"header-container-right"}>
-                <div id={"lang"} className={"languages"}>
-                    <p id={'nl'} onClick={() => changeLang("nl")}>NL</p>
-                    <p id={'en'} onClick={() => changeLang("en")}>EN</p>
-                    <p id={'fr'} onClick={() => changeLang("fr")}>FR</p>
+            <nav>
+                <div id={"lang"} className={"nav__lang-container"}>
+                    <p id={'nl'} onClick={() => changeLang("nl")}>nl</p>
+                    <p id={'en'} onClick={() => changeLang("en")}>en</p>
+                    <p id={'fr'} onClick={() => changeLang("fr")}>fr</p>
                 </div>
-                <ThemeToggle/>
-            </div>
+                {/*<ThemeToggle/>*/}
+            </nav>
         </header>
     )
 }
