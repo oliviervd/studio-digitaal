@@ -23,11 +23,10 @@ const Glossary = ({expandedContainersGlossary, setExpandedContainersGlossary}) =
     // Handle hash navigation
     useEffect(() => {
         const hash = window.location.hash.substring(1);
-        console.log(hash)
         if (hash) {
             setTimeout(() => {
                 if (refs.current[hash]) {
-                    console.log(refs.current[hash])
+                    // todo: toggle container (index) — in hash?
                     refs.current[hash].scrollIntoView({ behavior: "smooth" });
                     setExpandedContainersGlossary(prevState => {
                         if (!prevState.includes(hash)) {
@@ -48,9 +47,6 @@ const Glossary = ({expandedContainersGlossary, setExpandedContainersGlossary}) =
             } else {
                 newState.push(index);
                 route(`/glossary#${concept}`);  // Update the URL with the concept name
-                if (refs.current[concept]) {
-                    refs.current[concept].scrollIntoView({ behavior: "smooth" });
-                }
             }
             return newState;
         });

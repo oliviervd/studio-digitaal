@@ -1,6 +1,7 @@
 import Header from "../components/header";
 import CalculateSize from "../components/fetchSize";
 import {useState, useEffect, useRef} from "preact/hooks"
+import {route} from "preact-router";
 
 import "../index.css";
 import "../styles/nesting.css";
@@ -15,6 +16,7 @@ import Project from "../components/project";
 import GifControl from "../components/GifControl";
 import Logo from "../assets/Pixel-Logo-41-frames-transparent.gif"
 import Glossary from "./glossary";
+import glossary from "./glossary";
 
 const Home = ({url}) => {
     const {language, setLanguage} = useLanguage()
@@ -25,6 +27,9 @@ const Home = ({url}) => {
     const [animateGif, setAnimateGif] = useState(false)
     const [expandedContainers, setExpandedContainers] = useState([])
     const [expandedContainersGlossary, setExpandedContainersGlossary] = useState([])
+
+    const [scrollToID, setScrollToID] = useState<number>(null)
+    console.log(scrollToID)
 
     const researchRef = useRef(null)
     const glossaryRef = useRef(null)
@@ -57,10 +62,12 @@ const Home = ({url}) => {
 
 
     useEffect(() => {
-        if (url === "/glossary" && glossaryRef.current) {
-            glossaryRef.current.scrollIntoView({behavior:"smooth"})
-        } else if (url == "/research" && researchRef.current) {
-            glossaryRef.current.scrollIntoView({behavior:"smooth"})
+
+        if (glossaryRef.current) {
+            setScrollToID(glossaryRef.current)
+        } else if (researchRef.current) {
+            setScrollToID(researchRef.current)
+            researchRef.current.scrollIntoView({behavior:"smooth"})
         }
     }, [url]);
 
@@ -68,13 +75,14 @@ const Home = ({url}) => {
         setLanguage(lang);
     }
 
-    function toggleContainer(index) {
+    function toggleContainer(index, concept) {
         setExpandedContainers(prevState => {
             const newState = [...prevState]
             if (newState.includes(index)) {
                 newState.splice(newState.indexOf(index), 1)
             } else {
                 newState.push(index)
+                route(`/research#${concept}`)
             }
             return newState
         })
@@ -129,7 +137,6 @@ const Home = ({url}) => {
                 {projects && projects.map((p) => {
 
                     if (p.projectTitle === "format"){
-                        console.log(p)
                             return (
                                     <p>{serialize(p.projectDescription)}</p>
                             )
@@ -150,11 +157,11 @@ const Home = ({url}) => {
                                 <div className={"index-container"}>
                                     <div className={"index-number"}>{index}</div>
                                     <span className={isExpanded ? "arrow-open" : "arrow-open _90deg"}
-                                          onClick={() => toggleContainer(index)}>
+                                          onClick={() => toggleContainer(index, traject.trajectoryTitle)}>
                                      ▼
                                     </span>
                                     <h1 className={"L1-slug"}
-                                        onClick={() => toggleContainer(index)}>{serialize(traject.trajectorySlug)}</h1>
+                                        onClick={() => toggleContainer(index, traject.trajectoryTitle)}>{serialize(traject.trajectorySlug)}</h1>
                                 </div>
 
                                 {traject.trajectoryDescription &&
@@ -182,7 +189,7 @@ const Home = ({url}) => {
                 </div>
 
                 <section>
-                    <Glossary  expandedContainersGlossary={expandedContainersGlossary} setExpandedContainersGlossary={setExpandedContainersGlossary} />
+                    <Glossary scrollToID={scrollToID} setScrollToID={setScrollToID}  expandedContainersGlossary={expandedContainersGlossary} setExpandedContainersGlossary={setExpandedContainersGlossary} />
                 </section>
             </section>
 
