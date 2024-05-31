@@ -62,7 +62,9 @@ const Glossary = ({expandedContainersGlossary, setExpandedContainersGlossary}) =
                     <div key={concept.concept} ref={el => refs.current[concept.concept] = el}>
                         <div className={"index-container"}>
                             <div className={"index-number"}>{index}</div>
-                            <span className={isExpanded ? "arrow-open" : "arrow-open _90deg"}>▼</span>
+                            <div className={"arrow-container"}>
+                                <span className={isExpanded ? "arrow-open" : "arrow-open _90deg"}>▼</span>
+                            </div>
                             <h1 className={"glossary-concept"} id={concept.concept} onClick={() => toggleContainer(index, concept.concept)}>{concept.concept}</h1>
                         </div>
                         {concept.description &&

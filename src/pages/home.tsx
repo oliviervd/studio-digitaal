@@ -27,6 +27,7 @@ const Home = ({url}) => {
     const [animateGif, setAnimateGif] = useState(false)
     const [expandedContainers, setExpandedContainers] = useState([])
     const [expandedContainersGlossary, setExpandedContainersGlossary] = useState([])
+    const [font, setFont] = useState("courier")
 
     const [scrollToID, setScrollToID] = useState<number>(null)
     console.log(scrollToID)
@@ -71,6 +72,12 @@ const Home = ({url}) => {
         }
     }, [url]);
 
+    console.log(font)
+
+    useEffect(()=>{
+        document.body.style.fontFamily = font;
+    },[font])
+
     function changeLang(lang) {
         setLanguage(lang);
     }
@@ -96,11 +103,16 @@ const Home = ({url}) => {
         setExpandedContainersGlossary([])
     }
 
+    const handleFontChange = (event) => {
+        setFont(event.target.value)
+    }
+
     return(
         <div>
             <Header
                 language={language} changeLang={changeLang}
                 logoDesc={logoDesc} openLogoDesc={openLogoDesc}
+                handleFontChange={handleFontChange}
             />
 
             <section className={"nest-master"}>
@@ -156,10 +168,12 @@ const Home = ({url}) => {
                             <div key={traject._id}>
                                 <div className={"index-container"}>
                                     <div className={"index-number"}>{index}</div>
-                                    <span className={isExpanded ? "arrow-open" : "arrow-open _90deg"}
-                                          onClick={() => toggleContainer(index, traject.trajectoryTitle)}>
+                                    <div className={"arrow-container"}>
+                                         <span className={isExpanded ? "arrow-open" : "arrow-open _90deg"}
+                                               onClick={() => toggleContainer(index, traject.trajectoryTitle)}>
                                      ▼
-                                    </span>
+                                        </span>
+                                    </div>
                                     <h1 className={"L1-slug"}
                                         onClick={() => toggleContainer(index, traject.trajectoryTitle)}>{serialize(traject.trajectorySlug)}</h1>
                                 </div>

@@ -27,8 +27,12 @@ const L2Container = ({projects}) => {
                         <div key={project._id}>
                             <div className={"index-container"}>
                                 <div className={"index-number"}>{index}</div>
-                                <span className={isExpanded? "arrow-open" : "arrow-open _90deg"} onClick={()=>toggleContainer(index)}> ▼ </span>
-                                <h2 className={"L2-slug"} onClick={()=>toggleContainer(index)}><p>{project.article.projectTitle}</p></h2>
+                                <div className={"arrow-container"}>
+                                    <span className={isExpanded ? "arrow-open" : "arrow-open _90deg"}
+                                          onClick={() => toggleContainer(index)}> ▼ </span>
+                                </div>
+                                <h2 className={"L2-slug"} onClick={() => toggleContainer(index)}>
+                                    <p>{project.article.projectTitle}</p></h2>
                             </div>
 
                                 {project.article.projectDescription &&

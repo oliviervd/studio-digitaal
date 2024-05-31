@@ -3,6 +3,8 @@ header {
     height: 80px;
     padding: 20px;
     position: relative;
+    display: flex;
+    flex-direction: row;
 }
 
 .header__logo-container{
@@ -20,6 +22,10 @@ header > nav {
     position: absolute;
     right: 20px;
     top: 0
+}
+
+.font-changer{
+    padding-top: 20px;
 }
 
 .nav__lang-container {
