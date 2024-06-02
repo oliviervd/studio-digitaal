@@ -157,7 +157,7 @@ const Home = ({url}) => {
 
 
                 <div className={"section-head"} id={"research"} ref={researchRef}>
-                    <h1>RESEARCH</h1>
+                    <h1>research</h1>
                     <a style={{paddingTop:"20px"}} onClick={()=>collapseAllContainers()}>[collapse all]</a>
                 </div>
 
@@ -168,12 +168,12 @@ const Home = ({url}) => {
                             <div key={traject._id}>
                                 <div className={"index-container"}>
                                     <div className={"index-number"}>{index}</div>
-                                    <div className={"arrow-container"}>
+                                    {/*<div className={"arrow-container"}>
                                          <span className={isExpanded ? "arrow-open" : "arrow-open _90deg"}
                                                onClick={() => toggleContainer(index, traject.trajectoryTitle)}>
                                      ▼
                                         </span>
-                                    </div>
+                                    </div>*/}
                                     <h1 className={"L1-slug"}
                                         onClick={() => toggleContainer(index, traject.trajectoryTitle)}>{serialize(traject.trajectorySlug)}</h1>
                                 </div>
@@ -198,13 +198,17 @@ const Home = ({url}) => {
                 </section>
 
                 <div class={"section-head"} id={"glossary"} ref={glossaryRef}>
-                    <h1>GLOSSARY</h1>
+                    <h1>glossary</h1>
                     <a onClick={() => collapseAllContainersGlossary()}>[collapse all]</a>
                 </div>
 
                 <section>
                     <Glossary scrollToID={scrollToID} setScrollToID={setScrollToID}  expandedContainersGlossary={expandedContainersGlossary} setExpandedContainersGlossary={setExpandedContainersGlossary} />
                 </section>
+
+                <div class={"section-head"}>
+                    <h1>actors</h1>
+                </div>
             </section>
 
             {/*<CalculateSize/>*/}
