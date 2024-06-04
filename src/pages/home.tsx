@@ -143,9 +143,6 @@ const Home = ({url}) => {
                                 </details>
                             )
                         })}
-                        <section>
-                            <L2Container></L2Container>
-                        </section>
                     </section>
                 </details>
 

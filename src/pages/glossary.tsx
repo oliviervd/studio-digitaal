@@ -54,7 +54,9 @@ const Glossary = ({expandedContainersGlossary, setExpandedContainersGlossary}) =
                                     {concept.references && concept.references.map((ref, idx) => {
                                         return (
                                             <details key={idx}>
-                                                <summary style={{textDecoration:"underline", fontWeight:"300"}}>sources</summary>
+                                                <summary
+                                                    style={{textDecoration: "underline", fontWeight: "300"}}>sources
+                                                </summary>
                                                 <ol className={"index-container"}>
                                                     <li>
                                                         <a className={"source"} href={ref.url}>{ref.source}</a>
