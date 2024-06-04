@@ -4,6 +4,7 @@ import "../styles/navigation.css"
 import logo from "../assets/Pixel-Logo-41-frames-transparent.gif"
 import FontChanger from "./fontChanger";
 import Toggle from "./toggle";
+import CalculateSize from "./fetchSize";
 
 const Header = ({changeLang, openLogoDesc, logoDesc, handleFontChange}) => {
 
@@ -18,6 +19,8 @@ const Header = ({changeLang, openLogoDesc, logoDesc, handleFontChange}) => {
                     onClick={() => openLogoDesc(!logoDesc)}
                 />
             </div>
+
+            <CalculateSize/>
 
             <nav>
                 <FontChanger handleFontChange={handleFontChange}/>

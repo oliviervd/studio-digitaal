@@ -6,6 +6,9 @@ const L2Container = ({projects}) => {
     const {language, setLanguage} = useLanguage()
     const [expandedContainers, setExpandedContainers] = useState([])
 
+    // todo: images lazy load and hide in details
+    // todo: show filesize
+
     function toggleContainer(index) {
         setExpandedContainers(prevState => {
             const newState = [...prevState]
@@ -21,30 +24,22 @@ const L2Container = ({projects}) => {
     return(
         <section className={"L2-container"}>
             {projects && projects.map((project, index) => {
-                const isExpanded = expandedContainers.includes(index)
-                    //console.log(project.article)
-                    return(
-                        <div key={project._id}>
-                            <div className={"index-container"}>
-                                <div className={"index-number"}>{index}</div>
-                              {/*  <div className={"arrow-container"}>
-                                    <span className={isExpanded ? "arrow-open" : "arrow-open _90deg"}
-                                          onClick={() => toggleContainer(index)}> ▼ </span>
-                                </div>*/}
-                                <h2 className={"L2-slug"} onClick={() => toggleContainer(index)}>
-                                    <p>{project.article.projectTitle}</p></h2>
-                            </div>
+                return(
+                    <details key={project._id}>
+                        <summary>
+                            {project.article.projectTitle}
+                        </summary>
+                        {project.article.projectDescription &&
+                            <div>
+                                {project.article.heroImage &&
+                                    <img src={project.article.heroImage.url}/>
 
-                                {project.article.projectDescription &&
-                                        <div className={`L2-description ${isExpanded ? "expanded" : "collapsed"}`}>
-                                            {project.article.heroImage &&
-                                                <img src={project.article.heroImage.url}/>
-                                            }
-                                            <p>{serialize(project.article.projectDescription)}</p>
-                                        </div>
                                 }
-                        </div>
-                    )
+                                <p>{serialize(project.article.projectDescription)}</p>
+                            </div>
+                        }
+                    </details>
+                )
             })}
         </section>
     )

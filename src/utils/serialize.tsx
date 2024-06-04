@@ -53,8 +53,8 @@ const serialize = (children) =>
             case "link":
                 return (
                     <a href={escapeHTML(node.url)} key={i}>
-                    {serialize(node.children)}
-                </a>
+                        {serialize(node.children)}
+                    </a>
             );
 
             default:

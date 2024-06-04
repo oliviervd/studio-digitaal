@@ -16,7 +16,6 @@ import Project from "../components/project";
 import GifControl from "../components/GifControl";
 import Logo from "../assets/Pixel-Logo-41-frames-transparent.gif"
 import Glossary from "./glossary";
-import glossary from "./glossary";
 
 const Home = ({url}) => {
     const {language, setLanguage} = useLanguage()
@@ -38,6 +37,7 @@ const Home = ({url}) => {
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
     //todo: add logo (white) for dark mode
+    //todo: use details instead of hardcoded boxes.
 
     // fetch content from CMS
     useEffect(()=> {
@@ -72,10 +72,12 @@ const Home = ({url}) => {
         }
     }, [url]);
 
-    console.log(font)
 
     useEffect(()=>{
         document.body.style.fontFamily = font;
+        if (font == "fantasy") {
+            document.body.style.lineHeight = "1.4";
+        }
     },[font])
 
     function changeLang(lang) {
@@ -148,67 +150,61 @@ const Home = ({url}) => {
 
                 {projects && projects.map((p) => {
 
-                    if (p.projectTitle === "format"){
-                            return (
-                                    <p>{serialize(p.projectDescription)}</p>
-                            )
+                    if (p.projectTitle === "format") {
+                        return (
+                            <p>{serialize(p.projectDescription)}</p>
+                        )
                     }
                 })}
-
-
-                <div className={"section-head"} id={"research"} ref={researchRef}>
-                    <h1>research</h1>
-                    <a style={{paddingTop:"20px"}} onClick={()=>collapseAllContainers()}>[collapse all]</a>
-                </div>
-
-                <section className={"L1-container"}>
-                    {trajectories.map((traject, index) => {
-                        const isExpanded = expandedContainers.includes(index);
-                        return (
-                            <div key={traject._id}>
-                                <div className={"index-container"}>
-                                    <div className={"index-number"}>{index}</div>
-                                    {/*<div className={"arrow-container"}>
-                                         <span className={isExpanded ? "arrow-open" : "arrow-open _90deg"}
-                                               onClick={() => toggleContainer(index, traject.trajectoryTitle)}>
-                                     ▼
-                                        </span>
-                                    </div>*/}
-                                    <h1 className={"L1-slug"}
-                                        onClick={() => toggleContainer(index, traject.trajectoryTitle)}>{serialize(traject.trajectorySlug)}</h1>
-                                </div>
-
-                                {traject.trajectoryDescription &&
-                                    <p className={`L1-description ${isExpanded ? "expanded" : "collapsed"}`}>
-                                        {serialize(traject.trajectoryDescription)}
-                                        {traject.articles &&
-                                            <L2Container projects={traject.articles}></L2Container>
-                                        }
-                                    </p>
-                                }
-
-
-                            </div>
-
-                        )
-                    })}
-                    <section>
-                        <L2Container></L2Container>
+                <hr/>
+                <hr/>
+                <details>
+                    <summary>
+                        research
+                    </summary>
+                    <br/>
+                    <section className={"L1-container"}>
+                        {trajectories.map((traject, index) => {
+                            return (
+                                <details key={traject._id}>
+                                    <summary>{traject.trajectoryTitle}</summary>
+                                    {traject.trajectoryDescription &&
+                                        <p>
+                                            {serialize(traject.trajectoryDescription)}
+                                            {traject.articles &&
+                                                <L2Container projects={traject.articles}></L2Container>
+                                            }
+                                        </p>
+                                    }
+                                </details>
+                            )
+                        })}
+                        <section>
+                            <L2Container></L2Container>
+                        </section>
                     </section>
-                </section>
+                </details>
 
-                <div class={"section-head"} id={"glossary"} ref={glossaryRef}>
-                    <h1>glossary</h1>
-                    <a onClick={() => collapseAllContainersGlossary()}>[collapse all]</a>
-                </div>
+                <hr/>
+                <hr/>
 
-                <section>
-                    <Glossary scrollToID={scrollToID} setScrollToID={setScrollToID}  expandedContainersGlossary={expandedContainersGlossary} setExpandedContainersGlossary={setExpandedContainersGlossary} />
-                </section>
+                <details>
+                    <summary>glossary</summary>
+                    <br/>
+                    <section>
+                        <Glossary scrollToID={scrollToID} setScrollToID={setScrollToID}
+                                  expandedContainersGlossary={expandedContainersGlossary}
+                                  setExpandedContainersGlossary={setExpandedContainersGlossary}/>
+                    </section>
+                </details>
 
-                <div class={"section-head"}>
-                    <h1>actors</h1>
-                </div>
+                <hr/>
+                <hr/>
+
+                <details>
+                    <summary>actors</summary>
+                </details>
+
             </section>
 
             {/*<CalculateSize/>*/}

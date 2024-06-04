@@ -3,14 +3,18 @@
     --nest-layer-2-color: #F8F4EC;
 }
 
+hr {
+    margin: 0;
+}
+
 .nest-master{
     position: relative;
-    padding: 0 20px;
+    padding: 0 1.2em;
 }
 
 .nest-master img{
     width: 250px;
-    padding-right: 20px;
+    padding-right: 1.2rem;
     height: 100%;
 }
 
@@ -97,13 +101,13 @@
 }
 
 .L2-description {
-    display: flex;
+    display: block;
     flex-direction: row;
-    padding-left: 60px;
+    padding-left: 1.4rem;
     max-height: 0;
     overflow: hidden;
     transition: max-height .25s ease-out, opacity 0.3s ease-out;
-    border-left: var(--nest-layer-2-color) 2px solid;
+    border-left: pink 2px solid;
 
     & p {
         margin-top:0;

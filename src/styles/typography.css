@@ -50,8 +50,10 @@ pre {
 
 h1 {
     font-size: var(--font-size-s);
+    margin-block-start: 0;
 }
 
-h2 {
+summary {
     font-size: var(--font-size-s);
+    font-weight: 900;
 }
