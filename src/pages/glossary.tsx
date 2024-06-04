@@ -53,14 +53,14 @@ const Glossary = ({expandedContainersGlossary, setExpandedContainersGlossary}) =
                                     <p>{serialize(concept.description)}</p>
                                     {concept.references && concept.references.map((ref, idx) => {
                                         return (
-                                            <div key={idx}>
-                                                <p style={{ textDecoration: "underline" }}>sources</p>
+                                            <details key={idx}>
+                                                <summary style={{textDecoration:"underline", fontWeight:"300"}}>sources</summary>
                                                 <ol className={"index-container"}>
                                                     <li>
                                                         <a className={"source"} href={ref.url}>{ref.source}</a>
                                                     </li>
                                                 </ol>
-                                            </div>
+                                            </details>
                                         );
                                     })}
                                 </div>

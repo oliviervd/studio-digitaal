@@ -17,61 +17,6 @@ body {
 }
 
 
-.languages {
-    display: flex;
-    flex-flow: row;
-    gap:10px;
-    margin-right: 30px;
-    position: relative;
-    top:6px;
-    font-family: IBM Plex Mono-Medium;
-
-    p {
-        line-height: 0;
-    }
-
-    & .selected {
-        text-decoration: underline;
-    }
-}
-
-.languages > h1:hover {
-    text-decoration: underline;
-}
-
-.languages > h1:first-child:hover {
-    background-color: orange;
-    text-decoration: underline;
-    transition: opacity .25s,border-color .25s,background-color .25s,color .25s;
-}
-
-.languages > h1:nth-child(2):hover {
-    background-color: darkorange;
-    text-decoration: underline;
-    transition: opacity .25s,border-color .25s,background-color .25s,color .25s;
-}
-
-.languages > h1:last-child:hover {
-    background-color: coral;
-    text-decoration: underline;
-    transition: opacity .25s,border-color .25s,background-color .25s,color .25s;
-}
-
-
-.pageSize{
-    position: fixed;
-    left: 0;
-    bottom: 0;
-
-    > p {
-        margin: 1px;
-        font-size: 1rem;
-        font-family: "IBM Plex Mono-Light";
-        line-height: 1.2rem;
-        color: var(--text-color)
-    }
-}
-
 .landing-gif {
     position: fixed;
     top: 5vh;

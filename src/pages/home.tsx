@@ -12,9 +12,6 @@ import L2Container from "./L2Container";
 import {fetchPayload} from "../utils/fetchPayload";
 import serialize from "../utils/serialize";
 import {useLanguage} from "../utils/languageProvider";
-import Project from "../components/project";
-import GifControl from "../components/GifControl";
-import Logo from "../assets/Pixel-Logo-41-frames-transparent.gif"
 import Glossary from "./glossary";
 
 const Home = ({url}) => {
@@ -23,7 +20,6 @@ const Home = ({url}) => {
     const [projects, setProjects] = useState([])
     const [logoDesc, openLogoDesc] = useState(false)
     const [about, setAbout] = useState([])
-    const [animateGif, setAnimateGif] = useState(false)
     const [expandedContainers, setExpandedContainers] = useState([])
     const [expandedContainersGlossary, setExpandedContainersGlossary] = useState([])
     const [font, setFont] = useState("courier")
@@ -84,27 +80,6 @@ const Home = ({url}) => {
         setLanguage(lang);
     }
 
-    function toggleContainer(index, concept) {
-        setExpandedContainers(prevState => {
-            const newState = [...prevState]
-            if (newState.includes(index)) {
-                newState.splice(newState.indexOf(index), 1)
-            } else {
-                newState.push(index)
-                route(`/research#${concept}`)
-            }
-            return newState
-        })
-    }
-
-    function collapseAllContainers() {
-        setExpandedContainers([])
-    }
-
-    function collapseAllContainersGlossary() {
-        setExpandedContainersGlossary([])
-    }
-
     const handleFontChange = (event) => {
         setFont(event.target.value)
     }
@@ -131,17 +106,6 @@ const Home = ({url}) => {
                             }
                         })
                         }
-                        {/*<section>
-                            <GifControl playAutomatically={false}
-                                        src={Logo}
-                                        width={500}
-                                        height={400}>
-                                frameDelay={100}
-                                transitionDelay={10}
-                                transitionDuration={500}
-                                idleTimeout={100}
-                            </GifControl>
-                        </section>*/}
                     </section>
                 }
 
@@ -206,8 +170,6 @@ const Home = ({url}) => {
                 </details>
 
             </section>
-
-            {/*<CalculateSize/>*/}
 
         </div>
     )
