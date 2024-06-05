@@ -17,22 +17,4 @@ body {
 }
 
 
-.landing-gif {
-    position: fixed;
-    top: 5vh;
-    left: 0;
-    width: auto;
-    height: 120%;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.5;
-}
-
-.container-logo-pop-up {
-    position: absolute;
-    top: 10vh;
-    left: 5vw;
-    width: 20vw;
-}
-
 

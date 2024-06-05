@@ -1,14 +1,15 @@
 import {useLanguage} from "../utils/languageProvider";
 import serialize from "../utils/serialize";
 
-const L2Container = ({projects}) => {
+const NestedContent = ({projects}) => {
     const {language, setLanguage} = useLanguage()
-
-    // todo: images lazy load and hide in details
 
     return(
         <section style={{borderLeft: "2px solid blue"}} className={"L2-container"}>
             {projects && projects.map((project, index) => {
+                if (project.article.subProjects[0] && project.article.subProjects[0].project !== null){
+                    console.log(project.article.subProjects)
+                }
                 return(
                     <details key={project._id}>
                         <summary>
@@ -22,9 +23,23 @@ const L2Container = ({projects}) => {
                                         {project.article.heroImage &&
                                             <img loading="lazy" src={project.article.heroImage.url}/>
                                         }
+
                                     </details>
                                 }
                                 <p>{serialize(project.article.projectDescription)}</p>
+                                {project.article.subProjects[0] && project.article.subProjects[0].project !== null && project.article.subProjects.map((project)=> {
+                                    console.log(project.project)
+                                    return (
+                                        <details>
+                                            <summary>{project.project.projectTitle}</summary>
+                                            <div style={{borderLeft: "2px solid pink", paddingLeft: "20px"}}>
+                                                <p>{serialize(project.project.projectDescription)}</p>
+                                            </div>
+                                        </details>
+                                    )
+
+                                })
+                                }
                             </div>
                         }
                     </details>
@@ -34,4 +49,4 @@ const L2Container = ({projects}) => {
     )
 }
 
-export default L2Container;
+export default NestedContent;

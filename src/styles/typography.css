@@ -27,6 +27,12 @@ body {
     font-family: "courier";
 }
 
+h1 {
+    font-size: var(--font-size-s);
+    margin-block-start: 0;
+}
+
+
 p > span {
     font-size: var(--font-size-s);
 }
@@ -40,6 +46,11 @@ a:hover {
     color: orange;
 }
 
+li {
+    font-size: var(--font-size-s);
+    padding-bottom: 0.5rem;
+}
+
 pre {
     white-space: pre-wrap;       /* CSS 3 */
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
@@ -48,12 +59,15 @@ pre {
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
-h1 {
-    font-size: var(--font-size-s);
-    margin-block-start: 0;
-}
 
 summary {
     font-size: var(--font-size-s);
     font-weight: 900;
+    padding: 10px 0;
+}
+
+@media(max-width: 600px) {
+    summary {
+        padding: 10px 0;
+    }
 }

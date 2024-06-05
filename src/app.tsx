@@ -4,7 +4,7 @@ import { render } from 'preact';
 import ApiDocs from "./pages/CollectionAPI";
 import {LanguageProvider} from "./utils/languageProvider";
 import Glossary from "./pages/glossary";
-import Open from "./pages/L2Container";
+import Open from "./pages/NestedContent";
 
 const App = () => {
 

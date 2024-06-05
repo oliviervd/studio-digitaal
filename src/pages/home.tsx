@@ -1,13 +1,11 @@
 import Header from "../components/header";
-import CalculateSize from "../components/fetchSize";
 import {useState, useEffect, useRef} from "preact/hooks"
-import {route} from "preact-router";
 
 import "../index.css";
 import "../styles/nesting.css";
 import "../styles/typography.css"
 
-import L2Container from "./L2Container";
+import NestedContent from "./NestedContent";
 
 import {fetchPayload} from "../utils/fetchPayload";
 import serialize from "../utils/serialize";
@@ -31,9 +29,6 @@ const Home = ({url}) => {
     const glossaryRef = useRef(null)
 
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
-
-    //todo: add logo (white) for dark mode
-    //todo: use details instead of hardcoded boxes.
 
     // fetch content from CMS
     useEffect(()=> {
@@ -59,7 +54,6 @@ const Home = ({url}) => {
 
 
     useEffect(() => {
-
         if (glossaryRef.current) {
             setScrollToID(glossaryRef.current)
         } else if (researchRef.current) {
@@ -126,7 +120,6 @@ const Home = ({url}) => {
                     <summary>
                         research
                     </summary>
-                    <br/>
                     <section className={"L1-container"}>
                         {trajectories.map((traject, index) => {
                             return (
@@ -136,7 +129,7 @@ const Home = ({url}) => {
                                         <p>
                                             {serialize(traject.trajectoryDescription)}
                                             {traject.articles &&
-                                                <L2Container projects={traject.articles}></L2Container>
+                                                <NestedContent projects={traject.articles}></NestedContent>
                                             }
                                         </p>
                                     }
@@ -151,7 +144,6 @@ const Home = ({url}) => {
 
                 <details>
                     <summary>glossary</summary>
-                    <br/>
                     <section>
                         <Glossary scrollToID={scrollToID} setScrollToID={setScrollToID}
                                   expandedContainersGlossary={expandedContainersGlossary}
