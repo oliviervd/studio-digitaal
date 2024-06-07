@@ -14,6 +14,8 @@ const ApiDocs = (props) => {
     const [open, setOpen] = useState(false);
     const [scrollToID, setScrollToID] = useState(null)
 
+    // todo: fix styling
+
     // fetch and parse data from CMS
     useEffect(()=>  {
         // to do change language to props;
@@ -51,9 +53,14 @@ const ApiDocs = (props) => {
     return(
         <div>
             <Header setOpen={setOpen} open={open}/>
-            <section className={"api-doc__container"}>
-                <Sidebar changePage={changePage} nav={nav}/>
-                <ApiDoc apiPage={apiPage} scrollToID={scrollToID}/>
+            <section className={"nest-master"}>
+                <details>`
+                    <summary>articles</summary>
+                    <Sidebar changePage={changePage} nav={nav}/>
+                </details>
+                <details>
+                    <ApiDoc apiPage={apiPage} scrollToID={scrollToID}/>
+                </details>
             </section>
             <Footer showFont={false}/>
         </div>
