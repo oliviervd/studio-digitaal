@@ -12,25 +12,18 @@ import serialize from "../utils/serialize";
 import {useLanguage} from "../utils/languageProvider";
 import Glossary from "./glossary";
 
-const Home = ({url}) => {
+const Home = ({trajectory}) => {
     const {language, setLanguage} = useLanguage()
     const [trajectories, setTrajectories] = useState([])
     const [projects, setProjects] = useState([])
     const [logoDesc, openLogoDesc] = useState(false)
     const [about, setAbout] = useState([])
-    const [expandedContainers, setExpandedContainers] = useState([])
-    const [expandedContainersGlossary, setExpandedContainersGlossary] = useState([])
     const [font, setFont] = useState("courier")
-
-    const [scrollToID, setScrollToID] = useState<number>(null)
-    console.log(scrollToID)
-
-    const researchRef = useRef(null)
-    const glossaryRef = useRef(null)
 
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
     // fetch content from CMS
+    // trajectory
     useEffect(()=> {
         fetchPayload(baseURI,"trajectory", 10, language).then((data)=> {
                 setTrajectories(data["docs"])
@@ -38,6 +31,7 @@ const Home = ({url}) => {
         )
     }, [language])
 
+    // projects
     useEffect(()=> {
         fetchPayload(baseURI,"StudioDigitalProject", 10, language).then((data)=> {
                 setProjects(data["docs"])
@@ -52,16 +46,17 @@ const Home = ({url}) => {
         })
     }, [language]);
 
-
     useEffect(() => {
-        if (glossaryRef.current) {
-            setScrollToID(glossaryRef.current)
-        } else if (researchRef.current) {
-            setScrollToID(researchRef.current)
-            researchRef.current.scrollIntoView({behavior:"smooth"})
+        const Element = document.getElementById(trajectory);
+        if (Element) {
+            // open the element
+            if (Element.tagName.toLowerCase() === 'details') {
+                Element.open = true;
+            }
+        } else {
+            // return 404
         }
-    }, [url]);
-
+    }, []);
 
     useEffect(()=>{
         document.body.style.fontFamily = font;
@@ -105,31 +100,24 @@ const Home = ({url}) => {
 
                 <b>{about}</b>
 
-
-                {projects && projects.map((p) => {
-
-                    if (p.projectTitle === "format") {
-                        return (
-                            <p>{serialize(p.projectDescription)}</p>
-                        )
-                    }
-                })}
                 <hr/>
                 <hr/>
-                <details>
+                <details id={'research'}>
                     <summary>
                         research
                     </summary>
                     <section className={"L1-container"}>
                         {trajectories.map((traject, index) => {
                             return (
-                                <details key={traject._id}>
+                                <details id={traject._id} key={traject}>
                                     <summary>{traject.trajectoryTitle}</summary>
                                     {traject.trajectoryDescription &&
                                         <p>
                                             {serialize(traject.trajectoryDescription)}
                                             {traject.articles &&
-                                                <NestedContent projects={traject.articles}></NestedContent>
+                                                <NestedContent
+                                                    projects={traject.articles}
+                                                ></NestedContent>
                                             }
                                         </p>
                                     }
@@ -142,22 +130,36 @@ const Home = ({url}) => {
                 <hr/>
                 <hr/>
 
-                <details>
+                <details id={"glossary"}>
                     <summary>glossary</summary>
                     <section>
-                        <Glossary scrollToID={scrollToID} setScrollToID={setScrollToID}
-                                  expandedContainersGlossary={expandedContainersGlossary}
-                                  setExpandedContainersGlossary={setExpandedContainersGlossary}/>
+                        <Glossary/>
                     </section>
                 </details>
 
                 <hr/>
                 <hr/>
 
-                <details>
+                <details id={"actors"}>
                     <summary>actors</summary>
                 </details>
 
+                <hr/>
+                <hr/>
+
+                {projects && projects.map((p) => {
+
+                    if (p.projectTitle === "format") {
+                        return (
+                            <details>
+                                <summary>
+                                    format
+                                </summary>
+                                <p>{serialize(p.projectDescription)}</p>
+                            </details>
+                        )
+                    }
+                })}
             </section>
 
         </div>
