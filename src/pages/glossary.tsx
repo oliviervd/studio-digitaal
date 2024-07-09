@@ -12,6 +12,7 @@ const Glossary = () => {
     const refs = useRef({})
 
     // todo: expand full article at once (with button) - with collapse all.
+    // todo: add reading time.
 
     // fetch data Glossary
     useEffect(()=>{
@@ -23,7 +24,7 @@ const Glossary = () => {
     }, [language])
 
     return(
-        <div>
+        <div className={"L1-container"}>
             {glossary && glossary.map((concept, index)=>{
                 return (
                     <details key={concept.concept} ref={el => refs.current[concept.concept] = el}>
