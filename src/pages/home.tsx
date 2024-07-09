@@ -148,16 +148,27 @@ const Home = ({trajectory}) => {
                 <hr/>
 
                 {projects && projects.map((p) => {
-
-                    if (p.projectTitle === "format") {
+                    if (p.projectTitle === "about") {
                         return (
                             <details>
                                 <summary>
-                                    format
+                                    about
                                 </summary>
-                                <p>{serialize(p.projectDescription)}</p>
+                                <section className={"L1-container"}>
+                                    {/*<p>{serialize(p.projectDescription)}</p>*/}
+                                    {p.subProjects.map((a) => {
+                                        console.log(a)
+                                        return (
+
+                                            <details>
+                                                <summary>{a.project.projectTitle}</summary>
+                                                <p>{serialize(a.project.projectDescription)}</p>
+                                            </details>
+                                        )
+                                    })}
+                                </section>
                             </details>
-                        )
+                    )
                     }
                 })}
             </section>
