@@ -64,6 +64,7 @@ hr {
 
 .L1-container {
     position: relative;
+    padding-left: 30px;
 }
 
 .L1-slug {
@@ -132,6 +133,10 @@ hr {
 
 .source{
     padding-top: 20px;
+}
+
+.highlight {
+    background-color: orange;
 }
 
 
