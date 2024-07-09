@@ -102,7 +102,7 @@ const Home = ({trajectory}) => {
 
                 <hr/>
                 <hr/>
-                <details id={'research'}>
+                <details id={'research'} >
                     <summary>
                         research
                     </summary>
@@ -115,9 +115,24 @@ const Home = ({trajectory}) => {
                                         <p>
                                             {serialize(traject.trajectoryDescription)}
                                             {traject.articles &&
-                                                <NestedContent
-                                                    projects={traject.articles}
-                                                ></NestedContent>
+                                                <section style={{paddingLeft: "30px", borderLeft: "2px solid pink"}}>
+                                                    <details>
+                                                        <summary>projects</summary>
+                                                        <p>
+                                                            <NestedContent
+                                                                projects={traject.articles} type={"project"}
+                                                            ></NestedContent>
+                                                        </p>
+                                                    </details>
+                                                    <details>
+                                                        <summary>research & development</summary>
+                                                        <p>
+                                                            <NestedContent
+                                                                projects={traject.articles} type={"RND"}
+                                                            ></NestedContent>
+                                                        </p>
+                                                    </details>
+                                                </section>
                                             }
                                         </p>
                                     }
@@ -157,7 +172,7 @@ const Home = ({trajectory}) => {
                                 <section className={"L1-container"}>
                                     {/*<p>{serialize(p.projectDescription)}</p>*/}
                                     {p.subProjects.map((a) => {
-                                        console.log(a)
+                                        //console.log(a)
                                         return (
 
                                             <details>
@@ -168,7 +183,7 @@ const Home = ({trajectory}) => {
                                     })}
                                 </section>
                             </details>
-                    )
+                        )
                     }
                 })}
             </section>
