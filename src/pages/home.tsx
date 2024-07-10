@@ -115,7 +115,7 @@ const Home = ({trajectory}) => {
                                         <p>
                                             {serialize(traject.trajectoryDescription)}
                                             {traject.articles &&
-                                                <section style={{paddingLeft: "30px", borderLeft: "2px solid pink"}}>
+                                                <section className={"indent-border-left"}>
                                                     <details>
                                                         <summary>projects</summary>
                                                         <p>

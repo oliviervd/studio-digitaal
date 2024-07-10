@@ -1,13 +1,13 @@
 :root {
     --background-color: white;
     --text-color: black;
-    --link-color: blue;
+    --link-color: orange;
 }
 
 [data-theme="dark"] {
     --background-color: black;
     --text-color: white;
-    --link-color: blue;
+    --link-color: orange;
 }
 
 body {

@@ -30,7 +30,7 @@ const Glossary = () => {
                     <details key={concept.concept} ref={el => refs.current[concept.concept] = el}>
                         <summary> {concept.concept}</summary>
                         {concept.description &&
-                            <div style={{borderLeft: "2px solid blue", paddingLeft: "20px"}}>
+                            <div className={"indent-border-left"}>
                                 <p>{serialize(concept.description)}</p>
                                 {concept.references && concept.references.map((ref, idx) => {
                                     return (
@@ -38,7 +38,7 @@ const Glossary = () => {
                                             <summary
                                                 style={{textDecoration: "underline", fontWeight: "300"}}>sources
                                             </summary>
-                                            <div style={{borderLeft: "2px solid pink", paddingLeft: "20px"}}>
+                                            <div className={"indent-border-left"}>
                                                 <ol className={"index-container"}>
                                                     <li>
                                                         <a className={"source"} href={ref.url}>{ref.source}</a>
@@ -52,7 +52,6 @@ const Glossary = () => {
                         }
                     </details>
                 );
-
             })}
         </div>
     )

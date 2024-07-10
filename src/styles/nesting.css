@@ -1,6 +1,8 @@
 :root {
+    --main-green: #02dc00;
     --nest-layer-1-color: #EFECEC;
     --nest-layer-2-color: #F8F4EC;
+
 }
 
 hr {
@@ -16,6 +18,11 @@ hr {
     width: 250px;
     padding-right: 1.2rem;
     height: 100%;
+}
+
+.indent-border-left {
+    border-left: 2px solid var(--main-green);
+    padding-left: 30px;
 }
 
 .section-head{
@@ -65,7 +72,7 @@ hr {
 .L1-container {
     position: relative;
     padding-left: 30px;
-    border-left: 2px solid blue;
+    border-left: 2px solid var(--main-green);
 }
 
 .L1-slug {
@@ -84,7 +91,7 @@ hr {
     max-height: 0;
     overflow: hidden;
     transition: max-height .25s ease-out, opacity 0.3s ease-out;
-    border-left: var(--nest-layer-1-color) 2px solid;
+    border-left: var(--main-green) 2px solid;
 }
 
 
@@ -109,7 +116,7 @@ hr {
     max-height: 0;
     overflow: hidden;
     transition: max-height .25s ease-out, opacity 0.3s ease-out;
-    border-left: pink 2px solid;
+    border-left: var(--main-green) 2px solid;
 
     & p {
         margin-top:0;
