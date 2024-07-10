@@ -11,7 +11,6 @@ class Pillar extends Component {
         window.removeEventListener('resize', this.handleResize);
     }
 
-
     handleResize = () => {
         // resize canavas when the window is resized.
         const newHeight = window.innerHeight; // Set height to window height
@@ -27,7 +26,6 @@ class Pillar extends Component {
         if (window.innerWidth <= 600) {
             color = p.color("#f9f1f1")
         }
-
 
         // p5.js setup function
         p.setup = () => {
@@ -45,7 +43,6 @@ class Pillar extends Component {
             p.textAlign(p.CENTER, p.CENTER);
 
             p.textSize(30);
-
 
             for (let y = 0; y < elementsY + 1; y++) {
                 for (let x=0; x < elementsX + 1; x++){
