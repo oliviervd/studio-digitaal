@@ -1,6 +1,5 @@
 import {useEffect, useState, useRef} from "preact/hooks";
 import {fetchPayload} from "../utils/fetchPayload";
-import {route} from "preact-router";
 import serialize from "../utils/serialize";
 import {useLanguage} from "../utils/languageProvider";
 
