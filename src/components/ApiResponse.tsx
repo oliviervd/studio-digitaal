@@ -1,6 +1,5 @@
 import { h, Component } from 'preact';
 import {useState} from "react";
-import "../styles/api-docs.css"
 
 interface ApiResponseProps {
     endpoint: string;
