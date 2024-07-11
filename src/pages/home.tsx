@@ -1,5 +1,5 @@
 import Header from "../components/header";
-import {useState, useEffect, useRef} from "preact/hooks"
+import {useState, useEffect,} from "preact/hooks"
 
 import "../index.css";
 import "../styles/nesting.css";
