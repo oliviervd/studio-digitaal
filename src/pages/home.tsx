@@ -21,6 +21,7 @@ const Home = ({trajectory}) => {
     const [font, setFont] = useState("courier")
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
+    console.log(logoDesc)
     //todo: add button to move up.
     //todo: add button to close all.
 
@@ -35,7 +36,7 @@ const Home = ({trajectory}) => {
 
     // projects
     useEffect(()=> {
-        fetchPayload(baseURI,"StudioDigitalProject", 10, language).then((data)=> {
+        fetchPayload(baseURI,"StudioDigitalProject", 1000, language).then((data)=> {
                 setProjects(data["docs"])
             }
         )
@@ -88,7 +89,9 @@ const Home = ({trajectory}) => {
                 {logoDesc &&
                     <section>
                         {projects && projects.map((p) => {
+                            console.log(p)
                             if (p.projectTitle == "logo-design") {
+                                console.log("found")
                                 console.log(serialize(p.projectDescription))
                                 return (
                                     <i>

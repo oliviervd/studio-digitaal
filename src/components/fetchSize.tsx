@@ -3,22 +3,29 @@ import {useEffect, useState} from "preact/hooks";
 const CalculateSize = () => {
 
     // todo: fix so it only calculates things that are actually loaded (take into account lazy loading.).
+    // todo: make absolute after scrolling beyond 100vh - check scrollposition?
 
     const [pageSize, setPageSize] = useState(0)
 
 
     useEffect(() => {
         const handleClick = () => {
-            calculatePageSize();
+            //calculatePageSize();
         };
 
-        calculatePageSize();
+        checkScrollPosition();
+
+        //calculatePageSize();
         document.addEventListener("click", handleClick);
 
         return () => {
             document.removeEventListener("click", handleClick);
         };
     }, []);
+
+    function checkScrollPosition() {
+        let pos = window.scrollY;
+    }
 
     async function calculatePageSize() {
         // Get the size of the HTML content
