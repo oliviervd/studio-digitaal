@@ -102,7 +102,7 @@ const Home = ({trajectory}) => {
 
                 <hr/>
                 <hr/>
-                <details id={'research'} >
+                <details id={'research'} style={{paddingBottom: "10px"}} >
                     <summary>
                         research
                     </summary>
@@ -145,7 +145,7 @@ const Home = ({trajectory}) => {
                 <hr/>
                 <hr/>
 
-                <details id={"glossary"}>
+                <details id={"glossary"} style={{paddingBottom: "10px"}}>
                     <summary>glossary</summary>
                     <section>
                         <Glossary/>
@@ -155,7 +155,7 @@ const Home = ({trajectory}) => {
                 <hr/>
                 <hr/>
 
-                <details id={"actors"}>
+                <details id={"actors"} style={{paddingBottom: "10px"}}>
                     <summary>actors</summary>
                 </details>
 
@@ -165,7 +165,7 @@ const Home = ({trajectory}) => {
                 {projects && projects.map((p) => {
                     if (p.projectTitle === "about") {
                         return (
-                            <details>
+                            <details style={{paddingBottom: "10px"}}>
                                 <summary>
                                     about
                                 </summary>
