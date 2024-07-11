@@ -10,6 +10,7 @@ import NestedContent from "./NestedContent";
 import {fetchPayload} from "../utils/fetchPayload";
 import serialize from "../utils/serialize";
 import {useLanguage} from "../utils/languageProvider";
+import {route} from "preact-router"
 import Glossary from "./glossary";
 
 const Home = ({trajectory}) => {
@@ -24,6 +25,22 @@ const Home = ({trajectory}) => {
     console.log(logoDesc)
     //todo: add button to move up.
     //todo: add button to close all.
+
+    // if page doesn't exist show 404
+    useEffect(() => {
+        if (trajectory) {
+            const Element = document.getElementById(trajectory);
+            if (Element) {
+                // Open the element
+                if (Element.tagName.toLowerCase() === 'details') {
+                    Element.open = true;
+                }
+            } else {
+                // Redirect to Error page if the trajectory does not exist
+                route('/error', true);
+            }
+        }
+    }, [trajectory]);
 
     // fetch content from CMS
     // trajectory

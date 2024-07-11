@@ -13,6 +13,7 @@ const App = () => {
               <Home path={"/"}/>
               <Home path={"/:trajectory"}/>
               <ApiDocs path={"/collection-api"}/>
+              <Error path={"/error"} />
           </Router>
       </LanguageProvider>
   )
