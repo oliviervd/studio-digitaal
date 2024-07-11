@@ -1,10 +1,9 @@
 import Home from "./pages/home";
-import {Router, route} from "preact-router";
+import {Router} from "preact-router";
 import { render } from 'preact';
 import ApiDocs from "./pages/CollectionAPI";
 import {LanguageProvider} from "./utils/languageProvider";
-import Glossary from "./pages/glossary";
-import Open from "./pages/NestedContent";
+import Error from "./utils/Error";
 
 const App = () => {
 
@@ -12,8 +11,7 @@ const App = () => {
       <LanguageProvider>
           <Router>
               <Home path={"/"}/>
-              <Home path={"/research"}/>
-              <Home path={"/glossary"}/>
+              <Home path={"/:trajectory"}/>
               <ApiDocs path={"/collection-api"}/>
           </Router>
       </LanguageProvider>
