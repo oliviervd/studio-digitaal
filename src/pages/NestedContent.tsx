@@ -4,7 +4,6 @@ import {useEffect} from "preact/hooks";
 
 const NestedContent = ({projects, type}) => {
     const {language, setLanguage} = useLanguage()
-    console.log(type)
 
     useEffect(() => {
         // fetch ID
@@ -23,7 +22,6 @@ const NestedContent = ({projects, type}) => {
     return(
         <section className={"indent-border-left"}>
             {projects && projects.map((project, index) => {
-                console.log(project.article.postType === type, type)
                 if (project.article.postType === type){
                     return(
                         <details id={project.article.path}>
