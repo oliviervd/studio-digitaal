@@ -19,8 +19,10 @@ const Home = ({trajectory}) => {
     const [logoDesc, openLogoDesc] = useState(false)
     const [about, setAbout] = useState([])
     const [font, setFont] = useState("courier")
-
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
+
+    //todo: add button to move up.
+    //todo: add button to close all.
 
     // fetch content from CMS
     // trajectory
@@ -87,6 +89,7 @@ const Home = ({trajectory}) => {
                     <section>
                         {projects && projects.map((p) => {
                             if (p.projectTitle == "logo-design") {
+                                console.log(serialize(p.projectDescription))
                                 return (
                                     <i>
                                         {serialize(p.projectDescription)}
