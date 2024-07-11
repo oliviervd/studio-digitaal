@@ -3,18 +3,54 @@ import logo from "../assets/Pixel-Logo-41-frames-transparent.gif"
 import FontChanger from "./fontChanger";
 import CalculateSize from "./fetchSize";
 import {route} from "preact-router"
+import {Component} from "preact";
 
-const Header = ({changeLang, openLogoDesc, logoDesc, handleFontChange}) => {
-    // todo: add responsible design for mobile.
+class Header extends Component {
 
-    function logoAction() {
-        if (openLogoDesc) {
-            openLogoDesc(!logoDesc);
+    constructor(props) {
+        super(props);
+        this.state = {
+            isMobile: window.innerWidth < 600,
         }
-        route("")
     }
 
-    return(
+    componentDidMount() {
+        window.addEventListener('resize', this.handleResize)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handleResize)
+    }
+
+    handleResize = () => {
+        this.setState({isMobile: window.innerWidth <= 600});
+    }
+
+    render() {
+        const {isMobile} = this.state;
+        const { changeLang, openLogoDesc, logoDesc, handleFontChange } = this.props;
+
+        function logoAction() {
+            if (openLogoDesc) {
+                openLogoDesc(!logoDesc);
+            }
+            route("")
+            console.log("cliccare")
+        }
+
+        return isMobile ? (
+            <header className={"header__mobile"}>
+                <div className={"header__logo-container"}>
+                    <img
+                        src={logo} alt={"logo of studio digitaal"}
+                        onClick={() => logoAction()}
+                    />
+                </div>
+
+                <CalculateSize/>
+
+            </header>
+        ) : (
             <header className={"header__desktop"}>
                 <div className={"header__logo-container"}>
                     <img
@@ -28,15 +64,14 @@ const Header = ({changeLang, openLogoDesc, logoDesc, handleFontChange}) => {
                 <nav>
                     <FontChanger handleFontChange={handleFontChange}/>
                     <div id={"lang"} className={"nav__lang-container"}>
-                        <p id={'nl'} onClick={() => changeLang("nl")}>nl</p>
+                        <p id={'nl'} className={"disabled-link"}>nl</p>
                         <p id={'en'} onClick={() => changeLang("en")}>en</p>
-                        <p id={'fr'} onClick={() => changeLang("fr")}>fr</p>
+                        <p id={'fr'} className={"disabled-link"}>fr</p>
                     </div>
                 </nav>
             </header>
-
-
-    )
+        )
+    };
 }
 
-export default Header;
+export default Header
