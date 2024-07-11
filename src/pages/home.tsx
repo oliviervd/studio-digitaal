@@ -1,9 +1,10 @@
 import Header from "../components/header";
-import {useState, useEffect,} from "preact/hooks"
+import {useState, useEffect, useRef} from "preact/hooks"
 
 import "../index.css";
 import "../styles/nesting.css";
 import "../styles/typography.css"
+import "../styles/ui-elements.css"
 
 import NestedContent from "./NestedContent";
 
@@ -12,9 +13,13 @@ import serialize from "../utils/serialize";
 import {useLanguage} from "../utils/languageProvider";
 import {route} from "preact-router"
 import Glossary from "./glossary";
+import ButtonMoveUp from "../components/buttonMoveUp";
 
-const Home = ({trajectory}) => {
+const Home = ({trajectory, subpage}) => {
     const {language, setLanguage} = useLanguage()
+    const [subPage, setSubPage] = useState(null);
+    const [previousElem, setPreviousElem] = useState(null);
+    const [previousSubPage, setPreviousSubPage] = useState(null);
     const [trajectories, setTrajectories] = useState([])
     const [projects, setProjects] = useState([])
     const [logoDesc, openLogoDesc] = useState(false)
@@ -22,9 +27,29 @@ const Home = ({trajectory}) => {
     const [font, setFont] = useState("courier")
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
+    const refs = useRef({});
+
     console.log(logoDesc)
-    //todo: add button to move up.
     //todo: add button to close all.
+
+    useEffect(() => {
+        const handleDetailsToggle = (e) => {
+            if (!e.target.open) {
+                setPreviousSubPage(null);
+            }
+        };
+
+        const detailsElements = document.querySelectorAll("details");
+        detailsElements.forEach((el) => {
+            el.addEventListener("toggle", handleDetailsToggle);
+        });
+
+        return () => {
+            detailsElements.forEach((el) => {
+                el.removeEventListener("toggle", handleDetailsToggle);
+            });
+        };
+    }, []);
 
     // if page doesn't exist show 404
     useEffect(() => {
@@ -35,12 +60,31 @@ const Home = ({trajectory}) => {
                 if (Element.tagName.toLowerCase() === 'details') {
                     Element.open = true;
                 }
+                if (subpage) {
+                    // Collapse the previous subpage if it exists
+                    if (previousSubPage && refs.current[previousSubPage]) {
+                        refs.current[previousSubPage].open = false;
+                    }
+
+                    // Set the new subpage
+                    setPreviousSubPage(subpage.toLowerCase());
+                    setSubPage(subpage);
+
+                    // Scroll to subpage element if it exists
+                    const subElement = document.getElementById(subpage.toLowerCase());
+                    if (subElement) {
+                        subElement.scrollIntoView({ behavior: 'smooth' });
+                        if (subElement.tagName.toLowerCase() === 'details') {
+                            subElement.open = true;
+                        }
+                    }
+                }
             } else {
                 // Redirect to Error page if the trajectory does not exist
                 route('/error', true);
             }
         }
-    }, [trajectory]);
+    }, [trajectory, subpage]);
 
     // fetch content from CMS
     // trajectory
@@ -65,18 +109,6 @@ const Home = ({trajectory}) => {
             setAbout(serialize(data["docs"][3]["description"]));
         })
     }, [language]);
-
-    useEffect(() => {
-        const Element = document.getElementById(trajectory);
-        if (Element) {
-            // open the element
-            if (Element.tagName.toLowerCase() === 'details') {
-                Element.open = true;
-            }
-        } else {
-            // return 404
-        }
-    }, []);
 
     useEffect(()=>{
         document.body.style.fontFamily = font;
@@ -143,7 +175,7 @@ const Home = ({trajectory}) => {
                                                         <summary>projects</summary>
                                                         <p>
                                                             <NestedContent
-                                                                projects={traject.articles} type={"project"}
+                                                                projects={traject.articles} type={"project"} sub={subPage}
                                                             ></NestedContent>
                                                         </p>
                                                     </details>
@@ -151,7 +183,7 @@ const Home = ({trajectory}) => {
                                                         <summary>research & development</summary>
                                                         <p>
                                                             <NestedContent
-                                                                projects={traject.articles} type={"RND"}
+                                                                projects={traject.articles} type={"RND"} sub={subpage}
                                                             ></NestedContent>
                                                         </p>
                                                     </details>
@@ -171,7 +203,7 @@ const Home = ({trajectory}) => {
                 <details id={"glossary"} style={{paddingBottom: "10px"}}>
                     <summary>glossary</summary>
                     <section>
-                        <Glossary/>
+                        <Glossary sub={subpage}/>
                     </section>
                 </details>
 
@@ -209,7 +241,9 @@ const Home = ({trajectory}) => {
                     })}
                 </details>
             </section>
-
+            <div style={{position: "fixed", right: "30px", bottom: "20px"}}>
+                <ButtonMoveUp />
+            </div>
         </div>
     )
 }
