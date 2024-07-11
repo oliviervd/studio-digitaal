@@ -1,10 +1,8 @@
 import {useState, useEffect} from "preact/hooks";
 import {fetchPayload} from "../utils/fetchPayload";
-import "../styles/api-docs.css"
 
 import Header from "../components/header";
 import Footer from "../components/footer";
-import Sidebar from "../components/Sidebar";
 import ApiDoc from "../components/apiDoc";
 
 const ApiDocs = (props) => {
@@ -15,6 +13,7 @@ const ApiDocs = (props) => {
     const [scrollToID, setScrollToID] = useState(null)
 
     // todo: fix styling
+    console.log(nav)
 
     // fetch and parse data from CMS
     useEffect(()=>  {
@@ -31,8 +30,8 @@ const ApiDocs = (props) => {
     },[])
 
     if (apiPage.length == 0) {
-        if (nav.pages) {
-            setApiPage(nav.pages[0])
+        if (nav && nav.pages) {
+            setApiPage(nav.pages)
         }
     }
 
@@ -54,13 +53,29 @@ const ApiDocs = (props) => {
         <div>
             <Header setOpen={setOpen} open={open}/>
             <section className={"nest-master"}>
-                <details>`
+                {/*  <details>`
                     <summary>articles</summary>
                     <Sidebar changePage={changePage} nav={nav}/>
-                </details>
-                <details>
+                </details>*/}
+                {nav && nav.pages && nav.pages.map((article)=>{
+                    console.log(article)
+                    return(
+                        <details>
+                            <summary>{article.page.title}</summary>
+                            <ApiDoc apiPage={article}/>
+                            {article.page.subDoc && article.page.subDoc.map((sub)=>{
+                                console.log(sub)
+                                return(
+                                    <>
+                                    </>
+                                )
+                            })}
+                        </details>
+                    )
+                })}
+                {/*   <details>
                     <ApiDoc apiPage={apiPage} scrollToID={scrollToID}/>
-                </details>
+                </details>*/}
             </section>
             <Footer showFont={false}/>
         </div>
