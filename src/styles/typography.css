@@ -59,6 +59,10 @@ pre {
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
+.disabled-link {
+    text-decoration: line-through;
+}
+
 
 summary {
     font-size: var(--font-size-s);

@@ -153,7 +153,11 @@ hr {
         top: 0;
     }
 
-    .L1-description, .L2-description, .L2-container {
+    .L1-description, .L2-description, .L2-container, .L1-container {
+        padding-left: 5px;
+    }
+
+    .indent-border-left {
         padding-left: 5px;
     }
 }
