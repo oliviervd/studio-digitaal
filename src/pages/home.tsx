@@ -125,7 +125,7 @@ const Home = ({trajectory}) => {
 
                 <hr/>
                 <hr/>
-                <details id={'research'} style={{paddingBottom: "10px"}} >
+                <details id={'research'} style={{paddingBottom: "10px"}}>
                     <summary>
                         research
                     </summary>
@@ -184,14 +184,13 @@ const Home = ({trajectory}) => {
 
                 <hr/>
                 <hr/>
-
-                {projects && projects.map((p) => {
-                    if (p.projectTitle === "about") {
-                        return (
-                            <details style={{paddingBottom: "10px"}}>
-                                <summary>
-                                    about
-                                </summary>
+                <details id={"about"} style={{paddingBottom: "10px"}}>
+                    <summary>
+                        about
+                    </summary>
+                    {projects && projects.map((p) => {
+                        if (p.projectTitle === "about") {
+                            return (
                                 <section className={"L1-container"}>
                                     {/*<p>{serialize(p.projectDescription)}</p>*/}
                                     {p.subProjects.map((a) => {
@@ -205,10 +204,10 @@ const Home = ({trajectory}) => {
                                         )
                                     })}
                                 </section>
-                            </details>
-                        )
-                    }
-                })}
+                            )
+                        }
+                    })}
+                </details>
             </section>
 
         </div>
