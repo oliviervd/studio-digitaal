@@ -47,7 +47,7 @@ class Header extends Component {
                     />
                 </div>
 
-                <CalculateSize/>
+                {/*<CalculateSize/>*/}
 
             </header>
         ) : (
@@ -59,7 +59,7 @@ class Header extends Component {
                     />
                 </div>
 
-                <CalculateSize/>
+                {/*<CalculateSize/>*/}
 
                 <nav>
                     <FontChanger handleFontChange={handleFontChange}/>

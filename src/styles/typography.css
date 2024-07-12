@@ -1,6 +1,6 @@
 :root {
     --font-size-xs: 1rem;
-    --font-size-s: 1.2rem;
+    --font-size-s: 20px;
     --font-size-m: 1.8rem;
     --font-size-l: 3.5rem;
 }
@@ -8,7 +8,7 @@
 
 @media (max-width: 1600px) {
     :root {
-        --font-size-s: 1rem;
+        --font-size-s: 20px;
         --font-size-m: 1.2rem;
         --font-size-l: 2rem;
     }
@@ -23,7 +23,7 @@
 }
 
 body {
-    line-height: 120%;
+    line-height: 135%;
     font-family: "courier";
 }
 
@@ -31,7 +31,6 @@ h1 {
     font-size: var(--font-size-s);
     margin-block-start: 0;
 }
-
 
 p > span {
     font-size: var(--font-size-s);
@@ -43,7 +42,11 @@ a {
 }
 
 a:hover {
-    color: orange;
+    text-decoration: underline;
+}
+
+em {
+    font-size: var(--font-size-s);
 }
 
 li {
@@ -62,7 +65,6 @@ pre {
 .disabled-link {
     text-decoration: line-through;
 }
-
 
 summary {
     font-size: var(--font-size-s);

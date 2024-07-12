@@ -23,7 +23,7 @@ const Home = ({trajectory, subpage}) => {
     const [projects, setProjects] = useState([])
     const [logoDesc, openLogoDesc] = useState(false)
     const [about, setAbout] = useState([])
-    const [font, setFont] = useState("system-ui")
+    const [font, setFont] = useState("sans-serif")
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
     const refs = useRef({});
@@ -152,7 +152,7 @@ const Home = ({trajectory, subpage}) => {
                     </section>
                 }
 
-                <b>{about}</b>
+                <b style={{fontColor:"black"}}>{about}</b>
 
                 <hr/>
                 <hr/>
