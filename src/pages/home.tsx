@@ -18,13 +18,12 @@ import ButtonMoveUp from "../components/buttonMoveUp";
 const Home = ({trajectory, subpage}) => {
     const {language, setLanguage} = useLanguage()
     const [subPage, setSubPage] = useState(null);
-    const [previousElem, setPreviousElem] = useState(null);
     const [previousSubPage, setPreviousSubPage] = useState(null);
     const [trajectories, setTrajectories] = useState([])
     const [projects, setProjects] = useState([])
     const [logoDesc, openLogoDesc] = useState(false)
     const [about, setAbout] = useState([])
-    const [font, setFont] = useState("courier")
+    const [font, setFont] = useState("serif")
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
     const refs = useRef({});
@@ -130,7 +129,7 @@ const Home = ({trajectory, subpage}) => {
             <Header
                 language={language} changeLang={changeLang}
                 logoDesc={logoDesc} openLogoDesc={openLogoDesc}
-                handleFontChange={handleFontChange}
+                handleFontChange={handleFontChange} font={font}
             />
 
             <section className={"nest-master"}>

@@ -2,22 +2,14 @@ import {useLanguage} from "../utils/languageProvider";
 import serialize from "../utils/serialize";
 import {useEffect} from "preact/hooks";
 
-const NestedContent = ({projects, type}) => {
+const NestedContent = ({projects, type, sub}) => {
     const {language, setLanguage} = useLanguage()
 
     useEffect(() => {
-        // fetch ID
-        const id = window.location.hash.substring(1)
-
-        const elem = document.getElementById(id);
-        if (elem) {
-            //console.log(id)
-            //console.log(elem)
-        } else  {
-            //console.log("no such element")
+        if (sub) {
+            const Element = document.getElementById(sub);
         }
-
-    }, []);
+    }, [sub]);
 
     return(
         <section className={"indent-border-left"}>
@@ -36,9 +28,9 @@ const NestedContent = ({projects, type}) => {
                                             {project.article.heroImage &&
                                                 <img loading="lazy" src={project.article.heroImage.url}/>
                                             }
-
                                         </details>
                                     }
+
                                     <p>{serialize(project.article.projectDescription)}</p>
                                     {project.article.subProjects[0] && project.article.subProjects[0].project !== null && project.article.subProjects.map((project)=> {
                                         return (
@@ -49,9 +41,9 @@ const NestedContent = ({projects, type}) => {
                                                 </div>
                                             </details>
                                         )
-
                                     })
                                     }
+
                                 </div>
                             }
                         </details>

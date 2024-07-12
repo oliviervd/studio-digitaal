@@ -3,7 +3,7 @@ import {fetchPayload} from "../utils/fetchPayload";
 import serialize from "../utils/serialize";
 import {useLanguage} from "../utils/languageProvider";
 
-const Glossary = () => {
+const Glossary = ({sub}) => {
 
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
     const [glossary, setGlossary] = useState<string>([]);
@@ -22,11 +22,19 @@ const Glossary = () => {
         })
     }, [language])
 
+    // Scroll to the element when sub prop is updated
+    useEffect(() => {
+        if (sub && refs.current[sub]) {
+            refs.current[sub].scrollIntoView({ behavior: 'smooth' });
+            refs.current[sub].open = true;  // Automatically open the details element
+        }
+    }, [sub, glossary]);
+
     return(
         <div className={"L1-container"}>
-            {glossary && glossary.map((concept, index)=>{
+            {glossary && glossary.map((concept, index)=> {
                 return (
-                    <details key={concept.concept} ref={el => refs.current[concept.concept] = el}>
+                    <details id={concept.url} key={concept.concept} ref={el => refs.current[concept.concept] = el}>
                         <summary> {concept.concept}</summary>
                         {concept.description &&
                             <div className={"indent-border-left"}>
