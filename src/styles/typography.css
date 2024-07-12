@@ -39,7 +39,7 @@ p > span {
 
 a {
     font-size: var(--font-size-s);
-    color: var(--link-color);
+    color: var(--main-green);
 }
 
 a:hover {

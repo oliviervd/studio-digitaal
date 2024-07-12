@@ -28,7 +28,7 @@ class Header extends Component {
 
     render() {
         const {isMobile} = this.state;
-        const { changeLang, openLogoDesc, logoDesc, handleFontChange } = this.props;
+        const { changeLang, openLogoDesc, logoDesc, handleFontChange, font } = this.props;
 
         function logoAction() {
             if (openLogoDesc) {

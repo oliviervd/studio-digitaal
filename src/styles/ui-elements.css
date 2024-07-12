@@ -1,5 +1,5 @@
 .button-circle {
-    border: 2px solid black;
+    border: 3px solid black;
     background-color: white;
     border-radius: 50%;
     height: 50px;
@@ -8,6 +8,7 @@
     h2 {
         text-align: center;
         justify-content: center;
-        transform: translateY(-30%);
+        transform: translateY(-20%);
+        color: #02dc00
     }
 }
