@@ -3,7 +3,7 @@ const fontChanger = ({handleFontChange}) => {
         <div className={"font-changer"}>
             <select onChange={handleFontChange}>
                 <option value={"monospace"}>monospace</option>
-                <option value={"serif"}>serif</option>
+                <option value={"serif"} default>serif</option>
                 <option value={"sans-serif"}>sans-serif</option>
                 <option value={"cursive"}>cursive</option>
                 <option value={"system-ui"}>system-ui</option>
