@@ -23,7 +23,7 @@ const Home = ({trajectory, subpage}) => {
     const [projects, setProjects] = useState([])
     const [logoDesc, openLogoDesc] = useState(false)
     const [about, setAbout] = useState([])
-    const [font, setFont] = useState("sans-serif")
+    const [font, setFont] = useState("serif")
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
     const refs = useRef({});
@@ -161,6 +161,8 @@ const Home = ({trajectory, subpage}) => {
                         research
                     </summary>
                     <section className={"L1-container"}>
+                        <p  style={{fontSize: "20px"}}>studio digitaal informs its activities around several research strands or trajectories:</p>
+
                         {trajectories.map((traject, index) => {
                             return (
                                 <details id={traject._id} key={traject}>
@@ -174,7 +176,8 @@ const Home = ({trajectory, subpage}) => {
                                                         <summary>projects</summary>
                                                         <p>
                                                             <NestedContent
-                                                                projects={traject.articles} type={"project"} sub={subPage}
+                                                                projects={traject.articles} type={"project"}
+                                                                sub={subPage}
                                                             ></NestedContent>
                                                         </p>
                                                     </details>
@@ -238,6 +241,7 @@ const Home = ({trajectory, subpage}) => {
                             )
                         }
                     })}
+                    <p style={{fontSize: "20px"}}>** studio digitaal is a project curated by <a href={"https://oliviervandhuynslager.net"}>olivier van d'huynslager</a></p>
                 </details>
             </section>
             <div style={{position: "fixed", right: "30px", bottom: "20px"}}>
