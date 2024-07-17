@@ -16,5 +16,28 @@ body {
     margin: 0;
 }
 
+.left--panel {
+    display: none;
+}
 
+@media screen and (min-width: 1800px) {
+    .about {
+        display: none;
+    }
+
+    .main--container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .left--panel {
+        margin: 0 20px;
+        display: block;
+        line-height: 3rem;
+
+        a, span {
+            font-size: 5rem;
+        }
+    }
+}
 

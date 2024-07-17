@@ -14,6 +14,7 @@ import {useLanguage} from "../utils/languageProvider";
 import {route} from "preact-router"
 import Glossary from "./glossary";
 import ButtonMoveUp from "../components/buttonMoveUp";
+import logo from "../assets/Pixel-Logo-41-frames-transparent.gif";
 
 const Home = ({trajectory, subpage}) => {
     const {language, setLanguage} = useLanguage()
@@ -131,121 +132,126 @@ const Home = ({trajectory, subpage}) => {
                 logoDesc={logoDesc} openLogoDesc={openLogoDesc}
                 handleFontChange={handleFontChange} font={font}
             />
-
-            <section className={"nest-master"}>
-
+            <div className={"main--container"}>
+                <div className={"left--panel"}>
+                    <p style={{fontColor: "black"}}>{about}</p>
+                </div>
+                <section className={"nest-master"}>
                 {logoDesc &&
-                    <section>
+                        <section>
                         {projects && projects.map((p) => {
-                            console.log(p)
-                            if (p.projectTitle == "logo-design") {
-                                console.log("found")
-                                console.log(serialize(p.projectDescription))
+                                console.log(p)
+                                if (p.projectTitle == "logo-design") {
+                                    console.log("found")
+                                    console.log(serialize(p.projectDescription))
+                                    return (
+                                        <i>
+                                            {serialize(p.projectDescription)}
+                                        </i>
+                                    )
+                                }
+                            })
+                            }
+                        </section>
+                    }
+
+                    <b className={"about"} style={{fontColor: "black"}}>{about}</b>
+
+                    <details id={'research'} style={{paddingBottom: "10px"}}>
+                        <summary>
+                            research
+                        </summary>
+                        <section className={"L1-container"}>
+                            <p style={{fontSize: "20px"}}>studio digitaal informs its activities around several research
+                                strands or trajectories:</p>
+
+                            {trajectories.map((traject, index) => {
                                 return (
-                                    <i>
-                                        {serialize(p.projectDescription)}
-                                    </i>
+                                    <details id={traject._id} key={traject}>
+                                        <summary>{traject.trajectoryTitle}</summary>
+                                        {traject.trajectoryDescription &&
+                                            <p>
+                                                {serialize(traject.trajectoryDescription)}
+                                                {traject.articles &&
+                                                    <section className={"indent-border-left"}>
+                                                        <details>
+                                                            <summary>projects</summary>
+                                                            <p>
+                                                                <NestedContent
+                                                                    projects={traject.articles} type={"project"}
+                                                                    sub={subPage}
+                                                                ></NestedContent>
+                                                            </p>
+                                                        </details>
+                                                        <details>
+                                                            <summary>research & development</summary>
+                                                            <p>
+                                                                <NestedContent
+                                                                    projects={traject.articles} type={"RND"}
+                                                                    sub={subpage}
+                                                                ></NestedContent>
+                                                            </p>
+                                                        </details>
+                                                    </section>
+                                                }
+                                            </p>
+                                        }
+                                    </details>
+                                )
+                            })}
+                        </section>
+                    </details>
+
+                    <hr/>
+                    <hr/>
+
+                    <details id={"glossary"} style={{paddingBottom: "10px"}}>
+                        <summary>glossary</summary>
+                        <section>
+                            <Glossary sub={subpage}/>
+                        </section>
+                    </details>
+
+                    <hr/>
+                    <hr/>
+
+                    <details id={"actors"} style={{paddingBottom: "10px"}}>
+                        <summary>actors</summary>
+                    </details>
+
+                    <hr/>
+                    <hr/>
+                    <details id={"about"} style={{paddingBottom: "10px"}}>
+                        <summary>
+                            about
+                        </summary>
+                        {projects && projects.map((p) => {
+                            if (p.projectTitle === "about") {
+                                return (
+                                    <section className={"L1-container"}>
+                                        {/*<p>{serialize(p.projectDescription)}</p>*/}
+                                        {p.subProjects.map((a) => {
+                                            //console.log(a)
+                                            return (
+
+                                                <details>
+                                                    <summary>{a.project.projectTitle}</summary>
+                                                    <p>{serialize(a.project.projectDescription)}</p>
+                                                </details>
+                                            )
+                                        })}
+                                    </section>
                                 )
                             }
-                        })
-                        }
-                    </section>
-                }
-
-                <b style={{fontColor:"black"}}>{about}</b>
-
-                <hr/>
-                <hr/>
-                <details id={'research'} style={{paddingBottom: "10px"}}>
-                    <summary>
-                        research
-                    </summary>
-                    <section className={"L1-container"}>
-                        <p  style={{fontSize: "20px"}}>studio digitaal informs its activities around several research strands or trajectories:</p>
-
-                        {trajectories.map((traject, index) => {
-                            return (
-                                <details id={traject._id} key={traject}>
-                                    <summary>{traject.trajectoryTitle}</summary>
-                                    {traject.trajectoryDescription &&
-                                        <p>
-                                            {serialize(traject.trajectoryDescription)}
-                                            {traject.articles &&
-                                                <section className={"indent-border-left"}>
-                                                    <details>
-                                                        <summary>projects</summary>
-                                                        <p>
-                                                            <NestedContent
-                                                                projects={traject.articles} type={"project"}
-                                                                sub={subPage}
-                                                            ></NestedContent>
-                                                        </p>
-                                                    </details>
-                                                    <details>
-                                                        <summary>research & development</summary>
-                                                        <p>
-                                                            <NestedContent
-                                                                projects={traject.articles} type={"RND"} sub={subpage}
-                                                            ></NestedContent>
-                                                        </p>
-                                                    </details>
-                                                </section>
-                                            }
-                                        </p>
-                                    }
-                                </details>
-                            )
                         })}
-                    </section>
-                </details>
+                        <p style={{fontSize: "20px"}}>** studio digitaal is a project curated by <a
+                            href={"https://oliviervandhuynslager.net"}>olivier van d'huynslager</a></p>
+                    </details>
+                </section>
+            </div>
 
-                <hr/>
-                <hr/>
-
-                <details id={"glossary"} style={{paddingBottom: "10px"}}>
-                    <summary>glossary</summary>
-                    <section>
-                        <Glossary sub={subpage}/>
-                    </section>
-                </details>
-
-                <hr/>
-                <hr/>
-
-                <details id={"actors"} style={{paddingBottom: "10px"}}>
-                    <summary>actors</summary>
-                </details>
-
-                <hr/>
-                <hr/>
-                <details id={"about"} style={{paddingBottom: "10px"}}>
-                    <summary>
-                        about
-                    </summary>
-                    {projects && projects.map((p) => {
-                        if (p.projectTitle === "about") {
-                            return (
-                                <section className={"L1-container"}>
-                                    {/*<p>{serialize(p.projectDescription)}</p>*/}
-                                    {p.subProjects.map((a) => {
-                                        //console.log(a)
-                                        return (
-
-                                            <details>
-                                                <summary>{a.project.projectTitle}</summary>
-                                                <p>{serialize(a.project.projectDescription)}</p>
-                                            </details>
-                                        )
-                                    })}
-                                </section>
-                            )
-                        }
-                    })}
-                    <p style={{fontSize: "20px"}}>** studio digitaal is a project curated by <a href={"https://oliviervandhuynslager.net"}>olivier van d'huynslager</a></p>
-                </details>
-            </section>
             <div style={{position: "fixed", right: "30px", bottom: "20px"}}>
-                <ButtonMoveUp />
+                <ButtonMoveUp/>
             </div>
         </div>
     )
