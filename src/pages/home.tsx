@@ -14,6 +14,7 @@ import {useLanguage} from "../utils/languageProvider";
 import {route} from "preact-router"
 import Glossary from "./glossary";
 import ButtonMoveUp from "../components/buttonMoveUp";
+import CalculateSize from "../components/fetchSize";
 import logo from "../assets/Pixel-Logo-41-frames-transparent.gif";
 
 const Home = ({trajectory, subpage}) => {
@@ -254,6 +255,8 @@ const Home = ({trajectory, subpage}) => {
             <div style={{position: "fixed", right: "30px", bottom: "20px"}}>
                 <ButtonMoveUp/>
             </div>
+
+            {<CalculateSize/>}
         </div>
     )
 }

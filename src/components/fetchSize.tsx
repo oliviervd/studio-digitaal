@@ -10,12 +10,12 @@ const CalculateSize = () => {
 
     useEffect(() => {
         const handleClick = () => {
-            //calculatePageSize();
+            calculatePageSize();
         };
 
         checkScrollPosition();
 
-        //calculatePageSize();
+        calculatePageSize();
         document.addEventListener("click", handleClick);
 
         return () => {

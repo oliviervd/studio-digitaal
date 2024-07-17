@@ -27,18 +27,6 @@ header > nav {
     position: relative;
 }
 
-.pageSize{
-    position: relative;
-    text-align: center;
-
-    > p {
-        margin: 1px;
-        font-size: 1rem;
-        line-height: 1.2rem;
-        color: var(--text-color);
-        font-size: var(--font-size-s);
-    }
-}
 
 .nav__lang-container {
     display: flex;
