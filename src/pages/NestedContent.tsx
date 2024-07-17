@@ -31,6 +31,21 @@ const NestedContent = ({projects, type, sub}) => {
                                         </details>
                                     }
 
+                                    {project.article.gallery &&
+                                        <details>
+                                            <summary>
+                                                images
+                                            </summary>
+                                            {project.article.gallery.map((img)=> {
+                                                return (
+                                                    <img loading="lazy" src={img.image.url}/>
+
+                                                )
+                                            })}
+                                        </details>
+
+                                    }
+
                                     <p>{serialize(project.article.projectDescription)}</p>
                                     {project.article.subProjects[0] && project.article.subProjects[0].project !== null && project.article.subProjects.map((project)=> {
                                         return (
