@@ -22,14 +22,14 @@ const NestedContent = ({projects, type, sub}) => {
                             </summary>
                             {project.article.projectDescription &&
                                 <div className={"indent-border-left"}>
-                                    {project.article.heroImage &&
+                                   {/* {project.article.heroImage &&
                                         <details>
                                             <summary>image</summary>
                                             {project.article.heroImage &&
                                                 <img loading="lazy" src={project.article.heroImage.url}/>
                                             }
                                         </details>
-                                    }
+                                    }*/}
 
                                     {project.article.gallery &&
                                         <details>
