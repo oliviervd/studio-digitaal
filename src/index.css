@@ -54,7 +54,7 @@ body {
     }
 }
 
-@media screen and (min-width: 1600px) {
+@media screen and (min-width: 1700px) {
     .left--panel {
 
         line-height: 3rem;
