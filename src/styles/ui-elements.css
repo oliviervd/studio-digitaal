@@ -14,7 +14,8 @@
 }
 
 hr {
-    color: #02dc00
+    color: #02dc00;
+    border: 3px dotted #02dc00;
 }
 
 .pageSize{
