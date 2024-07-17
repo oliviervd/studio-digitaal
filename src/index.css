@@ -43,7 +43,7 @@ body {
     }
 }
 
-@media screen and (min-width: 1600px) {
+/*@media screen and (min-width: 1600px) {
     .left--panel {
 
         line-height: 3rem;
@@ -52,7 +52,7 @@ body {
             font-size: 4rem;
         }
     }
-}
+}*/
 
 @media screen and (min-width: 1800px) {
     .left--panel {
