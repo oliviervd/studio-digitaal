@@ -32,6 +32,8 @@ const Home = ({trajectory, subpage}) => {
 
     console.log(logoDesc)
     //todo: add button to close all.
+    //todo: add reading time.
+    //todo: add number of children
 
     useEffect(() => {
         const handleDetailsToggle = (e) => {
@@ -164,9 +166,6 @@ const Home = ({trajectory, subpage}) => {
                             research
                         </summary>
                         <section className={"L1-container"}>
-                            <p style={{fontSize: "20px"}}>studio digitaal informs its activities around several research
-                                strands or trajectories:</p>
-
                             {trajectories.map((traject, index) => {
                                 return (
                                     <details id={traject._id} key={traject}>
