@@ -136,6 +136,7 @@ const Home = ({trajectory, subpage}) => {
                 <div className={"left--panel"}>
                     <p style={{fontColor: "black"}}>{about}</p>
                 </div>
+                <div></div>
                 <section className={"nest-master"}>
                 {logoDesc &&
                         <section>

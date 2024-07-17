@@ -31,8 +31,21 @@ body {
     }
 
     .left--panel {
+        position: fixed;
         margin: 0 20px;
         display: block;
+        line-height: 2.2rem;
+        width: 40%;
+
+        a, span {
+            font-size: 3.2rem;
+        }
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    .left--panel {
+
         line-height: 3rem;
 
         a, span {
@@ -40,4 +53,3 @@ body {
         }
     }
 }
-
