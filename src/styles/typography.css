@@ -39,10 +39,17 @@ p > span {
 a {
     font-size: var(--font-size-s);
     color: var(--main-green);
+    text-decoration: underline dotted var(--main-green);
+    -webkit-text-decoration-color: var(--main-green);
+    -webkit-text-decoration-style: dotted;
 }
 
 a:hover {
     text-decoration: underline;
+}
+
+ul {
+    text-decoration: underline dotted var(--main-green);
 }
 
 em {
