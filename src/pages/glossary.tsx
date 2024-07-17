@@ -3,24 +3,15 @@ import {fetchPayload} from "../utils/fetchPayload";
 import serialize from "../utils/serialize";
 import {useLanguage} from "../utils/languageProvider";
 
-const Glossary = ({sub}) => {
+const Glossary = ({sub, glossary}) => {
 
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
-    const [glossary, setGlossary] = useState<string>([]);
     const {language, setLanguage} = useLanguage()
     const refs = useRef({})
 
     // todo: expand full article at once (with button) - with collapse all.
     // todo: add reading time.
 
-    // fetch data Glossary
-    useEffect(()=>{
-        fetchPayload(baseURI, "Glossary", 100, language).then((data)=>{
-            // sort concepts alphabetically
-            const sortedData = data["docs"].sort((a, b) => a.concept.localeCompare(b.concept));
-            setGlossary(sortedData)
-        })
-    }, [language])
 
     // Scroll to the element when sub prop is updated
     useEffect(() => {

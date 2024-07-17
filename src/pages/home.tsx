@@ -15,6 +15,7 @@ import {route} from "preact-router"
 import Glossary from "./glossary";
 import ButtonMoveUp from "../components/buttonMoveUp";
 import CalculateSize from "../components/fetchSize";
+import SizeBubble from "../components/sizeBubble";
 import logo from "../assets/Pixel-Logo-41-frames-transparent.gif";
 
 const Home = ({trajectory, subpage}) => {
@@ -23,6 +24,7 @@ const Home = ({trajectory, subpage}) => {
     const [previousSubPage, setPreviousSubPage] = useState(null);
     const [trajectories, setTrajectories] = useState([])
     const [projects, setProjects] = useState([])
+    const [glossary, setGlossary] = useState<string>([]);
     const [logoDesc, openLogoDesc] = useState(false)
     const [about, setAbout] = useState([])
     const [font, setFont] = useState("serif")
@@ -33,7 +35,6 @@ const Home = ({trajectory, subpage}) => {
     console.log(logoDesc)
     //todo: add button to close all.
     //todo: add reading time.
-    //todo: add number of children
 
     useEffect(() => {
         const handleDetailsToggle = (e) => {
@@ -113,6 +114,15 @@ const Home = ({trajectory, subpage}) => {
         })
     }, [language]);
 
+    // fetch data Glossary
+    useEffect(()=>{
+        fetchPayload(baseURI, "Glossary", 100, language).then((data)=>{
+            // sort concepts alphabetically
+            const sortedData = data["docs"].sort((a, b) => a.concept.localeCompare(b.concept));
+            setGlossary(sortedData)
+        })
+    }, [language])
+
     useEffect(()=>{
         document.body.style.fontFamily = font;
         if (font == "fantasy") {
@@ -162,14 +172,16 @@ const Home = ({trajectory, subpage}) => {
                     <b className={"about"} style={{fontColor: "black"}}>{about}</b>
 
                     <details id={'research'} style={{paddingBottom: "10px"}}>
-                        <summary>
-                            research
-                        </summary>
+
+                            <summary>
+                                research <SizeBubble size={trajectories.length}/>
+                            </summary>
+
                         <section className={"L1-container"}>
                             {trajectories.map((traject, index) => {
                                 return (
                                     <details id={traject._id} key={traject}>
-                                        <summary>{traject.trajectoryTitle}</summary>
+                                        <summary>{traject.trajectoryTitle}<SizeBubble size={traject.articles.length}/></summary>
                                         {traject.trajectoryDescription &&
                                             <p>
                                                 {serialize(traject.trajectoryDescription)}
@@ -207,9 +219,9 @@ const Home = ({trajectory, subpage}) => {
                     <hr/>
 
                     <details id={"glossary"} style={{paddingBottom: "10px"}}>
-                        <summary>glossary</summary>
+                        <summary>glossary <SizeBubble size={glossary.length}/></summary>
                         <section>
-                            <Glossary sub={subpage}/>
+                            <Glossary sub={subpage} glossary={glossary}/>
                         </section>
                     </details>
 
