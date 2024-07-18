@@ -27,7 +27,7 @@ body {
 
     .main--container{
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 30% 70%;
     }
 
     .left--panel {
@@ -35,10 +35,10 @@ body {
         margin: 0 20px;
         display: block;
         line-height: 2.2rem;
-        width: 50%;
+        width: 30%;
 
         a, span {
-            font-size: 3.5rem;
+            font-size: 2rem;
         }
     }
 }
@@ -55,6 +55,7 @@ body {
 }*/
 
 @media screen and (min-width: 1800px) {
+
     .left--panel {
 
         line-height: 3rem;

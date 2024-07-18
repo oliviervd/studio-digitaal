@@ -23,7 +23,7 @@ const serialize = (children) =>
             }
 
             if (node.underline) {
-                text = <span style={{textDecoration:"underline dotted #02dc00",}} key={i}>{text}</span>
+                text = <span style={{textDecoration:"underline"}} key={i}>{text}</span>
             }
 
             // Handle other leaf types here...
