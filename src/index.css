@@ -34,7 +34,7 @@ body {
         position: fixed;
         margin: 0 20px;
         display: block;
-        line-height: 2.2rem;
+        line-height: 200%;
         width: 30%;
 
         a, span {
@@ -58,10 +58,10 @@ body {
 
     .left--panel {
 
-        line-height: 3rem;
+        line-height: 230%;
 
         a, span {
-            font-size: 5rem;
+            font-size: 3rem;
         }
     }
 }
