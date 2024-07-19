@@ -63,7 +63,7 @@ body {
         line-height: 3rem;
 
         a, span {
-            font-size: 5rem;
+            font-size: var(--font-size-s);
         }
     }
 }
