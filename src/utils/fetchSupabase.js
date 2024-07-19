@@ -15,3 +15,9 @@ export function getObjects(client) {
         .eq("STATUS", "HEALTHY")
         .limit(10000)
 }
+
+export function getAgents(client) {
+    return client
+        .from("dmg_personen_LDES")
+        .select("LDES_raw")
+}

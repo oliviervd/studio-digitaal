@@ -1,19 +1,30 @@
-import {getSupabaseBrowserClient, getObjects} from "../utils/fetchSupabase";
+import {getSupabaseBrowserClient, getObjects, getAgents} from "../utils/fetchSupabase";
 import {useEffect, useState} from "preact/hooks";
-import {objectTraps} from "immer/src/core/proxy";
 
 const DigitizationProcess = () => {
     const supabaseClient = getSupabaseBrowserClient();
     const [objects, setObjects] = useState([]);
+    const [agents, setAgents] = useState([])
     const [loading, isLoading] = useState(true);
 
     useEffect(() => {
+
         const fetchPublicObjects = async()=>{
             const result = await getObjects(supabaseClient);
             setObjects(result)
         }
-        fetchPublicObjects()
+
+        const fetchAgents = async() => {
+            const result = await getAgents(supabaseClient);
+            setAgents(result)
+        }
+
+        fetchPublicObjects();
+        fetchAgents();
+
     }, []);
+
+    console.log(agents)
 
     function countImages(collection) {
         console.log(collection);
@@ -33,25 +44,37 @@ const DigitizationProcess = () => {
     return(
         <div>
 
-            {objects && objects["data"] &&
-                <section>
-                    <hr/>
-                    <div className={"process__container"}>
+            <section>
+                <hr/>
+                <div className={"process__container"}>
 
-                        <div className={"process__bubble"}>
+                    <div className={"process__bubble"}>
+                        {objects && objects["data"] &&
                             <p>{objects["data"].length} objects</p>
-                        </div>
-                        <div className={"process__bubble"}>
-                            <p>{countImages(objects) * 10} colors tagged</p>
-                        </div>
-                        <div className={"process__bubble"}>
-                            <p>{countImages(objects)} media assets</p>
-                        </div>
+                        }
                     </div>
-                </section>
+                    <div className={"process__bubble"}>
+                        {objects && objects["data"] &&
+                            <p>{countImages(objects) * 10} colors tagged</p>
+                        }
+
+                    </div>
+                    <div className={"process__bubble"}>
+                        {objects && objects["data"] &&
+                            <p>{countImages(objects)} media assets</p>
+                        }
+                    </div>
+                    <div className={"process__bubble"}>
+                        {agents && agents["data"] &&
+                            <p>{agents["data"].length} agents </p>
+                        }
+                    </div>
+
+                </div>
+
+            </section>
 
 
-            }
         </div>
 
     )
