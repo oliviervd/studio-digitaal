@@ -17,6 +17,7 @@ import ButtonMoveUp from "../components/buttonMoveUp";
 import CalculateSize from "../components/fetchSize";
 import SizeBubble from "../components/sizeBubble";
 import logo from "../assets/Pixel-Logo-41-frames-transparent.gif";
+import DigitizationProcess from "../components/digitizationProcess";
 
 const Home = ({trajectory, subpage}) => {
     const {language, setLanguage} = useLanguage()
@@ -31,8 +32,6 @@ const Home = ({trajectory, subpage}) => {
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
     const refs = useRef({});
-
-    console.log(logoDesc)
     //todo: add button to close all.
     //todo: add reading time.
 
@@ -148,6 +147,8 @@ const Home = ({trajectory, subpage}) => {
             <div className={"main--container"}>
                 <div className={"left--panel"}>
                     <p style={{fontColor: "black"}}>{about}</p>
+                    <DigitizationProcess/>
+
                 </div>
                 <div></div>
                 <section className={"nest-master"}>
