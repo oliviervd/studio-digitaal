@@ -1,13 +1,12 @@
 import {getSupabaseBrowserClient, getObjects, getAgents} from "../utils/fetchSupabase";
 import {useEffect, useState} from "preact/hooks";
 import CountingBox from "./countingBox";
-import {Simulate} from "react-dom/test-utils";
-import load = Simulate.load;
 
 const DigitizationProcess = () => {
     const supabaseClient = getSupabaseBrowserClient();
     const [objects, setObjects] = useState([]);
     const [agents, setAgents] = useState([])
+
     const [loading, isLoading] = useState({
         agents: true,
         objects: true,
@@ -21,6 +20,7 @@ const DigitizationProcess = () => {
     })
 
     useEffect(() => {
+        // fetch data from database (supabase)
         const updateLoading = {...loading};
         const fetchPublicObjects = async()=>{
             const result = await getObjects(supabaseClient);
