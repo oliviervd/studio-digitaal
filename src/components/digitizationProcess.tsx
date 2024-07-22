@@ -1,11 +1,22 @@
 import {getSupabaseBrowserClient, getObjects, getAgents} from "../utils/fetchSupabase";
 import {useEffect, useState} from "preact/hooks";
+import CountingBox from "./countingBox";
 
 const DigitizationProcess = () => {
     const supabaseClient = getSupabaseBrowserClient();
     const [objects, setObjects] = useState([]);
     const [agents, setAgents] = useState([])
-    const [loading, isLoading] = useState(true);
+    const [loading, isLoading] = useState({
+        agents: true,
+        objects: true,
+        images: true
+    });
+
+    const [count, isCounting] = useState({
+        agents: 0,
+        objects: 0,
+        images: 0
+    })
 
     useEffect(() => {
 
@@ -18,13 +29,11 @@ const DigitizationProcess = () => {
             const result = await getAgents(supabaseClient);
             setAgents(result)
         }
-
         fetchPublicObjects();
         fetchAgents();
-
     }, []);
 
-    console.log(agents)
+    console.log(count);
 
     function countImages(collection) {
         console.log(collection);
@@ -37,46 +46,20 @@ const DigitizationProcess = () => {
         return count;
     }
 
-
     // todo: add function that measures the number of colors that have been tagged (filter)
     // todo: add function that fetches the number of images opened up.
 
     return(
         <div>
-
             <section>
                 <hr/>
                 <div className={"process__container"}>
-
-                    <div className={"process__bubble"}>
-                        {objects && objects["data"] &&
-                            <p>{objects["data"].length} objects</p>
-                        }
-                    </div>
-                    <div className={"process__bubble"}>
-                        {objects && objects["data"] &&
-                            <p>{countImages(objects) * 10} colors tagged</p>
-                        }
-
-                    </div>
-                    <div className={"process__bubble"}>
-                        {objects && objects["data"] &&
-                            <p>{countImages(objects)} media assets</p>
-                        }
-                    </div>
-                    <div className={"process__bubble"}>
-                        {agents && agents["data"] &&
-                            <p>{agents["data"].length} agents </p>
-                        }
-                    </div>
-
+                    <CountingBox count={count["objects"]} loading={loading["objects"]} type={"objects"}/>
+                    <CountingBox count={count["images"]} loading={loading["images"]} type={"images"}/>
+                    <CountingBox count={"agents"} loading={loading["agents"]} type={"agents"}/>
                 </div>
-
             </section>
-
-
         </div>
-
     )
 }
 export default DigitizationProcess
