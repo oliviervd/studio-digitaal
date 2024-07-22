@@ -10,13 +10,17 @@ const DigitizationProcess = () => {
     const [loading, isLoading] = useState({
         agents: true,
         objects: true,
-        images: true
+        images: true,
+        colors: true,
+        exhibitions: true,
     });
 
     const [count, isCounting] = useState({
         agents: 0,
         objects: 0,
-        images: 0
+        images: 0,
+        colors: 0,
+        exhibitions: 0,
     })
 
     useEffect(() => {
@@ -74,6 +78,9 @@ const DigitizationProcess = () => {
                     <CountingBox count={count["objects"]} loading={loading["objects"]} type={"objects"}/>
                     <CountingBox count={count["images"]} loading={loading["images"]} type={"images"}/>
                     <CountingBox count={count["agents"]} loading={loading["agents"]} type={"agents"}/>
+                    <CountingBox count={count["colors"]} loading={loading["colors"]} type={"colors"}/>
+                    <CountingBox count={count["exhibitions"]} loading={loading["exhibitions"]} type={"exhibitions"}/>
+
                 </div>
             </section>
         </div>
