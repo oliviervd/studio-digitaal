@@ -247,7 +247,6 @@ const Home = ({trajectory, subpage}) => {
                                         {p.subProjects.map((a) => {
                                             //console.log(a)
                                             return (
-
                                                 <details>
                                                     <summary>{a.project.projectTitle}</summary>
                                                     <p>{serialize(a.project.projectDescription)}</p>
@@ -258,8 +257,8 @@ const Home = ({trajectory, subpage}) => {
                                 )
                             }
                         })}
-                        <p style={{fontSize: "20px"}}>** studio digitaal is a project curated by <a
-                            href={"https://oliviervandhuynslager.net"}>olivier van d'huynslager</a></p>
+                        <i style={{fontSize: "20px" ,paddingTop:"20px"}}>** studio digitaal is a project curated by <a
+                            href={"https://oliviervandhuynslager.net"}>Olivier Van D'huynslager</a></i>
                     </details>
                 </section>
             </div>
