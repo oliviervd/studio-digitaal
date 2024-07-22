@@ -1,6 +1,8 @@
 import {getSupabaseBrowserClient, getObjects, getAgents} from "../utils/fetchSupabase";
 import {useEffect, useState} from "preact/hooks";
 import CountingBox from "./countingBox";
+import {Simulate} from "react-dom/test-utils";
+import load = Simulate.load;
 
 const DigitizationProcess = () => {
     const supabaseClient = getSupabaseBrowserClient();
@@ -19,12 +21,14 @@ const DigitizationProcess = () => {
     })
 
     useEffect(() => {
-
+        const updateLoading = {...loading};
         const fetchPublicObjects = async()=>{
             const result = await getObjects(supabaseClient);
+            updateLoading.objects = false;
+            updateLoading.images = false;
+            isLoading(updateLoading)
             setObjects(result)
         }
-
         const fetchAgents = async() => {
             const result = await getAgents(supabaseClient);
             setAgents(result)
@@ -33,7 +37,15 @@ const DigitizationProcess = () => {
         fetchAgents();
     }, []);
 
-    console.log(count);
+    useEffect(() => {
+        if(!loading.images){
+            // set counts objects + derived counts from objects data (images)
+            const updatedCount = {...count}
+            updatedCount.objects = objects.data.length
+            updatedCount.images = countImages(objects)
+            isCounting(updatedCount)
+        }
+    }, [loading]);
 
     function countImages(collection) {
         console.log(collection);
