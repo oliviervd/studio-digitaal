@@ -31,6 +31,7 @@ const DigitizationProcess = () => {
         }
         const fetchAgents = async() => {
             const result = await getAgents(supabaseClient);
+            updateLoading.agents = false;
             setAgents(result)
         }
         fetchPublicObjects();
@@ -38,11 +39,15 @@ const DigitizationProcess = () => {
     }, []);
 
     useEffect(() => {
+        const updatedCount = {...count}
         if(!loading.images){
             // set counts objects + derived counts from objects data (images)
-            const updatedCount = {...count}
             updatedCount.objects = objects.data.length
             updatedCount.images = countImages(objects)
+            isCounting(updatedCount)
+        }
+        if(!loading.agents) {
+            updatedCount.agents = agents.data.length
             isCounting(updatedCount)
         }
     }, [loading]);
@@ -68,7 +73,7 @@ const DigitizationProcess = () => {
                 <div className={"process__container"}>
                     <CountingBox count={count["objects"]} loading={loading["objects"]} type={"objects"}/>
                     <CountingBox count={count["images"]} loading={loading["images"]} type={"images"}/>
-                    <CountingBox count={"agents"} loading={loading["agents"]} type={"agents"}/>
+                    <CountingBox count={count["agents"]} loading={loading["agents"]} type={"agents"}/>
                 </div>
             </section>
         </div>
