@@ -13,13 +13,15 @@ const Collection = ({type}) => {
     const [collapse, setCollapse] = useState(true); // todo: add this to the collapse button.
     const [view, setView] = useState("tiles");
     const detailsRefs = useRef([]);
+    const BASE_URI = import.meta.env.VITE_REST_API_URL;
+    console.log(BASE_URI)
 
     useEffect(()=>{
         const fetchObjects = async() => {
             setLoading(true)
             setResults([])
             try {
-                const response = await fetch(`https://data.designmuseumgent.be/v1/color-api/${color}`)
+                const response = await fetch(`${BASE_URI}color-api/${color}`)
                 const data = await response.json()
                 setLoading(false)
                 setResults(data)
@@ -79,15 +81,15 @@ const Collection = ({type}) => {
                     {loading &&
                         <div>
                             <div className={"process__bubble"} style={{backgroundColor:"#02dc00", borderColor:"white", marginTop: "20px"}}>
-                                <a href={`https://data.designmuseumgent.be/color-api/${color}`} style={{color:"white"}}>requesting data
-                                    from {`https://data.designmuseumgent.be/color-api/${color}`}</a>
+                                <a href={`${BASE_URI}color-api/${color}`} style={{color:"white"}}>requesting data
+                                    from {`${BASE_URI}color-api/${color}`}</a>
                             </div>
                         </div>
                     }
 
                     {!loading &&
                         <div className={"process__bubble"} style={{marginTop: "20px"}}>
-                            <a href={`https://data.designmuseumgent.be/color-api/${color}`}> displaying data from {`https://data.designmuseumgent.be/color-api/${color}`}</a>
+                            <a href={`${BASE_URI}color-api/${color}`}> displaying data from {`${BASE_URI}color-api/${color}`}</a>
                         </div>
 
                     }

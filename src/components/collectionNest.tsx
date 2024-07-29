@@ -1,11 +1,12 @@
 import {useEffect, useState} from "preact/hooks";
 
-const CollectionNest = ({ collection, color, setColor }) => {
+const CollectionNest = ({ collection, setColor }) => {
+    const BASE_URI = import.meta.env.VITE_REST_API_URL;
     const [colors, setColors] = useState([]);
     useEffect(() => {
         const fetchColors = async() => {
             try{
-                const response = await fetch("https://data.designmuseumgent.be/v1/colors")
+                const response = await fetch(`${BASE_URI}colors`)
                 const data = await response.json()
                 setColors(data)
 
