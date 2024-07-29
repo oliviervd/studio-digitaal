@@ -4,6 +4,7 @@ import { render } from 'preact';
 import ApiDocs from "./pages/CollectionAPI";
 import {LanguageProvider} from "./utils/languageProvider";
 import Error from "./utils/Error";
+import Collection from "./pages/Collection";
 
 const App = () => {
 
@@ -14,6 +15,7 @@ const App = () => {
               <Home path={"/:trajectory"}/>
               <Home path={"/:trajectory/:subpage"}/>
               <ApiDocs path={"/collection-api"}/>
+              <Collection path={"/collection/:type"}/>
               <Error path={"/error"} />
           </Router>
       </LanguageProvider>

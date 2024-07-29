@@ -35,7 +35,6 @@ class Header extends Component {
                 openLogoDesc(!logoDesc);
             }
             route("")
-            console.log("cliccare")
         }
 
         return isMobile ? (

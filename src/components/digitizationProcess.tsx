@@ -1,11 +1,16 @@
-import {getSupabaseBrowserClient, getObjects, getAgents} from "../utils/fetchSupabase";
+import {getSupabaseBrowserClient, getObjects, getAgents, getExhibitions} from "../utils/fetchSupabase";
 import {useEffect, useState} from "preact/hooks";
 import CountingBox from "./countingBox";
+import {route} from "preact-router";
+import {colors_dict} from "../utils/colors";
 
 const DigitizationProcess = () => {
     const supabaseClient = getSupabaseBrowserClient();
+
+    //todo: put all in object state?
     const [objects, setObjects] = useState([]);
     const [agents, setAgents] = useState([])
+    const [exhibitions, setExhibitions] = useState([])
 
     const [loading, isLoading] = useState({
         agents: true,
@@ -26,20 +31,30 @@ const DigitizationProcess = () => {
     useEffect(() => {
         // fetch data from database (supabase)
         const updateLoading = {...loading};
+        //object data
         const fetchPublicObjects = async()=>{
             const result = await getObjects(supabaseClient);
             updateLoading.objects = false;
             updateLoading.images = false;
+            updateLoading.colors = false;
             isLoading(updateLoading)
             setObjects(result)
         }
+        //agent data
         const fetchAgents = async() => {
             const result = await getAgents(supabaseClient);
             updateLoading.agents = false;
             setAgents(result)
         }
+        // exhibition data
+        const fetchExhibitions = async() => {
+            const result = await getExhibitions(supabaseClient);
+            updateLoading.exhibitions = false;
+            setExhibitions(result)
+        }
         fetchPublicObjects();
         fetchAgents();
+        fetchExhibitions();
     }, []);
 
     useEffect(() => {
@@ -48,10 +63,15 @@ const DigitizationProcess = () => {
             // set counts objects + derived counts from objects data (images)
             updatedCount.objects = objects.data.length
             updatedCount.images = countImages(objects)
+            updatedCount.colors = updatedCount.images * 10;
             isCounting(updatedCount)
         }
         if(!loading.agents) {
             updatedCount.agents = agents.data.length
+            isCounting(updatedCount)
+        }
+        if(!loading.exhibitions) {
+            updatedCount.exhibitions = exhibitions.data.length
             isCounting(updatedCount)
         }
     }, [loading]);
@@ -68,7 +88,6 @@ const DigitizationProcess = () => {
     }
 
     // todo: add function that measures the number of colors that have been tagged (filter)
-    // todo: add function that fetches the number of images opened up.
 
     return(
         <div>
@@ -80,7 +99,6 @@ const DigitizationProcess = () => {
                     <CountingBox count={count["agents"]} loading={loading["agents"]} type={"agents"}/>
                     <CountingBox count={count["colors"]} loading={loading["colors"]} type={"colors"}/>
                     <CountingBox count={count["exhibitions"]} loading={loading["exhibitions"]} type={"exhibitions"}/>
-
                 </div>
             </section>
         </div>

@@ -1,3 +1,5 @@
+import {route} from "preact-router";
+
 const CountingBox = ({type, loading, count}) => {
     if (loading) {
         return(
@@ -7,7 +9,7 @@ const CountingBox = ({type, loading, count}) => {
         )
     } else if (!loading) {
         return (
-            <div className={"process__bubble"}>
+            <div onClick={()=>route(`/collection/${type}`)} className={"process__bubble"}>
                 <p>{count} {type}</p>
             </div>
         )

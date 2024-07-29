@@ -19,6 +19,13 @@ body {
 .left--panel {
     display: none;
     padding-right: 20px;
+    height: 60vh;
+    position: relative;
+
+    p {
+      font-size: var(--font-size-s);
+    }
+
 }
 
 @media screen and (min-width: 1200px) {

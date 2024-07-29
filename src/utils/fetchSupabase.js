@@ -21,3 +21,9 @@ export function getAgents(client) {
         .from("dmg_personen_LDES")
         .select("LDES_raw")
 }
+
+export function getExhibitions(client) {
+    return client
+        .from("dmg_tentoonstelling_LDES")
+        .select("LDES_raw")
+}

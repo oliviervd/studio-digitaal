@@ -148,7 +148,6 @@ const Home = ({trajectory, subpage}) => {
                 <div className={"left--panel"}>
                     <p style={{fontColor: "black"}}>{about}</p>
                     <DigitizationProcess/>
-
                 </div>
                 <div></div>
                 <section className={"nest-master"}>
@@ -170,7 +169,7 @@ const Home = ({trajectory, subpage}) => {
                         </section>
                     }
 
-                    <b className={"about"} style={{fontColor: "black"}}>{about}</b>
+                    <p className={"about"} style={{fontColor: "black"}}>{about}</p>
 
                     <details id={'research'} style={{paddingBottom: "10px"}}>
 

@@ -33,7 +33,7 @@
 
 hr {
     color: var(--main-green);
-    border: 3px dotted var(--main-green);
+    border: 2px dotted var(--main-green);
 }
 
 .pageSize{
@@ -61,19 +61,55 @@ hr {
 .process__container{
     margin-top: 20px;
     width: 100%;
+    height: 100%;
     /*background-color: rgba(7, 220, 0, 0.4);*/
 
-    .process__bubble {
-        width: 100%;
-        justify-content: center;
-        border: dotted 3px var(--main-green);
-        border-radius: 50px;
-        margin-bottom: 5px;
+}
 
-        p {
-            text-align: center;
-            margin: 5px;
-            font-size: var(--font-size-s);
-        }
+.process__bubble {
+    width: 100%;
+    justify-content: center;
+    border: dotted 2px var(--main-green);
+    border-radius: 50px;
+    margin-bottom: 5px;
+
+    p, a {
+        text-align: center;
+        margin: 5px;
+        font-size: var(--font-size-s);
+    }
+    a {
+        display: flex;
+    }
+
+}
+
+.button__bubble {
+    border: dotted 2px var(--main-green);
+    border-radius: 50px;
+    margin-bottom: 5px;
+    width: auto;
+
+    p, a {
+        text-align: center;
+        margin: 5px;
+        font-size: var(--font-size-s);
+    }
+    a {
+        display: flex;
+    }
+}
+
+.collection--container {
+
+    margin-top: 20px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+
+    > div {
+        width: 20%;
+        justify-content: center;
+        text-align: center;
     }
 }
