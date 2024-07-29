@@ -78,8 +78,8 @@ const Collection = ({type}) => {
                 <div className={"nest-master"}>
                     {loading &&
                         <div>
-                            <div className={"process__bubble"} style={{backgroundColor:"#02dc00", borderColor:"black", marginTop: "20px"}}>
-                                <a href={`https://data.designmuseumgent.be/color-api/${color}`} style={{color:"black"}}>requesting data
+                            <div className={"process__bubble"} style={{backgroundColor:"#02dc00", borderColor:"white", marginTop: "20px"}}>
+                                <a href={`https://data.designmuseumgent.be/color-api/${color}`} style={{color:"white"}}>requesting data
                                     from {`https://data.designmuseumgent.be/color-api/${color}`}</a>
                             </div>
                         </div>
