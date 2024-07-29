@@ -1,6 +1,7 @@
 import Header from "../components/header";
 import CollectionNest from "../components/collectionNest";
 import {useState, useEffect, useRef} from "preact/hooks";
+import {openAllDetails} from "../utils/utils";
 
 // re-import collections if not in cache
 
@@ -39,22 +40,6 @@ const Collection = ({type}) => {
         }
     },[font])
 
-    const openAllDetails = () => {
-        //todo: make function general (it works for other components as well)
-        const openNestedDetails = (detailsElement) => {
-            detailsElement.open = true;
-            const nestedDetails = detailsElement.querySelectorAll("details");
-            nestedDetails.forEach((nestedDetail) => {
-                openNestedDetails(nestedDetail);
-            });
-        };
-
-        detailsRefs.current.forEach((ref) => {
-            if (ref) {
-                openNestedDetails(ref);
-            }
-        });
-    };
 
     const handleFontChange = (event) => {
         setFont(event.target.value)
@@ -108,7 +93,7 @@ const Collection = ({type}) => {
                             </div>
                             {!loading && (results.length !== 0) && (view === "list") &&
                                 <div className={"button__bubble"}>
-                                    <a onClick={() => openAllDetails()}> open all </a>
+                                    <a onClick={() => openAllDetails(detailsRefs)}> open all </a>
                                 </div>
                             }
                         </nav>
