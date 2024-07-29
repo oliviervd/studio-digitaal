@@ -19,7 +19,7 @@ const Collection = ({type}) => {
             setLoading(true)
             setResults([])
             try {
-                const response = await fetch(`https://data.designmuseumgent.be/color-api/${color}`)
+                const response = await fetch(`https://data.designmuseumgent.be/v1/color-api/${color}`)
                 const data = await response.json()
                 setLoading(false)
                 setResults(data)

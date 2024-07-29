@@ -5,7 +5,7 @@ const CollectionNest = ({ collection, color, setColor }) => {
     useEffect(() => {
         const fetchColors = async() => {
             try{
-                const response = await fetch("https://data.designmuseumgent.be/colors")
+                const response = await fetch("https://data.designmuseumgent.be/v1/colors")
                 const data = await response.json()
                 setColors(data)
 
