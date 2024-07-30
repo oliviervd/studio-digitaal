@@ -2,66 +2,36 @@ import {useState, useEffect} from "preact/hooks";
 import {fetchPayload} from "../utils/fetchPayload";
 
 import Header from "../components/header";
-import Footer from "../components/footer";
-import ApiDoc from "../components/apiDoc";
 import serialize from "../utils/serialize";
 import {useLanguage} from "../utils/languageProvider";
 
 const ApiDocs = (props) => {
     const {language, setLanguage} = useLanguage()
-
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
-    const [nav, setNav] = useState([])
-    const [apiPage, setApiPage] = useState([])
-    const [open, setOpen] = useState(false);
-    const [scrollToID, setScrollToID] = useState(null)
-    const [about, setAbout] = useState([])
     const [font, setFont] = useState("serif")
-
-
+    const [docs, setDocs] = useState([])
+    const [about, setAbout] = useState([])
 
     // fetch data
     useEffect(() => {
         fetchPayload(baseURI, "studios", 10, language).then((data)=>{
+            console.log(serialize(data["docs"][3]["description"]));
             setAbout(serialize(data["docs"][3]["description"]));
         })
     }, [language]);
 
-    // todo: fix styling
-    console.log(nav)
-
-    // fetch and parse data from CMS
-    useEffect(()=>  {
-        // to do change language to props;
-        fetchPayload(baseURI, "navigationSD", 10, "en").then((data) => {
-                for (let i = 0; i < data["docs"].length; i ++) {
-                    if (data["docs"][i]["pageGroup"] === "collection-api") {
-                        setNav(data["docs"][i])
-                    }
-                }
+    useEffect(()=> {
+        const fetchDocumentation = async() => {
+            try {
+                const response = await fetch("https://p01--admin-cms--qbt6mytl828m.code.run/api/trajectory/66a8f54f4d72ff7ba84e46e6?locale=en&draft=false&depth=1")
+                const data = await response.json()
+                setDocs(data)
+            } catch(e) {
+                console.log("Error fetching collection: ", e)
             }
-        )
-
-    },[])
-
-    if (apiPage.length == 0) {
-        if (nav && nav.pages) {
-            setApiPage(nav.pages)
         }
-    }
-
-    function changePage(page, id) {
-        setApiPage(page)
-        if (id) {
-            setScrollToID(id)
-        }
-        else {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            })
-        }
-    }
+        fetchDocumentation()
+    }, [language])
 
     useEffect(()=>{
         document.body.style.fontFamily = font;
@@ -78,7 +48,6 @@ const ApiDocs = (props) => {
         setFont(event.target.value)
     }
 
-
     return(
         <div>
             <Header language={language} changeLang={changeLang}
@@ -88,34 +57,20 @@ const ApiDocs = (props) => {
                 <div className={"left--panel"}>
                     <p style={{fontColor: "black"}}>{about}</p>
                 </div>
-                <div></div>
+                <div/>
                 <section className={"nest-master"}>
-                    {/*  <details>`
-                    <summary>articles</summary>
-                    <Sidebar changePage={changePage} nav={nav}/>
-                </details>*/}
-                    {nav && nav.pages && nav.pages.map((article) => {
-                        console.log(article)
-                        return (
+                    {docs["articles"] && docs["articles"].map((doc) => {
+                        console.log(doc)
+                        return(
                             <details>
-                                <summary>{article.page.title}</summary>
-                                <ApiDoc apiPage={article}/>
-                                {article.page.subDoc && article.page.subDoc.map((sub) => {
-                                    console.log(sub)
-                                    return (
-                                        <>
-                                        </>
-                                    )
-                                })}
+                                <summary>{doc.article.projectTitle}</summary>
+                                <p>{serialize(doc.article.projectDescription)}</p>
                             </details>
                         )
                     })}
-                    {/*   <details>
-                    <ApiDoc apiPage={apiPage} scrollToID={scrollToID}/>
-                </details>*/}
                 </section>
-                <Footer showFont={false}/>
             </div>
+
         </div>
     )
 

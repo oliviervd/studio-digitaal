@@ -14,7 +14,7 @@ const App = () => {
               <Home path={"/"}/>
               <Home path={"/:trajectory"}/>
               <Home path={"/:trajectory/:subpage"}/>
-              <ApiDocs path={"/collection-api"}/>
+              <ApiDocs path={"/api-documentation/"}/>
               <Collection path={"/collection/:type"}/>
               <Error path={"/error"} />
           </Router>

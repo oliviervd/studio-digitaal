@@ -179,38 +179,41 @@ const Home = ({trajectory, subpage}) => {
 
                         <section className={"L1-container"}>
                             {trajectories.map((traject, index) => {
-                                return (
-                                    <details id={traject._id} key={traject}>
-                                        <summary>{traject.trajectoryTitle}<SizeBubble size={traject.articles.length}/></summary>
-                                        {traject.trajectoryDescription &&
-                                            <p>
-                                                {serialize(traject.trajectoryDescription)}
-                                                {traject.articles &&
-                                                    <section className={"indent-border-left"}>
-                                                        <details>
-                                                            <summary>projects</summary>
-                                                            <p>
-                                                                <NestedContent
-                                                                    projects={traject.articles} type={"project"}
-                                                                    sub={subPage}
-                                                                ></NestedContent>
-                                                            </p>
-                                                        </details>
-                                                        <details>
-                                                            <summary>research & development</summary>
-                                                            <p>
-                                                                <NestedContent
-                                                                    projects={traject.articles} type={"RND"}
-                                                                    sub={subpage}
-                                                                ></NestedContent>
-                                                            </p>
-                                                        </details>
-                                                    </section>
-                                                }
-                                            </p>
-                                        }
-                                    </details>
-                                )
+                                console.log(traject)
+                                if (traject.trajectoryTitle !== "api-documentation"){
+                                    return (
+                                        <details id={traject._id} key={traject}>
+                                            <summary>{traject.trajectoryTitle}<SizeBubble size={traject.articles.length}/></summary>
+                                            {traject.trajectoryDescription &&
+                                                <p>
+                                                    {serialize(traject.trajectoryDescription)}
+                                                    {traject.articles &&
+                                                        <section className={"indent-border-left"}>
+                                                            <details>
+                                                                <summary>projects</summary>
+                                                                <p>
+                                                                    <NestedContent
+                                                                        projects={traject.articles} type={"project"}
+                                                                        sub={subPage}
+                                                                    ></NestedContent>
+                                                                </p>
+                                                            </details>
+                                                            <details>
+                                                                <summary>research & development</summary>
+                                                                <p>
+                                                                    <NestedContent
+                                                                        projects={traject.articles} type={"RND"}
+                                                                        sub={subpage}
+                                                                    ></NestedContent>
+                                                                </p>
+                                                            </details>
+                                                        </section>
+                                                    }
+                                                </p>
+                                            }
+                                        </details>
+                                    )
+                                }
                             })}
                         </section>
                     </details>
@@ -239,7 +242,7 @@ const Home = ({trajectory, subpage}) => {
                             about
                         </summary>
                         {projects && projects.map((p) => {
-                            if (p.projectTitle === "about") {
+                            if (p.projectTitle === "format") {
                                 return (
                                     <section className={"L1-container"}>
                                         {/*<p>{serialize(p.projectDescription)}</p>*/}
