@@ -1,5 +1,5 @@
 .button-circle {
-    border: 3px solid black;
+    border: 2px dotted black;
     background-color: white;
     border-radius: 50%;
     height: 50px;
@@ -42,7 +42,7 @@ hr {
     left: 20px;
     height: 50px;
     background-color: white;
-    border: 3px solid black;
+    border: 2px dotted black;
     border-radius: 20px;
     text-align: center;
 
