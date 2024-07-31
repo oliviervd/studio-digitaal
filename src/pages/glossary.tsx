@@ -30,22 +30,24 @@ const Glossary = ({sub, glossary}) => {
                         {concept.description &&
                             <div className={"indent-border-left"}>
                                 <p>{serialize(concept.description)}</p>
-                                {concept.references && concept.references.map((ref, idx) => {
-                                    return (
-                                        <details key={idx}>
-                                            <summary
-                                                style={{textDecoration: "underline", fontWeight: "300"}}>sources
-                                            </summary>
-                                            <div className={"indent-border-left"}>
-                                                <ol className={"index-container"}>
-                                                    <li>
-                                                        <a className={"source"} href={ref.url}>{ref.source}</a>
-                                                    </li>
-                                                </ol>
-                                            </div>
-                                        </details>
-                                    );
-                                })}
+                                <details>
+                                    <summary
+                                        style={{textDecoration: "underline", fontWeight: "300"}}>sources
+                                    </summary>
+                                    <div className={"indent-border-left"}>
+                                        {concept.references &&
+                                            <ol>  {/* Note this line, moved the opening tag of ol outside the map function */}
+                                                {concept.references.map((ref, idx) => {
+                                                    return (
+                                                        <li key={idx}>
+                                                            <a href={ref.url}>{ref.source}</a>
+                                                        </li>
+                                                    )
+                                                })}
+                                            </ol>
+                                        }
+                                    </div>
+                                </details>
                             </div>
                         }
                     </details>
