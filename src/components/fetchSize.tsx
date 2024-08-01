@@ -7,7 +7,6 @@ const CalculateSize = () => {
 
     const [pageSize, setPageSize] = useState(0)
 
-
     useEffect(() => {
         const handleClick = () => {
             calculatePageSize();

@@ -82,6 +82,7 @@ const Block = (props) => {
         )
 
     }
+
     // todo: code snippet
     // todo: add possibility to copy to clipboard
 

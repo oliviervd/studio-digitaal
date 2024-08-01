@@ -7,7 +7,9 @@ import {colors_dict} from "../utils/colors";
 const DigitizationProcess = () => {
     const supabaseClient = getSupabaseBrowserClient();
 
-    //todo: put all in object state?
+    //todo: put all in collections in a shared state?
+    //todo: use cookies for data?
+
     const [objects, setObjects] = useState([]);
     const [agents, setAgents] = useState([])
     const [exhibitions, setExhibitions] = useState([])
