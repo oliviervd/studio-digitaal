@@ -22,7 +22,7 @@ const Collection = ({type}) => {
             setLoading(true)
             setResults([])
             try {
-                const response = await fetch(`${BASE_URI}color-api/${color}`)
+                const response = await fetch(`${BASE_URI}color-api/${color}?image=true`)
                 const data = await response.json()
                 setLoading(false)
                 setResults(data)
@@ -32,6 +32,8 @@ const Collection = ({type}) => {
         }
         fetchObjects()
     },[color])
+
+    console.log(results)
 
     useEffect(()=>{
         document.body.style.fontFamily = font;
@@ -103,12 +105,13 @@ const Collection = ({type}) => {
 
                         {view === "tiles" &&
                             <div className={"collection--container"}>
-                                {results.map((object, index) => {
+                                {results["GecureerdeCollectie.bestaatUit"] && results["GecureerdeCollectie.bestaatUit"][0].map((object, index) => {
+                                    console.log(object)
                                     return (
                                         <div id={index}>
-                                            {object.iiif_image_uris[0] &&
+                                            {object['@id'] &&
                                                 <img
-                                                    src={object.iiif_image_uris[0].replace("/full/0/default.jpg", "/300,/0/default.jpg")}
+                                                    src={object['@id'].replace("/full/0/default.jpg", "/300,/0/default.jpg")}
                                                     style={{height: "100px", width: "auto", margin: "auto"}}/>
                                             }
                                         </div>
@@ -119,17 +122,17 @@ const Collection = ({type}) => {
 
                         {view === "list" &&
                             <div>
-                                {results.map((object, index) => {
+                                {results["GecureerdeCollectie.bestaatUit"] && results["GecureerdeCollectie.bestaatUit"][0].map((object, index) => {
                                     return (
                                         <section key={index}>
                                             <details id={index} ref={(el) => (detailsRefs.current[index] = el)}>
-                                                <summary>{object.objectNumber}</summary>
+                                                <summary>{object["cidoc:P138_represents"]["@id"]}</summary>
                                                 <section className={"indent-border-left"}>
                                                     <details>
                                                         <summary>image</summary>
-                                                        {object.iiif_image_uris[0] &&
+                                                        {object["@id"] &&
                                                             <img
-                                                                src={object.iiif_image_uris[0].replace("/full/0/default.jpg", "/1000,/0/default.jpg")}/>
+                                                                src={object["@id"].replace("/full/0/default.jpg", "/1000,/0/default.jpg")}/>
                                                         }
                                                     </details>
                                                 </section>
