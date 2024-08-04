@@ -49,7 +49,7 @@ const ApiDocs = (props) => {
     }
 
     return(
-        <div>
+        <div className={"API-DOC"}>
             <Header language={language} changeLang={changeLang}
                     handleFontChange={handleFontChange} font={font}
             />
@@ -61,16 +61,25 @@ const ApiDocs = (props) => {
                 <section className={"nest-master"}>
                     {docs["articles"] && docs["articles"].map((doc) => {
                         console.log(doc)
-                        return(
-                            <details>
-                                <summary>{doc.article.projectTitle}</summary>
+                        if (doc.article.projectTitle == "about") {
+                            return (
                                 <p>{serialize(doc.article.projectDescription)}</p>
-                            </details>
-                        )
+                            )
+                        }
+                    })}
+                    {docs["articles"] && docs["articles"].map((doc) => {
+                        console.log(doc)
+                        if (doc.article.projectTitle !== "about") {
+                            return (
+                                <details>
+                                    <summary>{doc.article.projectTitle}</summary>
+                                    <p className={"L1-container"}>{serialize(doc.article.projectDescription)}</p>
+                                </details>
+                            )
+                        }
                     })}
                 </section>
             </div>
-
         </div>
     )
 

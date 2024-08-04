@@ -1,0 +1,7 @@
+.API-DOC {
+    code {
+        padding: 10px;
+        background-color: #e9fbe9;
+        border-left: 6px solid var(--main-green)
+    }
+}
