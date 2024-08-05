@@ -4,25 +4,29 @@ import {useState, useEffect, useRef} from "preact/hooks";
 import {openAllDetails} from "../utils/utils";
 
 // re-import collections if not in cache
+// todo: implement paging in UI
+// todo: add input container for fuzzy search.
 
 const Collection = ({type}) => {
 
     const [font, setFont] = useState("serif") //todo: make this like a context thing.
-    const [color, setColor] = useState("Artichoke");
+    const [color, setColor] = useState("Pullman Brown (UPS Brown)");
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(true);
     const [collapse, setCollapse] = useState(true); // todo: add this to the collapse button.
     const [view, setView] = useState("tiles");
+    const [pageNumber, setPageNumber] = useState(1)
     const detailsRefs = useRef([]);
     const BASE_URI = import.meta.env.VITE_REST_API_URL;
-    console.log(BASE_URI)
+    const [apiRequest, setApiRequest] = useState(`${BASE_URI}color-api/${color}?image=true`)
 
     useEffect(()=>{
         const fetchObjects = async() => {
             setLoading(true)
             setResults([])
+            setApiRequest(`${BASE_URI}color-api/${color}?image=true&pageNumber=${pageNumber}`)
             try {
-                const response = await fetch(`${BASE_URI}color-api/${color}?image=true`)
+                const response = await fetch(apiRequest)
                 const data = await response.json()
                 setLoading(false)
                 setResults(data)
@@ -33,7 +37,6 @@ const Collection = ({type}) => {
         fetchObjects()
     },[color])
 
-    console.log(results)
 
     useEffect(()=>{
         document.body.style.fontFamily = font;
@@ -54,79 +57,89 @@ const Collection = ({type}) => {
                 <div className={"left--panel"}>
                     {type === "colors" &&
                         <p>the list of <span><a href={"https://www.w3.org/wiki/CSS/Properties/color/keywords"}>CSS colors</a></span> below
-                            are used to color-tag digital reproductions of the collection. This list can also be
-                            retrieved via the following endpoint:</p>
+                            are used to color-tag digital reproductions of the collection. Choose one of the colors in the list below, or search with a personalized color in the input box above.</p>
                     }
                     <hr/>
                     <hr/>
+
+                    <form  onSubmit={(e) => {
+                        e.preventDefault();
+                        setColor(e.target.elements.colorInput.value);
+                    }}>
+                        <input name={"colorInput"} type={"text"} placeholder={"what color comes to mind?"} style={{fontFamily: font}}/>
+                    </form>
+
+                    <hr/>
+                    <hr/>
+
                     <CollectionNest collection={type} color={color} setColor={setColor}/>
                     <hr style={{marginTop: "20px"}}/>
                     <hr/>
                 </div>
                 <div></div>
                 <div className={"nest-master"}>
-                    {loading &&
-                        <div>
-                            <div className={"process__bubble"} style={{backgroundColor:"#02dc00", borderColor:"white", marginTop: "20px"}}>
-                                <a href={`${BASE_URI}color-api/${color}`} style={{color:"white"}}>requesting data
-                                    from {`${BASE_URI}color-api/${color}`}</a>
-                            </div>
-                        </div>
-                    }
 
-                    {!loading &&
-                        <div className={"process__bubble"} style={{marginTop: "20px"}}>
-                            <a href={`${BASE_URI}color-api/${color}`}> displaying data from {`${BASE_URI}color-api/${color}`}</a>
-                        </div>
-
-                    }
+                    <div className={"process__bubble"} style={{marginTop: "20px"}}>
+                        <a href={loading ? apiRequest : `${BASE_URI}color-api/${color}`}>
+                            {loading ? "requesting" : "displaying"} data from {apiRequest}
+                        </a>
+                    </div>
 
                     {!loading && (results.length === 0) &&
                         <p>there are no objects with that color in the collection</p>
                     }
 
                     <div>
-                        <nav style={{display: "flex", justifyContent: "end", gap: "10px", flexFlow: "row"}}>
-                            <div className={"button__bubble"}>
-                                <a onClick={()=>{setView('tiles')}}>show grid</a>
+                        <nav style={{display: "flex", justifyContent: "space-between", gap: "10px", flexFlow: "row"}}>
+                            <div className={"button__bubble"} style={{justifyContent: "start"}}>
+                                <a>{loading ? "counting" : results['hydra:totalItems']} total entities</a>
                             </div>
-                            <div className={"button__bubble"}>
-                                <a onClick={()=>{setView('list')}}>show list</a>
-                            </div>
-                            {!loading && (results.length !== 0) && (view === "list") &&
-                                <div className={"button__bubble"}>
-                                    <a onClick={() => openAllDetails(detailsRefs)}> open all </a>
+                            {!loading &&
+                                <div style={{display: "flex", justifyContent: "space-between", gap: "10px", flexFlow: "row"}}>
+                                    <div className={"button__bubble"}><a>previous set</a></div>
+                                    <div className={"button__bubble"}><a>next set</a></div>
                                 </div>
                             }
+
+                            <div style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                gap: "10px",
+                                flexFlow: "row"
+                            }}>
+                                <div className={"button__bubble"}>
+                                    <a onClick={() => {
+                                        setView('tiles')
+                                    }}>show grid</a>
+                                </div>
+                                <div className={"button__bubble"}>
+                                    <a onClick={() => {
+                                        setView('list')
+                                    }}>show list</a>
+                                </div>
+                                {!loading && (results.length !== 0) && (view === "list") &&
+                                    <div className={"button__bubble"}>
+                                        <a onClick={() => openAllDetails(detailsRefs)}> open all </a>
+                                    </div>
+                                }
+                            </div>
                         </nav>
 
                         <hr style={{marginTop: "20px"}}/>
                         <hr/>
 
-                        {view === "tiles" &&
-                            <div className={"collection--container"}>
-                                {results["GecureerdeCollectie.bestaatUit"] && results["GecureerdeCollectie.bestaatUit"].map((object, index) => {
-                                    console.log(object)
-                                    return (
-                                        <div id={index}>
-                                            {object && object['@id'] &&
-                                                <img
-                                                    src={object['@id'].replace("/full/0/default.jpg", "/300,/0/default.jpg")}
-                                                    style={{height: "100px", width: "auto", margin: "auto"}}/>
-                                            }
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        }
-
-                        {view === "list" &&
-                            <div>
-                                {results["GecureerdeCollectie.bestaatUit"] && results["GecureerdeCollectie.bestaatUit"].map((object, index) => {
-                                    console.log(object)
-                                    return (
-                                        <section key={index}>
-                                            {object && object['cidoc:P138_represents'] &&
+                        <div className={view === "tiles" ? "collection--container" : ""}>
+                            {results["GecureerdeCollectie.bestaatUit"] && results["GecureerdeCollectie.bestaatUit"].map((object, index) => (
+                                <div id={index}>
+                                    {object && (
+                                        view === "tiles" ? (
+                                            object['@id'] &&
+                                            <img
+                                                src={object['@id'].replace("/full/0/default.jpg", "/300,/0/default.jpg")}
+                                                style={{height: "100px", width: "auto", margin: "auto"}}/>
+                                        ) : (
+                                            object['cidoc:P138_represents'] &&
+                                            <section key={index}>
                                                 <details id={index} ref={(el) => (detailsRefs.current[index] = el)}>
                                                     <summary>{object["cidoc:P138_represents"]["@id"]}</summary>
                                                     <section className={"indent-border-left"}>
@@ -139,12 +152,12 @@ const Collection = ({type}) => {
                                                         </details>
                                                     </section>
                                                 </details>
-                                            }
-                                        </section>
-                                    )
-                                })}
-                            </div>
-                        }
+                                            </section>
+                                        )
+                                    )}
+                                </div>
+                            ))}
+                        </div>
 
                     </div>
                 </div>
