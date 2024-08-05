@@ -105,11 +105,11 @@ const Collection = ({type}) => {
 
                         {view === "tiles" &&
                             <div className={"collection--container"}>
-                                {results["GecureerdeCollectie.bestaatUit"] && results["GecureerdeCollectie.bestaatUit"][0].map((object, index) => {
+                                {results["GecureerdeCollectie.bestaatUit"] && results["GecureerdeCollectie.bestaatUit"].map((object, index) => {
                                     console.log(object)
                                     return (
                                         <div id={index}>
-                                            {object['@id'] &&
+                                            {object && object['@id'] &&
                                                 <img
                                                     src={object['@id'].replace("/full/0/default.jpg", "/300,/0/default.jpg")}
                                                     style={{height: "100px", width: "auto", margin: "auto"}}/>
@@ -122,21 +122,24 @@ const Collection = ({type}) => {
 
                         {view === "list" &&
                             <div>
-                                {results["GecureerdeCollectie.bestaatUit"] && results["GecureerdeCollectie.bestaatUit"][0].map((object, index) => {
+                                {results["GecureerdeCollectie.bestaatUit"] && results["GecureerdeCollectie.bestaatUit"].map((object, index) => {
+                                    console.log(object)
                                     return (
                                         <section key={index}>
-                                            <details id={index} ref={(el) => (detailsRefs.current[index] = el)}>
-                                                <summary>{object["cidoc:P138_represents"]["@id"]}</summary>
-                                                <section className={"indent-border-left"}>
-                                                    <details>
-                                                        <summary>image</summary>
-                                                        {object["@id"] &&
-                                                            <img
-                                                                src={object["@id"].replace("/full/0/default.jpg", "/1000,/0/default.jpg")}/>
-                                                        }
-                                                    </details>
-                                                </section>
-                                            </details>
+                                            {object && object['cidoc:P138_represents'] &&
+                                                <details id={index} ref={(el) => (detailsRefs.current[index] = el)}>
+                                                    <summary>{object["cidoc:P138_represents"]["@id"]}</summary>
+                                                    <section className={"indent-border-left"}>
+                                                        <details>
+                                                            <summary>image</summary>
+                                                            {object["@id"] &&
+                                                                <img
+                                                                    src={object["@id"].replace("/full/0/default.jpg", "/1000,/0/default.jpg")}/>
+                                                            }
+                                                        </details>
+                                                    </section>
+                                                </details>
+                                            }
                                         </section>
                                     )
                                 })}
