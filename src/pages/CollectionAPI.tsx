@@ -4,18 +4,20 @@ import {fetchPayload} from "../utils/fetchPayload";
 import Header from "../components/header";
 import serialize from "../utils/serialize";
 import {useLanguage} from "../utils/languageProvider";
+import {i} from "@tanstack/query-core/build/legacy/queryClient-Ho-z40Sw";
+import NestedArticle from "../components/nestedArticle";
 
 const ApiDocs = (props) => {
     const {language, setLanguage} = useLanguage()
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
     const [font, setFont] = useState("serif")
     const [docs, setDocs] = useState([])
+    const [articles, setArticles] = useState([])
     const [about, setAbout] = useState([])
 
     // fetch data
     useEffect(() => {
         fetchPayload(baseURI, "studios", 10, language).then((data)=>{
-            console.log(serialize(data["docs"][3]["description"]));
             setAbout(serialize(data["docs"][3]["description"]));
         })
     }, [language]);
@@ -32,6 +34,18 @@ const ApiDocs = (props) => {
         }
         fetchDocumentation()
     }, [language])
+
+    useEffect(()=>{
+        const fetchArticles = async() => {
+            try {
+                const data = await fetchPayload(baseURI, "StudioDigitalProject", 1000, "en")
+                setArticles(data)
+            } catch(e) {
+                console.log(e)
+            }
+        }
+        fetchArticles();
+    },[language])
 
     useEffect(()=>{
         document.body.style.fontFamily = font;
@@ -60,7 +74,6 @@ const ApiDocs = (props) => {
                 <div/>
                 <section className={"nest-master"}>
                     {docs["articles"] && docs["articles"].map((doc) => {
-                        console.log(doc)
                         if (doc.article.projectTitle == "about") {
                             return (
                                 <p>{serialize(doc.article.projectDescription)}</p>
@@ -68,12 +81,18 @@ const ApiDocs = (props) => {
                         }
                     })}
                     {docs["articles"] && docs["articles"].map((doc) => {
-                        console.log(doc)
                         if (doc.article.projectTitle !== "about") {
                             return (
                                 <details>
                                     <summary>{doc.article.projectTitle}</summary>
-                                    <p className={"L1-container"}>{serialize(doc.article.projectDescription)}</p>
+                                    <p className={"L1-container"}>{serialize(doc.article.projectDescription)}
+                                        {doc.article.subProjects.map((sub) => {
+                                            return(
+                                                <NestedArticle articles={articles} id={sub.project}/>
+                                            )
+                                        })}
+
+                                    </p>
                                 </details>
                             )
                         }

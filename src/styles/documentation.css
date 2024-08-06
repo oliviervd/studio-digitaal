@@ -1,0 +1,17 @@
+.documentation h1 {
+    border: var(--main-green) dotted 2px;
+    padding: 10px;
+    border-radius: 25px;
+    width: fit-content;
+    color: var(--main-green);
+}
+
+.documentation p code {
+    background-color: #e9fbe9;
+    border-left: #02dc00 4px solid;
+    padding: 10px;
+
+    span {
+
+    }
+}
