@@ -24,7 +24,7 @@ const CollectionNest = ({ collection, setColor }) => {
             <div className={"process__container"} style={{overflowY: "auto", overflowX: "hidden", height: "100%"}}>
                 {Object.entries(colors).map(([colorCode, colorName]) => (
                     <div className={"process__bubble"} style={{maxWidth: "90%", justifyContent: "center", margin: "auto"}}>
-                        <p key={colorCode} onClick={()=>setColor(colorName)}>{colorName}</p>
+                        <p key={colorCode} onClick={()=>setColor(colorName, false)}>{colorName}</p>
                     </div>
                 ))}
             </div>

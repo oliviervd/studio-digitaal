@@ -11,6 +11,7 @@ const Collection = ({type}) => {
 
     const [font, setFont] = useState("serif") //todo: make this like a context thing.
     const [color, setColor] = useState("Pullman Brown (UPS Brown)");
+    const [strict, setStrict] = useState(true)
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(true);
     const [collapse, setCollapse] = useState(true); // todo: add this to the collapse button.
@@ -20,11 +21,17 @@ const Collection = ({type}) => {
     const BASE_URI = import.meta.env.VITE_REST_API_URL;
     const [apiRequest, setApiRequest] = useState(`${BASE_URI}color-api/${color}?image=true`)
 
+    function changeColor(color, strict) {
+        setColor(color);
+        setStrict(strict);
+    }
+
     useEffect(()=>{
         const fetchObjects = async() => {
             setLoading(true)
             setResults([])
-            setApiRequest(`${BASE_URI}color-api/${color}?image=true&pageNumber=${pageNumber}`)
+            const currentApiRequest = `${BASE_URI}color-api/${color}?image=true&fuzzy=${strict}&pageNumber=${pageNumber}`;
+            setApiRequest(currentApiRequest);
             try {
                 const response = await fetch(apiRequest)
                 const data = await response.json()
@@ -35,7 +42,7 @@ const Collection = ({type}) => {
             }
         }
         fetchObjects()
-    },[color])
+    },[color, pageNumber, strict])
 
 
     useEffect(()=>{
@@ -49,6 +56,7 @@ const Collection = ({type}) => {
     const handleFontChange = (event) => {
         setFont(event.target.value)
     }
+
 
     return (
         <div>
@@ -71,8 +79,7 @@ const Collection = ({type}) => {
 
                     <hr/>
                     <hr/>
-
-                    <CollectionNest collection={type} color={color} setColor={setColor}/>
+                    <CollectionNest collection={type} color={color} setColor={changeColor}/>
                     <hr style={{marginTop: "20px"}}/>
                     <hr/>
                 </div>
