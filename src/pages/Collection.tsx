@@ -26,23 +26,26 @@ const Collection = ({type}) => {
         setStrict(strict);
     }
 
+    // handle fetching data
     useEffect(()=>{
         const fetchObjects = async() => {
-            setLoading(true)
-            setResults([])
+            setLoading(true) // set loading true when fetching starts
+            setResults([]) // clear results before new fetch
             const currentApiRequest = `${BASE_URI}color-api/${color}?image=true&fuzzy=${strict}&pageNumber=${pageNumber}`;
-            setApiRequest(currentApiRequest);
+            setApiRequest(currentApiRequest)
+
             try {
-                const response = await fetch(apiRequest)
+                const response = await fetch(currentApiRequest)
                 const data = await response.json()
-                setLoading(false)
-                setResults(data)
+                setLoading(false) // set loading to false when fetch completes
+                setResults(data) // update results with fetched data.
             } catch(error) {
                 console.log("Error fetching collection: ", error);
+                setLoading(false) // ensure loading state is reset even in case of an error.
             }
         }
         fetchObjects()
-    },[color, pageNumber, strict])
+    },[color, pageNumber, strict, BASE_URI])
 
 
     useEffect(()=>{
@@ -73,6 +76,7 @@ const Collection = ({type}) => {
                     <form  onSubmit={(e) => {
                         e.preventDefault();
                         setColor(e.target.elements.colorInput.value);
+                        setStrict(true)
                     }}>
                         <input name={"colorInput"} type={"text"} placeholder={"what color comes to mind?"} style={{fontFamily: font}}/>
                     </form>
