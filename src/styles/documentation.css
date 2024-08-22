@@ -8,10 +8,9 @@
 
 .documentation p code {
     background-color: #e9fbe9;
-    border-left: #02dc00 4px solid;
+    border-left: var(--main-green) 4px solid;
     padding: 10px;
 
     span {
-
     }
 }

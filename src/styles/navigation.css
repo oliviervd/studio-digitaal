@@ -8,7 +8,7 @@ header {
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: #02dc00 dotted 3px;
+    border-bottom: var(--main-green) dotted 3px;
 }
 
 
