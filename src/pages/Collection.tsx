@@ -1,11 +1,10 @@
 import Header from "../components/header";
 import CollectionNest from "../components/collectionNest";
-import {useState, useEffect, useRef} from "preact/hooks";
+import {useState, useEffect, useRef, useCallback} from "preact/hooks";
 import {openAllDetails} from "../utils/utils";
 
 // re-import collections if not in cache
 // todo: implement paging in UI
-// todo: add input container for fuzzy search.
 
 const Collection = ({type}) => {
 
@@ -14,38 +13,37 @@ const Collection = ({type}) => {
     const [strict, setStrict] = useState(true)
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [collapse, setCollapse] = useState(true); // todo: add this to the collapse button.
     const [view, setView] = useState("tiles");
     const [pageNumber, setPageNumber] = useState(1)
+
     const detailsRefs = useRef([]);
     const BASE_URI = import.meta.env.VITE_REST_API_URL;
     const [apiRequest, setApiRequest] = useState(`${BASE_URI}color-api/${color}?image=true`)
 
-    function changeColor(color, strict) {
+    const changeColor = useCallback((color, strict) => {
         setColor(color);
         setStrict(strict);
-    }
+    }, []);
 
-    // handle fetching data
-    useEffect(()=>{
-        const fetchObjects = async() => {
-            setLoading(true) // set loading true when fetching starts
-            setResults([]) // clear results before new fetch
-            const currentApiRequest = `${BASE_URI}color-api/${color}?image=true&fuzzy=${strict}&pageNumber=${pageNumber}`;
-            setApiRequest(currentApiRequest)
-
-            try {
-                const response = await fetch(currentApiRequest)
-                const data = await response.json()
-                setLoading(false) // set loading to false when fetch completes
-                setResults(data) // update results with fetched data.
-            } catch(error) {
-                console.log("Error fetching collection: ", error);
-                setLoading(false) // ensure loading state is reset even in case of an error.
-            }
+    const fetchObjects = useCallback(async (color, strict, page) => {
+        setLoading(true); // set loading true when fetching starts
+        setResults([]); // clear results before new fetch
+        const url = `${BASE_URI}color-api/${color}?image=true&fuzzy=${strict}&pageNumber=${page}`;
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            setLoading(false); // set loading to false when fetch completes
+            setResults(data); // update results with fetched data.
+            setApiRequest(url);
+        } catch (error) {
+            console.log("Error fetching collection: ", error);
+            setLoading(false); // ensure loading state is reset even in case of an error.
         }
-        fetchObjects()
-    },[color, pageNumber, strict, BASE_URI])
+    }, [BASE_URI]);
+
+    useEffect(()=> {
+        fetchObjects(color, strict, pageNumber)
+    },[color, strict, pageNumber, BASE_URI])
 
 
     useEffect(()=>{
@@ -58,6 +56,19 @@ const Collection = ({type}) => {
 
     const handleFontChange = (event) => {
         setFont(event.target.value)
+    }
+
+    const handlePreviousPage = () => {
+        if (pageNumber > 1) {
+            setPageNumber(prevPage => prevPage - 1);
+        }
+        console.log(pageNumber)
+
+    }
+
+    const handleNextPage = () => {
+        setPageNumber(prevPage => prevPage + 1);
+        console.log(pageNumber)
     }
 
 
@@ -77,6 +88,7 @@ const Collection = ({type}) => {
                         e.preventDefault();
                         setColor(e.target.elements.colorInput.value);
                         setStrict(true)
+                        setPageNumber(1)
                     }}>
                         <input name={"colorInput"} type={"text"} placeholder={"what color comes to mind?"} style={{fontFamily: font}}/>
                     </form>
@@ -107,8 +119,12 @@ const Collection = ({type}) => {
                             </div>
                             {!loading &&
                                 <div style={{display: "flex", justifyContent: "space-between", gap: "10px", flexFlow: "row"}}>
-                                    <div className={"button__bubble"}><a>previous set</a></div>
-                                    <div className={"button__bubble"}><a>next set</a></div>
+                                    {pageNumber > 1 && (
+                                        <div className={"button__bubble"}><a onClick={handlePreviousPage}>previous set</a></div>
+                                    )}
+                                    {results["hydra:view"]?.["hydra:next"] && (
+                                        < div className={"button__bubble"}><a onClick={handleNextPage}>next set</a></div>
+                                    )}
                                 </div>
                             }
 

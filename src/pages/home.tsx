@@ -17,7 +17,6 @@ import Glossary from "./glossary";
 import ButtonMoveUp from "../components/buttonMoveUp";
 import CalculateSize from "../components/fetchSize";
 import SizeBubble from "../components/sizeBubble";
-import logo from "../assets/Pixel-Logo-41-frames-transparent.gif";
 import DigitizationProcess from "../components/digitizationProcess";
 
 const Home = ({trajectory, subpage}) => {
@@ -152,9 +151,9 @@ const Home = ({trajectory, subpage}) => {
                 </div>
                 <div></div>
                 <section className={"nest-master"}>
-                {logoDesc &&
+                    {logoDesc &&
                         <section>
-                        {projects && projects.map((p) => {
+                            {projects && projects.map((p) => {
                                 console.log(p)
                                 if (p.projectTitle == "logo-design") {
                                     console.log("found")
@@ -174,9 +173,9 @@ const Home = ({trajectory, subpage}) => {
 
                     <details id={'research'} style={{paddingBottom: "10px"}}>
 
-                            <summary>
-                                research <SizeBubble size={trajectories.length}/>
-                            </summary>
+                        <summary>
+                            research <SizeBubble size={trajectories.length}/>
+                        </summary>
 
                         <section className={"L1-container"}>
                             {trajectories.map((traject, index) => {
