@@ -28,7 +28,7 @@ const Collection = ({type}) => {
     const fetchObjects = useCallback(async (color, strict, page) => {
         setLoading(true); // set loading true when fetching starts
         setResults([]); // clear results before new fetch
-        const url = `${BASE_URI}color-api/${color}?image=true&fuzzy=${strict}&pageNumber=${page}`;
+        const url = `${BASE_URI}color-api/${color}?image=true&fuzzy=${strict}&page=${page}`;
         try {
             const response = await fetch(url);
             const data = await response.json();
