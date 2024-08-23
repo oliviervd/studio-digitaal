@@ -90,6 +90,7 @@ form {
 
     p, a {
         text-align: center;
+        color: black;
         margin: 5px;
         font-size: var(--font-size-s);
     }
@@ -97,6 +98,11 @@ form {
         display: flex;
     }
 
+}
+
+.process__bubble.green {
+    background-color: var(--main-green);
+    border-color: white;
 }
 
 .process__bubble:hover {
@@ -115,6 +121,7 @@ form {
 
     p, a {
         text-align: center;
+        color: black;
         margin: 5px;
         font-size: var(--font-size-s);
     }

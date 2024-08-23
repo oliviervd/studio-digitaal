@@ -4,7 +4,6 @@ import {useState, useEffect, useRef, useCallback} from "preact/hooks";
 import {openAllDetails} from "../utils/utils";
 
 // re-import collections if not in cache
-// todo: implement paging in UI
 
 const Collection = ({type}) => {
 
@@ -100,10 +99,11 @@ const Collection = ({type}) => {
                     <hr/>
                 </div>
                 <div></div>
+
                 <div className={"nest-master"}>
 
-                    <div className={"process__bubble"} style={{marginTop: "20px"}}>
-                        <a href={loading ? apiRequest : `${BASE_URI}color-api/${color}`}>
+                    <div className={"process__bubble green"} style={{marginTop: "20px"}}>
+                        <a className={""} href={loading ? apiRequest : `${BASE_URI}color-api/${color}`}>
                             {loading ? "requesting" : "displaying"} data from {apiRequest}
                         </a>
                     </div>

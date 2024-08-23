@@ -63,9 +63,9 @@ class Header extends Component {
                 <nav>
                     <FontChanger handleFontChange={handleFontChange}/>
                     <div id={"lang"} className={"nav__lang-container"}>
-                        <p id={'nl'} className={"disabled-link"}>nl</p>
-                        <p id={'en'} onClick={() => changeLang("en")}>en</p>
-                        <p id={'fr'} className={"disabled-link"}>fr</p>
+                        <p id={'nl'} className={""}>nl</p>
+                        <p id={'en'} onClick={() => changeLang("en")} className={"selected"}>en</p>
+                        <p id={'fr'} className={""}>fr</p>
                     </div>
                 </nav>
             </header>

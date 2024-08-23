@@ -32,13 +32,25 @@ header > nav {
 .nav__lang-container {
     display: flex;
     flex-direction: row;
+    height: 80%;
 
     > p {
         font-size: var(--font-size-s);
         padding-block-start: 0;
-        padding-left: 20px;
-        margin-top:0;
+        margin: auto auto ;
+        justify-content: center;
+        text-align: center;
+        border: var(--main-green) dotted 2px;
+        border-radius: 25px;
+        margin-left: 10px;
+        padding: 0 10px;
     }
+
+    > p.selected {
+        background-color: var(--main-green);
+        border-color: white;
+    }
+
 }
 
 @media (max-width: 800px) {
