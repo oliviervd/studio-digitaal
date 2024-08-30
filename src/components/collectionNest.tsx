@@ -3,23 +3,46 @@ import {useEffect, useState} from "preact/hooks";
 const CollectionNest = ({ collection, setColor }) => {
     const BASE_URI = import.meta.env.VITE_REST_API_URL;
     const [colors, setColors] = useState([]);
-    useEffect(() => {
-        const fetchColors = async() => {
-            try{
-                const response = await fetch(`${BASE_URI}colors`)
-                const data = await response.json()
-                setColors(data)
+    const [objects, setObjects] = useState([]);
 
-            } catch(error){
-                console.log("Error fetching colors: ", error)
+
+    useEffect(() => {
+        if (collection == "objects") {
+            const fetchObjects = async() => {
+                try {
+                    const response = await fetch(`${BASE_URI}id/objects`)
+                    const data = await response.json()
+                    setObjects(data)
+                } catch(e) {
+                    console.log('Error fetching objects:', e)
+                }
             }
+            fetchObjects();
         }
-        fetchColors();
+    }, []);
+
+
+    useEffect(() => {
+        if (collection == "colors") {
+            console.log("fetching colors")
+            const fetchColors = async() => {
+                try{
+                    const response = await fetch(`${BASE_URI}colors`)
+                    const data = await response.json()
+                    setColors(data)
+
+                } catch(error){
+                    console.log("Error fetching colors: ", error)
+                }
+            }
+            fetchColors();
+        }
     },[])
 
-    console.log(colors)
+    console.log(objects["GecureerdeCollectie.bestaatUit"])
 
-    if (collection === "colors") {
+    if (collection == "colors") {
+
         return (
             <div className={"process__container"} style={{overflowY: "auto", overflowX: "hidden", height: "100%"}}>
                 {Object.entries(colors).map(([colorCode, colorName]) => (
@@ -31,6 +54,16 @@ const CollectionNest = ({ collection, setColor }) => {
         )
     }
 
+    if (collection == "objects" && objects) {
+        return(
+            <div className={"process__container"} style={{overflowY: "auto"}}>
+                {Object.entries(objects).map((x) => (
+                    console.log(x['@id'])
+                ))}
+                <p>objects</p>
+            </div>
+        )
+    }
     return null;
 };
 

@@ -96,7 +96,7 @@ const DigitizationProcess = () => {
             <section>
                 <hr/>
                 <div className={"process__container"}>
-                    <CountingBox count={count["objects"]} loading={loading["objects"]} type={"objects"} active={false}/>
+                    <CountingBox count={count["objects"]} loading={loading["objects"]} type={"objects"} active={true}/>
                     <CountingBox count={count["images"]} loading={loading["images"]} type={"images"} active={false}/>
                     <CountingBox count={count["agents"]} loading={loading["agents"]} type={"agents"} active={false}/>
                     <CountingBox count={count["colors"]} loading={loading["colors"]} type={"colors"} active={true}/>

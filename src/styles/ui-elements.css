@@ -144,7 +144,6 @@ form {
 }
 
 .collection--container {
-
     margin-top: 20px;
     display: flex;
     flex-flow: row wrap;
@@ -155,4 +154,20 @@ form {
         justify-content: center;
         text-align: center;
     }
+}
+
+.image-container {
+    display: inline-block; /* Adjust the display type as needed */
+}
+
+.image-container img {
+    border: none;
+    transition: border 0.05s ease;
+    box-sizing: border-box; /* Ensures the border is included within the element's dimensions */
+    justify-content: center;
+    margin: auto;
+}
+
+.image-container img:hover {
+    border: 2px solid var(--main-green);
 }

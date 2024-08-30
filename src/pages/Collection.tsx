@@ -19,10 +19,15 @@ const Collection = ({type}) => {
     const BASE_URI = import.meta.env.VITE_REST_API_URL;
     const [apiRequest, setApiRequest] = useState(`${BASE_URI}color-api/${color}?image=true`)
 
+    console.log(type)
+
     const changeColor = useCallback((color, strict) => {
+        const url = `${BASE_URI}color-api/${color}?image=true&fuzzy=${strict}&page=1`;
+        setApiRequest(url);
         setColor(color);
         setStrict(strict);
-    }, []);
+        setPageNumber(1);
+    }, [BASE_URI]);
 
     const fetchObjects = useCallback(async (color, strict, page) => {
         setLoading(true); // set loading true when fetching starts
@@ -33,7 +38,6 @@ const Collection = ({type}) => {
             const data = await response.json();
             setLoading(false); // set loading to false when fetch completes
             setResults(data); // update results with fetched data.
-            setApiRequest(url);
         } catch (error) {
             console.log("Error fetching collection: ", error);
             setLoading(false); // ensure loading state is reset even in case of an error.
@@ -42,7 +46,7 @@ const Collection = ({type}) => {
 
     useEffect(()=> {
         fetchObjects(color, strict, pageNumber)
-    },[color, strict, pageNumber, BASE_URI])
+    },[fetchObjects, color, strict, pageNumber])
 
 
     useEffect(()=>{
@@ -51,7 +55,6 @@ const Collection = ({type}) => {
             document.body.style.lineHeight = "1.4";
         }
     },[font])
-
 
     const handleFontChange = (event) => {
         setFont(event.target.value)
@@ -62,7 +65,6 @@ const Collection = ({type}) => {
             setPageNumber(prevPage => prevPage - 1);
         }
         console.log(pageNumber)
-
     }
 
     const handleNextPage = () => {
@@ -76,27 +78,37 @@ const Collection = ({type}) => {
             <Header handleFontChange={handleFontChange} font={font} />
             <div className={"main--container"}>
                 <div className={"left--panel"}>
-                    {type === "colors" &&
-                        <p>the list of <span><a href={"https://www.w3.org/wiki/CSS/Properties/color/keywords"}>CSS colors</a></span> below
-                            are used to color-tag digital reproductions of the collection. Choose one of the colors in the list below, or search with a personalized color in the input box above.</p>
-                    }
-                    <hr/>
-                    <hr/>
+                            <p>the list of
+                                <span>
+                                    <a href={"https://www.w3.org/wiki/CSS/Properties/color/keywords"}>CSS colors</a>
+                                </span> below are used to color-tag digital reproductions of the collection. Choose one
+                                of the colors in the list below, or search with a personalized color in the input box
+                                above.
+                            </p>
 
-                    <form  onSubmit={(e) => {
-                        e.preventDefault();
-                        setColor(e.target.elements.colorInput.value);
-                        setStrict(true)
-                        setPageNumber(1)
-                    }}>
-                        <input name={"colorInput"} type={"text"} placeholder={"what color comes to mind?"} style={{fontFamily: font}}/>
-                    </form>
+                            <hr/>
+                            <hr/>
 
-                    <hr/>
-                    <hr/>
-                    <CollectionNest collection={type} color={color} setColor={changeColor}/>
-                    <hr style={{marginTop: "20px"}}/>
-                    <hr/>
+                            <form onSubmit={(e) => {
+                                e.preventDefault();
+                                const newColor = e.target.elements.colorInput.value;
+                                const newStrict = true;
+                                const url = `${BASE_URI}color-api/${newColor}?image=true&fuzzy=${newStrict}&page=1`;
+                                setApiRequest(url);
+                                setColor(newColor);
+                                setStrict(newStrict);
+                                setPageNumber(1);
+                            }}>
+                                <input name={"colorInput"} type={"text"} placeholder={"what color comes to mind?"}
+                                       style={{fontFamily: font}}/>
+                            </form>
+
+                            <hr/>
+                            <hr/>
+                            <CollectionNest collection={type} color={color} setColor={changeColor}/>
+                            <hr style={{marginTop: "20px"}}/>
+                            <hr/>
+
                 </div>
                 <div></div>
 
@@ -118,12 +130,19 @@ const Collection = ({type}) => {
                                 <a>{loading ? "counting" : results['hydra:totalItems']} total entities</a>
                             </div>
                             {!loading &&
-                                <div style={{display: "flex", justifyContent: "space-between", gap: "10px", flexFlow: "row"}}>
+                                <div style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    gap: "10px",
+                                    flexFlow: "row"
+                                }}>
                                     {pageNumber > 1 && (
-                                        <div className={"button__bubble"}><a onClick={handlePreviousPage}>previous set</a></div>
+                                        <div className={"button__bubble"}><a onClick={handlePreviousPage}>previous
+                                            set</a></div>
                                     )}
                                     {results["hydra:view"]?.["hydra:next"] && (
-                                        < div className={"button__bubble"}><a onClick={handleNextPage}>next set</a></div>
+                                        < div className={"button__bubble"}><a onClick={handleNextPage}>next set</a>
+                                        </div>
                                     )}
                                 </div>
                             }
@@ -157,16 +176,17 @@ const Collection = ({type}) => {
 
                         <div className={view === "tiles" ? "collection--container" : ""}>
                             {results["GecureerdeCollectie.bestaatUit"] && results["GecureerdeCollectie.bestaatUit"].map((object, index) => (
-                                <div id={index}>
+                                <div className="image-container" id={index}
+                                     key={index}>  {/* Ensure the className is applied and a unique key */}
                                     {object && (
                                         view === "tiles" ? (
                                             object['@id'] &&
                                             <img
                                                 src={object['@id'].replace("/full/0/default.jpg", "/300,/0/default.jpg")}
-                                                style={{height: "100px", width: "auto", margin: "auto"}}/>
+                                                style={{height: "100px", width: "auto", margin: "auto", paddingRight: "0"}}/>
                                         ) : (
                                             object['cidoc:P138_represents'] &&
-                                            <section key={index}>
+                                            <section>
                                                 <details id={index} ref={(el) => (detailsRefs.current[index] = el)}>
                                                     <summary>{object["cidoc:P138_represents"]["@id"]}</summary>
                                                     <section className={"indent-border-left"}>
