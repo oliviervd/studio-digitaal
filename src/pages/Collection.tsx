@@ -21,13 +21,17 @@ const Collection = ({type}) => {
 
     console.log(type)
 
-    const changeColor = useCallback((color, strict) => {
-        const url = `${BASE_URI}color-api/${color}?image=true&fuzzy=${strict}&page=1`;
+    const updateApiRequest = useCallback((color, strict, page)=>{
+        const url = `${BASE_URI}color-api/${color}?image=true&fuzzy=${strict}&page=${page}`;
         setApiRequest(url);
+    },[BASE_URI])
+
+    const changeColor = useCallback((color, strict) => {
+        updateApiRequest(color, strict, 1);
         setColor(color);
         setStrict(strict);
         setPageNumber(1);
-    }, [BASE_URI]);
+    }, [updateApiRequest]);
 
     const fetchObjects = useCallback(async (color, strict, page) => {
         setLoading(true); // set loading true when fetching starts
@@ -44,11 +48,6 @@ const Collection = ({type}) => {
         }
     }, [BASE_URI]);
 
-    useEffect(()=> {
-        fetchObjects(color, strict, pageNumber)
-    },[fetchObjects, color, strict, pageNumber])
-
-
     useEffect(()=>{
         document.body.style.fontFamily = font;
         if (font == "fantasy") {
@@ -62,23 +61,33 @@ const Collection = ({type}) => {
 
     const handlePreviousPage = () => {
         if (pageNumber > 1) {
-            setPageNumber(prevPage => prevPage - 1);
+            const newPage = pageNumber - 1;
+            updateApiRequest(color, strict, newPage);
+            setPageNumber(newPage);
         }
-        console.log(pageNumber)
     }
 
     const handleNextPage = () => {
-        setPageNumber(prevPage => prevPage + 1);
-        console.log(pageNumber)
+        const newPage = pageNumber + 1;
+        updateApiRequest(color, strict, newPage);
+        setPageNumber(newPage);
     }
 
+    useEffect(()=> {
+        fetchObjects(color, strict, pageNumber)
+    },[fetchObjects, color, strict, pageNumber])
+
+
+    useEffect(() => {
+        updateApiRequest(color, strict, pageNumber);
+    }, [color, strict, pageNumber, updateApiRequest]);
 
     return (
         <div>
             <Header handleFontChange={handleFontChange} font={font} />
             <div className={"main--container"}>
                 <div className={"left--panel"}>
-                            <p>the list of
+                            <p>the list of <span> </span>
                                 <span>
                                     <a href={"https://www.w3.org/wiki/CSS/Properties/color/keywords"}>CSS colors</a>
                                 </span> below are used to color-tag digital reproductions of the collection. Choose one
