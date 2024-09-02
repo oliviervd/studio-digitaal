@@ -94,13 +94,17 @@ const DigitizationProcess = () => {
     return(
         <div>
             <section>
+                <hr/><hr/>
+                <p>studio digitaal develops and explores interfaces displaying and connecting various collections from
+                    the museum demonstrating the capabilities and possibilities of its various APIs.</p>
                 <hr/>
                 <div className={"process__container"}>
                     <CountingBox count={count["objects"]} loading={loading["objects"]} type={"objects"} active={true}/>
                     <CountingBox count={count["images"]} loading={loading["images"]} type={"images"} active={false}/>
                     <CountingBox count={count["agents"]} loading={loading["agents"]} type={"agents"} active={false}/>
                     <CountingBox count={count["colors"]} loading={loading["colors"]} type={"colors"} active={true}/>
-                    <CountingBox count={count["exhibitions"]} loading={loading["exhibitions"]} type={"exhibitions"} active={false}/>
+                    <CountingBox count={count["exhibitions"]} loading={loading["exhibitions"]} type={"exhibitions"}
+                                 active={true}/>
                 </div>
             </section>
         </div>

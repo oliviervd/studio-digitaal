@@ -5,6 +5,7 @@ import ApiDocs from "./pages/CollectionAPI";
 import {LanguageProvider} from "./utils/languageProvider";
 import Error from "./utils/Error";
 import Collection from "./pages/Collection";
+import Exhibitions from "./pages/collections/exhibitions";
 
 const App = () => {
 
@@ -17,6 +18,7 @@ const App = () => {
               <ApiDocs path={"/api-documentation/"}/>
               <Collection path={"/collection/:type"}/>
               <Error path={"/error"} />
+              <Exhibitions path={"/collection/exhibitions"}/>
           </Router>
       </LanguageProvider>
   )
