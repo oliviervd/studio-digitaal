@@ -14,15 +14,16 @@ const Collection = ({type}) => {
     const [loading, setLoading] = useState(true);
     const [view, setView] = useState("tiles");
     const [pageNumber, setPageNumber] = useState(1)
+    const [limit, setLimit] = useState(30)
 
     const detailsRefs = useRef([]);
     const BASE_URI = import.meta.env.VITE_REST_API_URL;
-    const [apiRequest, setApiRequest] = useState(`${BASE_URI}color-api/${color}?image=true`)
+    const [apiRequest, setApiRequest] = useState(`${BASE_URI}color-api/${color}?image=true&itemsPerPage=${limit}`)
 
     console.log(type)
 
     const updateApiRequest = useCallback((color, strict, page)=>{
-        const url = `${BASE_URI}color-api/${color}?image=true&fuzzy=${strict}&page=${page}`;
+        const url = `${BASE_URI}color-api/${color}?image=true&fuzzy=${strict}&page=${page}&itemsPerPage=${limit}`;
         setApiRequest(url);
     },[BASE_URI])
 
@@ -36,7 +37,7 @@ const Collection = ({type}) => {
     const fetchObjects = useCallback(async (color, strict, page) => {
         setLoading(true); // set loading true when fetching starts
         setResults([]); // clear results before new fetch
-        const url = `${BASE_URI}color-api/${color}?image=true&fuzzy=${strict}&page=${page}`;
+        const url = `${BASE_URI}color-api/${color}?image=true&fuzzy=${strict}&page=${page}&itemsPerPage=${limit}`;
         try {
             const response = await fetch(url);
             const data = await response.json();
@@ -135,9 +136,31 @@ const Collection = ({type}) => {
 
                     <div>
                         <nav style={{display: "flex", justifyContent: "space-between", gap: "10px", flexFlow: "row"}}>
-                            <div className={"button__bubble"} style={{justifyContent: "start"}}>
-                                <a>{loading ? "counting" : results['hydra:totalItems']} total entities</a>
+                            <div style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                gap: "10px",
+                                flexFlow: "row"
+                            }}>
+                                <div className={"button__bubble"} style={{justifyContent: "start"}}>
+                                    <a>{loading ? "counting" : results['hydra:totalItems']} total entities</a>
+                                </div>
+                                {/*<div className={"button__bubble"}>
+                                    <form
+                                        style={{height: "auto", padding: "0"}}
+                                        onSubmit={(e)=>{
+                                            e.preventDefault();
+                                            const newLimit = e.target.elements.limitInput.value;
+                                        }}
+                                    >
+                                        <input
+                                            placeholder={"number of results"}
+                                            name={"limitInput"}
+                                        />
+                                    </form>
+                                </div>*/}
                             </div>
+
                             {!loading &&
                                 <div style={{
                                     display: "flex",
