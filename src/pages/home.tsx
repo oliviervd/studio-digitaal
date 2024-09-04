@@ -26,6 +26,7 @@ const Home = ({trajectory, subpage}) => {
     const [trajectories, setTrajectories] = useState([])
     const [projects, setProjects] = useState([])
     const [glossary, setGlossary] = useState<string>([]);
+    const [agents, setAgents] = useState([]);
     const [logoDesc, openLogoDesc] = useState(false)
     const [about, setAbout] = useState([])
     const [font, setFont] = useState("serif")
@@ -123,6 +124,12 @@ const Home = ({trajectory, subpage}) => {
     }, [language])
 
     useEffect(()=>{
+        fetchPayload(baseURI, "agents", 100, language).then((data)=>{
+            setAgents(data["docs"])
+        })
+    })
+
+    useEffect(()=>{
         document.body.style.fontFamily = font;
         if (font == "fantasy") {
             document.body.style.lineHeight = "1.4";
@@ -154,10 +161,10 @@ const Home = ({trajectory, subpage}) => {
                     {logoDesc &&
                         <section>
                             {projects && projects.map((p) => {
-                                console.log(p)
+                                //console.log(p)
                                 if (p.projectTitle == "logo-design") {
-                                    console.log("found")
-                                    console.log(serialize(p.projectDescription))
+                                    //console.log("found")
+                                    //console.log(serialize(p.projectDescription))
                                     return (
                                         <i>
                                             {serialize(p.projectDescription)}
@@ -179,7 +186,7 @@ const Home = ({trajectory, subpage}) => {
 
                         <section className={"L1-container"}>
                             {trajectories.map((traject, index) => {
-                                console.log(traject)
+                                //console.log(traject)
                                 if (traject.trajectoryTitle !== "api-documentation"){
                                     return (
                                         <details id={traject._id} key={traject}>
@@ -233,6 +240,16 @@ const Home = ({trajectory, subpage}) => {
 
                     <details id={"actors"} style={{paddingBottom: "10px"}}>
                         <summary>actors</summary>
+                        {agents && agents.map((agent)=>{
+                            console.log(agent)
+                            return(
+                                <details className={"indent-border-left"}>
+                                    <summary>{agent.firstName}</summary>
+                                    <p>{serialize(agent.biography)}</p>
+                                </details>
+                            )
+                        })}
+
                     </details>
 
                     <hr/>
