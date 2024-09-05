@@ -244,7 +244,7 @@ const Home = ({trajectory, subpage}) => {
                             console.log(agent)
                             return(
                                 <details className={"indent-border-left"}>
-                                    <summary>{agent.firstName}</summary>
+                                    <summary>{agent.firstName} {agent.familyName ? agent.familyName : ""}</summary>
                                     <p>{serialize(agent.biography)}</p>
                                 </details>
                             )
