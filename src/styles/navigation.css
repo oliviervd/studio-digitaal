@@ -11,8 +11,6 @@ header {
     border-bottom: var(--main-green) dotted 3px;
 }
 
-
-
 .header__logo-container{
     height: 80%;
     justify-content: center;

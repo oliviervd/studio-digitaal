@@ -1,5 +1,8 @@
 :root {
+    /*
     --main-green: rgb(5, 255, 0);
+    */
+    --main-green: rgb(255, 0, 0);
     --nest-layer-1-color: #EFECEC;
     --nest-layer-2-color: #F8F4EC;
 
