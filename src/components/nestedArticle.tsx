@@ -1,8 +1,7 @@
 import serialize from "../utils/serialize";
+import NestedContent from "../pages/NestedContent";
 
 const NestedArticle = ({id, articles}) => {
-    console.log(articles)
-
     return(
         <section>
             {articles.docs && articles.docs.map((doc, i) => {
@@ -14,7 +13,14 @@ const NestedArticle = ({id, articles}) => {
                             <summary>{doc.projectTitle}</summary>
                             <p className={"indent-border-left"}>
                                 {serialize(doc.projectDescription)}
+                                {doc.subProjects[0] && doc.subProjects[0].project !== null && doc.subProjects.map((project)=> {
+                                    console.log(project)
+                                    return(
+                                        <NestedArticle articles={articles} id={project.project.id} />
+                                    )
+                                })}
                             </p>
+
                         </details>
                     )
                 }
