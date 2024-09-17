@@ -25,7 +25,6 @@ body {
     p {
       font-size: var(--font-size-s);
     }
-
 }
 
 @media screen and (min-width: 1200px) {
@@ -60,4 +59,10 @@ body {
             font-size: var(--font-size-s);
         }
     }
+}
+
+strong {
+    color: var(--main-green);
+    font-weight: bold;
+    font-size: var(--font-size-m);
 }
