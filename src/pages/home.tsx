@@ -161,10 +161,7 @@ const Home = ({trajectory, subpage}) => {
                     {logoDesc &&
                         <section>
                             {projects && projects.map((p) => {
-                                //console.log(p)
                                 if (p.projectTitle == "logo-design") {
-                                    //console.log("found")
-                                    //console.log(serialize(p.projectDescription))
                                     return (
                                         <i>
                                             {serialize(p.projectDescription)}

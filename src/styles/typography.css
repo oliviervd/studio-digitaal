@@ -1,10 +1,9 @@
 :root {
     --font-size-xs: 1rem;
-    --font-size-s: 20px;
+    --font-size-s: 1.5rem;
     --font-size-m: 1.8rem;
     --font-size-l: 3.5rem;
 }
-
 
 @media (max-width: 1600px) {
     :root {
@@ -42,6 +41,11 @@ a {
     text-decoration: underline dotted var(--main-green);
     -webkit-text-decoration-color: var(--main-green);
     -webkit-text-decoration-style: dotted;
+}
+
+strong {
+    font-size: var(--font-size-s);
+    font-weight: 300;
 }
 
 a:hover {
