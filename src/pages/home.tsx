@@ -238,7 +238,7 @@ const Home = ({trajectory, subpage}) => {
                     <details id={"actors"} style={{paddingBottom: "10px"}}>
                         <summary>actors</summary>
                         {agents && agents.map((agent)=>{
-                            console.log(agent)
+                            //console.log(agent)
                             return(
                                 <details className={"indent-border-left"}>
                                     <summary>{agent.firstName} {agent.familyName ? agent.familyName : ""}</summary>

@@ -20,8 +20,6 @@ const Collection = ({type}) => {
     const BASE_URI = import.meta.env.VITE_REST_API_URL;
     const [apiRequest, setApiRequest] = useState(`${BASE_URI}color-api/${color}?image=true&itemsPerPage=${limit}`)
 
-    console.log(type)
-
     const updateApiRequest = useCallback((color, strict, page)=>{
         const url = `${BASE_URI}color-api/${color}?image=true&fuzzy=${strict}&page=${page}&itemsPerPage=${limit}`;
         setApiRequest(url);

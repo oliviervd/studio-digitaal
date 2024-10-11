@@ -32,7 +32,7 @@ const Glossary = ({sub, glossary}) => {
                                 <p>{serialize(concept.description)}</p>
                                 <details>
                                     <summary
-                                        style={{textDecoration: "underline", fontWeight: "300"}}>sources
+                                        style={{textDecoration: "underline"}}>sources
                                     </summary>
                                     <div className={"indent-border-left"}>
                                         {concept.references &&

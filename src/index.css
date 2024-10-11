@@ -30,7 +30,6 @@ body {
         position: fixed;
         margin: 0 20px;
         display: block;
-        line-height: 135%;
         width: 30%;
 
         a, span {
@@ -42,7 +41,6 @@ body {
 
 @media screen and (min-width: 1800px) {
     .left--panel {
-        line-height: 135%;
         a, span {
             font-size: var(--font-size-s);
         }
