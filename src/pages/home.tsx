@@ -173,6 +173,19 @@ const Home = ({trajectory, subpage}) => {
                         </section>
                     }
 
+                    <section>
+                        {projects && projects.map((p) => {
+                                if (p.projectTitle == "setup") {
+                                    return (
+                                        <div>
+                                            {serialize(p.projectDescription)}
+                                        </div>
+                                    )
+                                }
+                            })
+                        }
+                    </section>
+
                     <p className={"about"} style={{fontColor: "black"}}>{about}</p>
 
                     <details id={'research'} style={{paddingBottom: "10px"}}>
