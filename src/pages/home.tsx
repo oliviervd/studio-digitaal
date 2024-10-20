@@ -29,7 +29,7 @@ const Home = ({trajectory, subpage}) => {
     const [agents, setAgents] = useState([]);
     const [logoDesc, openLogoDesc] = useState(false)
     const [about, setAbout] = useState([])
-    const [font, setFont] = useState("serif")
+    const [font, setFont] = useState("sans-serif")
     const baseURI:string = "https://p01--admin-cms--qbt6mytl828m.code.run";
 
     const refs = useRef({});
@@ -296,7 +296,7 @@ const Home = ({trajectory, subpage}) => {
                 <ButtonMoveUp/>
             </div>
 
-            {<CalculateSize/>}
+            {/*<CalculateSize/>*/}
         </div>
     )
 }

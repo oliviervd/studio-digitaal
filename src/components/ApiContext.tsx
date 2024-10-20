@@ -1,8 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import serialize from "../utils/serialize";
 import {fetchPayload} from "../utils/fetchPayload";
-import {sort} from "semver";
-import glossary from "../pages/glossary";
 
 interface DataCache {
     trajectories: any[];
